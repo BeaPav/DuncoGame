@@ -1,70 +1,97 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMover : MonoBehaviour
 {
-    public float MoveSpeed;
-    public CharacterController CharControl;
+    /*
+     TODO
+        - spravit komentare
+        - vyjebat Cursor.lockState a dat do nejakeho game manageru
+        - prerobit jump na new input system
+     */
+    public InputAction playerInputs;
 
-    public Transform Camera;
+    [SerializeField] float smoothTurnTime = 0.2f;
+    [SerializeField] float jumpSpeed = 8f;
+    [SerializeField] float movementSpeed = 3f;
 
-    public float SmoothTurnTime;
-    float SmoothTurnVelocity;
+    float smoothTurnVelocity;
+    float ySpeed;
 
-    public float JumpSpeed;
-    float YSpeed;
+    public bool move;
 
+    Transform camera;
+
+    CharacterController charControler;
 
     private void Start()
     {
-        MoveSpeed = 3f;
-        SmoothTurnTime = 0.2f;
-        JumpSpeed = 8f;
+        playerInputs.Enable();
+
+        charControler = GetComponent<CharacterController>();
+        camera = Camera.main.transform;
+
+        Cursor.lockState = CursorLockMode.Locked; // neskorej vyjebat
     }
 
     // Update is called once per frame
     void Update()
     {
-        float Horizontal = Input.GetAxisRaw("Horizontal");
-        float Vertical = Input.GetAxisRaw("Vertical");
-
-        Vector3 Direction = new Vector3(Horizontal, 0, Vertical).normalized;
-
-        if(Direction.magnitude >= 0.1f)
-        {
-
-            //pohyb, ze mys kontroluje aj pohyb postavy
-            float TargetAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + Camera.eulerAngles.y;
-            float SmoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TargetAngle, ref SmoothTurnVelocity, SmoothTurnTime);
-
-            transform.rotation = Quaternion.Euler(0, SmoothAngle, 0);
-            Vector3 MoveDirection = Quaternion.Euler(0, TargetAngle, 0) * Vector3.forward;
-            MoveDirection = MoveDirection.normalized * MoveSpeed;
-            
-            YSpeed += Physics.gravity.y * Time.deltaTime;
-
-            if (CharControl.isGrounded)
-            {
-                YSpeed = -0.5f;
-            }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-               YSpeed = JumpSpeed;
-            }
-
-            
-            
-
-            MoveDirection.y = YSpeed;
-
-            CharControl.Move(MoveDirection * Time.deltaTime);
-            
-
-            
-        }
+        if (move)
+            Movement();
     }
 
+    void Movement()
+    {
+        Vector2 inputDirection = playerInputs.ReadValue<Vector2>();
 
+        Vector3 direction = new Vector3(inputDirection.x, 0, inputDirection.y).normalized;
+        Vector3 moveDirection = Rotation(direction) * direction.magnitude;
+
+        ySpeed = Gravity(ySpeed);
+        ySpeed = Jump(ySpeed);
+        moveDirection.y = ySpeed;
+        Debug.Log(moveDirection.y);
+        charControler.Move(moveDirection * Time.deltaTime);
+    }
+
+    float Jump(float ySpeed)
+    {
+        if (!Input.GetKeyDown(KeyCode.Space))
+        {
+            return ySpeed;
+        }
+
+        return jumpSpeed;
+    }
+
+    float Gravity(float ySpeed)
+    {
+        if (!charControler.isGrounded)
+        {
+            return ySpeed += Physics.gravity.y * Time.deltaTime;
+        }
+
+        return -0.5f;
+    }
+
+    //pohyb, ze mys kontroluje aj pohyb postavy
+    Vector3 Rotation(Vector3 Direction)
+    {
+        float targetAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
+        float smoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref smoothTurnVelocity, smoothTurnTime);
+
+        transform.rotation = Quaternion.Euler(0, smoothAngle, 0);
+        Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
+
+        return moveDirection.normalized * movementSpeed;
+    }
+
+    private void OnDisable()
+    {
+        playerInputs.Disable();
+    }
 }
 
