@@ -209,20 +209,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85971b94c14c9be4b9c729aff4774788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0
-  charControler: {fileID: 0}
-  camera: {fileID: 0}
-  smoothTurnTime: 0
-  jumpSpeed: 0
-  inputs:
-    m_Name: 
+  playerInputs:
+    m_Name: Player Inputs
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 76dfcae1-7863-43f6-a65a-3d2730b19b89
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  smoothTurnTime: 0
+  jumpSpeed: 0
+  movementSpeed: 0
+  move: 0
 --- !u!143 &8438794014499241744
 CharacterController:
   m_ObjectHideFlags: 0
