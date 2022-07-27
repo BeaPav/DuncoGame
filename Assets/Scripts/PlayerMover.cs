@@ -53,7 +53,7 @@ public class PlayerMover : MonoBehaviour
         ySpeed = Gravity(ySpeed);
         ySpeed = Jump(ySpeed);
         moveDirection.y = ySpeed;
-        Debug.Log(moveDirection.y);
+        //Debug.Log(moveDirection.y);
         charControler.Move(moveDirection * Time.deltaTime);
     }
 
