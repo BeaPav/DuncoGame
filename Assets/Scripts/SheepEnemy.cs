@@ -3,14 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
+public enum SheepState
+{
+    CursedPlaced,
+    CursedFollow,
+    CursedAttack,
+    Healthy
+}
+
+
+
 public class SheepEnemy : MonoBehaviour
 {
-    GameObject targetToFollow;
     GameObject player;
     NavMeshAgent agent;
-    public bool isCursed;
     float distToStartFollow = 7f;
     float distToEndFollow = 8f;
+
+    public SheepState state = SheepState.CursedPlaced;
 
     // Start is called before the first frame update
     void Start()
@@ -23,22 +34,29 @@ public class SheepEnemy : MonoBehaviour
     void Update()
     {
         DistanceControl();
-        if (targetToFollow != null && isCursed)
+        if (state == SheepState.CursedFollow)
         {
-            agent.destination = targetToFollow.transform.position;
+            agent.destination = player.transform.position;
+        }
+        else if(state == SheepState.CursedPlaced)
+        {
+
         }
     }
+
+
+
     private void DistanceControl()
     {
         float dist = (transform.position - player.transform.position).magnitude;
 
         if (dist < distToStartFollow)
         {
-            targetToFollow = player;
+            state = SheepState.CursedFollow;
         }
         else if(dist > distToEndFollow)
         {
-            targetToFollow = null;
+            state = SheepState.CursedPlaced;
         }
 
     }
