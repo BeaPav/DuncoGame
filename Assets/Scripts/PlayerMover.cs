@@ -80,7 +80,7 @@ public class PlayerMover : MonoBehaviour
     //pohyb, ze mys kontroluje aj pohyb postavy
     Vector3 Rotation(Vector3 Direction)
     {
-        float targetAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
+        float targetAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y * Direction.magnitude;
         float smoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref smoothTurnVelocity, smoothTurnTime);
 
         transform.rotation = Quaternion.Euler(0, smoothAngle, 0);
