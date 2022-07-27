@@ -6,39 +6,41 @@ using UnityEngine.AI;
 public class SheepEnemy : MonoBehaviour
 {
     GameObject targetToFollow;
+    GameObject player;
     NavMeshAgent agent;
     public bool isCursed;
+    float distToStartFollow = 7f;
+    float distToEndFollow = 8f;
 
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        player = GameObject.Find("Player-Dunco");
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(isCursed.ToString());
+        DistanceControl();
         if (targetToFollow != null && isCursed)
         {
             agent.destination = targetToFollow.transform.position;
         }
     }
-
-    private void OnTriggerEnter(Collider other)
+    private void DistanceControl()
     {
-        if(other.tag == "Player")
+        float dist = (transform.position - player.transform.position).magnitude;
+
+        if (dist < distToStartFollow)
         {
-            //Debug.Log("triggeredToFollow");
-            targetToFollow = other.gameObject;
+            targetToFollow = player;
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
+        else if(dist > distToEndFollow)
         {
             targetToFollow = null;
         }
+
     }
+
 }
