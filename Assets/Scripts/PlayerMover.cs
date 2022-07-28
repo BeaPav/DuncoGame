@@ -72,9 +72,11 @@ public class PlayerMover : MonoBehaviour
     {
         if (!charControler.isGrounded)
         {
+            gravityMultiplyer *= 1.03f;
             return ySpeed += Physics.gravity.y * Time.deltaTime * gravityMultiplyer;
-            gravityMultiplyer *= gravityMultiplyer;
+            
         }
+
         gravityMultiplyer = 1f;
         return -0.5f;
     }
