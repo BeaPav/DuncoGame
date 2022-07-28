@@ -14,13 +14,14 @@ public class PlayerMover : MonoBehaviour
     public InputAction playerInputs;
 
     [SerializeField] float smoothTurnTime = 0.2f;
-    [SerializeField] float jumpSpeed = 8f;
+    [SerializeField] float jumpSpeed = 10f;
     [SerializeField] float movementSpeed = 3f;
 
     float smoothTurnVelocity;
-    float ySpeed;
+    public float ySpeed;
 
     public bool move;
+    public float gravityMultiplyer = 2f;
 
     Transform camera;
 
@@ -71,9 +72,10 @@ public class PlayerMover : MonoBehaviour
     {
         if (!charControler.isGrounded)
         {
-            return ySpeed += Physics.gravity.y * Time.deltaTime;
+            return ySpeed += Physics.gravity.y * Time.deltaTime * gravityMultiplyer;
+            gravityMultiplyer *= gravityMultiplyer;
         }
-
+        gravityMultiplyer = 1f;
         return -0.5f;
     }
 
