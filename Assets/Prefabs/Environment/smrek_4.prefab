@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 6966176857827822158}
   - component: {fileID: 6269872032080512491}
   - component: {fileID: 8135744124851597601}
+  - component: {fileID: -234590686100604556}
   m_Layer: 0
   m_Name: smrek_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6966176857827822158
 Transform:
@@ -84,3 +85,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-234590686100604556
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7775188079290061044}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.207, y: 14.347343, z: 4.1286}
+  m_Center: {x: -0.017715573, y: 7.19557, z: -0.08908123}
