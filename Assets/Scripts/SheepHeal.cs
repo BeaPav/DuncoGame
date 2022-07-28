@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SheepHeal : MonoBehaviour
 {
+    [SerializeField] GameObject SheepParent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +23,10 @@ public class SheepHeal : MonoBehaviour
         if(other.tag == "Player")
         {
             //Debug.Log("TriggerHeal");
-            transform.parent.transform.GetComponent<SheepEnemy>().state = SheepState.Healthy;
+            SheepParent.GetComponent<SheepEnemy>().state = SheepState.Healthy;
 
             //zmena farby ovce
-            transform.parent.Find("Sheep").GetComponent<Renderer>().material.SetColor("_Color",new Color(1f, 1f, 0.8f, 1f));
+            SheepParent.transform.Find("Sheep").GetComponent<Renderer>().material.SetColor("_Color",new Color(1f, 1f, 0.8f, 1f));
         }
     }
 }
