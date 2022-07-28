@@ -40,6 +40,10 @@ public class SheepEnemy : MonoBehaviour
         }
         else if(state == SheepState.CursedPlaced)
         {
+            
+        }
+        else if(state == SheepState.Healthy)
+        {
 
         }
     }
@@ -50,11 +54,11 @@ public class SheepEnemy : MonoBehaviour
     {
         float dist = (transform.position - player.transform.position).magnitude;
 
-        if (dist < distToStartFollow)
+        if (dist < distToStartFollow && state != SheepState.Healthy)
         {
             state = SheepState.CursedFollow;
         }
-        else if(dist > distToEndFollow)
+        else if(dist > distToEndFollow && state != SheepState.Healthy)
         {
             state = SheepState.CursedPlaced;
         }

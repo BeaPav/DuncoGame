@@ -20,11 +20,11 @@ public class SheepHeal : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            Debug.Log("TriggerHeal");
-            transform.parent.GetComponent<SheepEnemy>().state = SheepState.Healthy;
+            //Debug.Log("TriggerHeal");
+            transform.parent.transform.GetComponent<SheepEnemy>().state = SheepState.Healthy;
 
             //zmena farby ovce
-            transform.parent.GetComponent<Renderer>().material.SetColor("_Color",new Color(1f, 1f, 0.8f, 1f));
+            transform.parent.Find("Sheep").GetComponent<Renderer>().material.SetColor("_Color",new Color(1f, 1f, 0.8f, 1f));
         }
     }
 }
