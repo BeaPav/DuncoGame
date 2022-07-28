@@ -25,8 +25,10 @@ public class SheepHeal : MonoBehaviour
             //Debug.Log("TriggerHeal");
             SheepParent.GetComponent<SheepEnemy>().state = SheepState.Healthy;
 
-            //zmena farby ovce
-            SheepParent.transform.Find("Sheep").GetComponent<Renderer>().material.SetColor("_Color",new Color(1f, 1f, 0.8f, 1f));
+            //vyliecenie ovce
+            GameObject SheepMesh = SheepParent.transform.Find("Sheep").gameObject;
+            SheepMesh.GetComponent<Renderer>().material.SetColor("_Color",new Color(1f, 1f, 0.8f, 1f));
+            SheepMesh.GetComponent<Animator>().SetBool("isHealthy", true);
         }
     }
 }

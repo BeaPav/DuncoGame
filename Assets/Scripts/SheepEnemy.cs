@@ -17,9 +17,13 @@ public enum SheepState
 public class SheepEnemy : MonoBehaviour
 {
     GameObject player;
+    [SerializeField] GameObject sheepMesh;
+
     NavMeshAgent agent;
-    float distToStartFollow = 7f;
-    float distToEndFollow = 8f;
+    float distToFollow = 7f;
+    float distToAttack = 3f;
+    float attackStart;
+    [SerializeField] bool isAttacking = false;
 
     public SheepState state = SheepState.CursedPlaced;
 
@@ -36,11 +40,32 @@ public class SheepEnemy : MonoBehaviour
         DistanceControl();
         if (state == SheepState.CursedFollow)
         {
+            isAttacking = false;
             agent.destination = player.transform.position;
+            sheepMesh.GetComponent<Animator>().SetBool("isJumping", true);
+            sheepMesh.GetComponent<Animator>().SetBool("isAttacking", false);
         }
         else if(state == SheepState.CursedPlaced)
         {
-            
+            isAttacking = false;
+            sheepMesh.GetComponent<Animator>().SetBool("isJumping", true);
+            sheepMesh.GetComponent<Animator>().SetBool("isAttacking", false);
+        }
+        else if(state == SheepState.CursedAttack)
+        {
+            sheepMesh.GetComponent<Animator>().SetBool("isJumping", false);
+            sheepMesh.GetComponent<Animator>().SetBool("isAttacking", true);
+            if (!isAttacking)
+            {
+                isAttacking = true;
+                attackStart = Time.time;
+                sheepMesh.transform.Find("ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>().Play(true);
+            }
+            else if(Time.time - attackStart > 2f)
+            {
+                isAttacking = false;
+            }
+
         }
         else if(state == SheepState.Healthy)
         {
@@ -54,13 +79,20 @@ public class SheepEnemy : MonoBehaviour
     {
         float dist = (transform.position - player.transform.position).magnitude;
 
-        if (dist < distToStartFollow && state != SheepState.Healthy)
+        if (state != SheepState.Healthy)
         {
-            state = SheepState.CursedFollow;
-        }
-        else if(dist > distToEndFollow && state != SheepState.Healthy)
-        {
-            state = SheepState.CursedPlaced;
+            if (dist < distToFollow && dist > distToAttack && !isAttacking)
+            {
+                state = SheepState.CursedFollow;
+            }
+            else if (dist > distToFollow)
+            {
+                state = SheepState.CursedPlaced;
+            }
+            else if (dist < distToAttack)
+            {
+                state = SheepState.CursedAttack;
+            }
         }
 
     }
