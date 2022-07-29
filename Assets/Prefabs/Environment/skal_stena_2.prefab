@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6947402072316760966}
   - component: {fileID: 5156294098496268108}
   - component: {fileID: 6216012477187767851}
+  - component: {fileID: 1018765068931847243}
   m_Layer: 0
   m_Name: skal_stena_2
   m_TagString: Untagged
@@ -93,7 +94,21 @@ BoxCollider:
   m_GameObject: {fileID: 6669314663764690585}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.099224, y: 0.054729942, z: 0.09822165}
   m_Center: {x: -0.0040910225, y: -0.00195575, z: 0.048906397}
+--- !u!64 &1018765068931847243
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6669314663764690585}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2212009239438826721, guid: b78e676b4f767074ebc32caa58a9904a, type: 3}

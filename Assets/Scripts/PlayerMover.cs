@@ -27,6 +27,10 @@ public class PlayerMover : MonoBehaviour
 
     CharacterController charControler;
 
+    [SerializeField] GameObject model, frontPoint, backPoint;
+    public float fix;
+    
+
     private void Start()
     {
         playerInputs.Enable();
@@ -54,6 +58,9 @@ public class PlayerMover : MonoBehaviour
         ySpeed = Gravity(ySpeed);
         ySpeed = Jump(ySpeed);
         moveDirection.y = ySpeed;
+
+        copyTerrain();
+
         //Debug.Log(moveDirection.y);
         charControler.Move(moveDirection * Time.deltaTime);
     }
@@ -84,13 +91,28 @@ public class PlayerMover : MonoBehaviour
     //pohyb, ze mys kontroluje aj pohyb postavy
     Vector3 Rotation(Vector3 Direction)
     {
-        float targetAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y * Direction.magnitude;
-        float smoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref smoothTurnVelocity, smoothTurnTime);
+        if (Direction.magnitude > 0.01f)
+        {
+            float targetAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
+            float smoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle - 90, ref smoothTurnVelocity, smoothTurnTime);
 
-        transform.rotation = Quaternion.Euler(0, smoothAngle, 0);
-        Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
+            transform.rotation = Quaternion.Euler(0, smoothAngle, 0);
+            Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
 
-        return moveDirection.normalized * movementSpeed;
+            return moveDirection.normalized * movementSpeed;
+        }
+
+        return Vector3.zero;
+    }
+
+    void copyTerrain() //premenovat
+    {
+        RaycastHit Fhit, Bhit;
+        if (Physics.Raycast(frontPoint.transform.position, frontPoint.transform.TransformDirection(Vector3.down), out Fhit, Mathf.Infinity) && Physics.Raycast(backPoint.transform.position, backPoint.transform.TransformDirection(Vector3.down), out Bhit, Mathf.Infinity))
+        {
+            Vector3 upright = Vector3.Cross(model.transform.right, -(Fhit.point - Bhit.point).normalized);
+            model.transform.rotation = Quaternion.LookRotation(Vector3.Cross(model.transform.right, upright));
+        }
     }
 
     private void OnDisable()

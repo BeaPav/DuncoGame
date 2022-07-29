@@ -61,6 +61,10 @@ MonoBehaviour:
   ySpeed: 0
   move: 0
   gravityMultiplyer: 2
+  model: {fileID: 0}
+  frontPoint: {fileID: 0}
+  backPoint: {fileID: 0}
+  fix: 0
 --- !u!143 &8438794014499241744
 CharacterController:
   m_ObjectHideFlags: 0
