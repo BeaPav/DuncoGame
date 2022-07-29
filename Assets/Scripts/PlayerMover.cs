@@ -91,13 +91,18 @@ public class PlayerMover : MonoBehaviour
     //pohyb, ze mys kontroluje aj pohyb postavy
     Vector3 Rotation(Vector3 Direction)
     {
-        float targetAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y * Direction.magnitude;
-        float smoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle - 90, ref smoothTurnVelocity, smoothTurnTime);
+        if (Direction.magnitude > 0.01f)
+        {
+            float targetAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
+            float smoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle - 90, ref smoothTurnVelocity, smoothTurnTime);
 
-        transform.rotation = Quaternion.Euler(0, smoothAngle, 0);
-        Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
+            transform.rotation = Quaternion.Euler(0, smoothAngle, 0);
+            Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
 
-        return moveDirection.normalized * movementSpeed;
+            return moveDirection.normalized * movementSpeed;
+        }
+
+        return Vector3.zero;
     }
 
     void copyTerrain() //premenovat

@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d467bb4fc7ea0304786f55aa99a14c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sheepMesh: {fileID: 7305569031432237341}
+  isAttacking: 0
   state: 0
 --- !u!82 &4783937838329229094
 AudioSource:

@@ -17,10 +17,11 @@ public enum SheepState
 public class SheepEnemy : MonoBehaviour
 {
     GameObject player;
-    [SerializeField] GameObject sheepMesh;
-
+    GameObject sheepMesh;
+    Animator sheepAnim;
     NavMeshAgent agent;
     float distToFollow = 7f;
+    float distToEndFollow = 10f;
     float distToAttack = 3f;
     float attackStart;
     [SerializeField] bool isAttacking = false;
@@ -32,6 +33,8 @@ public class SheepEnemy : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player-Dunco");
+        sheepMesh = transform.Find("Sheep").gameObject;
+        sheepAnim = sheepMesh.transform.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -40,37 +43,44 @@ public class SheepEnemy : MonoBehaviour
         DistanceControl();
         if (state == SheepState.CursedFollow)
         {
-            isAttacking = false;
             agent.destination = player.transform.position;
-            sheepMesh.GetComponent<Animator>().SetBool("isJumping", true);
-            sheepMesh.GetComponent<Animator>().SetBool("isAttacking", false);
+            Jump();
         }
         else if(state == SheepState.CursedPlaced)
         {
-            isAttacking = false;
-            sheepMesh.GetComponent<Animator>().SetBool("isJumping", true);
-            sheepMesh.GetComponent<Animator>().SetBool("isAttacking", false);
+            Jump();
         }
         else if(state == SheepState.CursedAttack)
         {
-            sheepMesh.GetComponent<Animator>().SetBool("isJumping", false);
-            sheepMesh.GetComponent<Animator>().SetBool("isAttacking", true);
-            if (!isAttacking)
-            {
-                isAttacking = true;
-                attackStart = Time.time;
-                sheepMesh.transform.Find("ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>().Play(true);
-            }
-            else if(Time.time - attackStart > 2f)
-            {
-                isAttacking = false;
-            }
-
+            Attack();
         }
         else if(state == SheepState.Healthy)
         {
 
         }
+    }
+
+    private void Attack()
+    {
+        sheepAnim.SetBool("isJumping", false);
+        sheepAnim.SetBool("isAttacking", true);
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            attackStart = Time.time;
+            sheepMesh.transform.Find("ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>().Play(true);
+        }
+        else if (Time.time - attackStart > 1.5f)
+        {
+            isAttacking = false;
+        }
+    }
+
+    private void Jump()
+    {
+        isAttacking = false;
+        sheepAnim.SetBool("isJumping", true);
+        sheepAnim.SetBool("isAttacking", false);
     }
 
 
