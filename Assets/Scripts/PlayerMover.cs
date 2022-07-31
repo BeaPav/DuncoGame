@@ -111,7 +111,18 @@ public class PlayerMover : MonoBehaviour
         if (Physics.Raycast(frontPoint.transform.position, frontPoint.transform.TransformDirection(Vector3.down), out Fhit, Mathf.Infinity) && Physics.Raycast(backPoint.transform.position, backPoint.transform.TransformDirection(Vector3.down), out Bhit, Mathf.Infinity))
         {
             Vector3 upright = Vector3.Cross(model.transform.right, -(Fhit.point - Bhit.point).normalized);
-            model.transform.rotation = Quaternion.LookRotation(Vector3.Cross(model.transform.right, upright));
+            Quaternion angel = Quaternion.LookRotation(Vector3.Cross(model.transform.right, upright));
+
+            
+            model.transform.rotation = angel;
+            Debug.Log(angel);
+            /*
+             * 
+             *  Vector3 upright = Vector3.Cross(model.transform.right, -(Fhit.point - Bhit.point).normalized);
+             *   Vector3 angel = Quaternion.LookRotation(Vector3.Cross(model.transform.right, upright)).eulerAngles;
+             *   model.transform.eulerAngles = angel;
+             *   Debug.Log(angel);
+             */
         }
     }
 
