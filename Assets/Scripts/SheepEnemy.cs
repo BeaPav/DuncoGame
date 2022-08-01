@@ -21,7 +21,6 @@ public class SheepEnemy : MonoBehaviour
     Animator sheepAnim;
     NavMeshAgent agent;
     float distToFollow = 7f;
-    float distToEndFollow = 10f;
     float distToAttack = 3f;
     float attackStart;
     [SerializeField] bool isAttacking = false;
