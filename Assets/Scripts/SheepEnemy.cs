@@ -20,6 +20,7 @@ public class SheepEnemy : MonoBehaviour
     Animator sheepAnim;
     NavMeshAgent agent;
     ParticleSystem particles;
+    Collider hitCollider;
     float distToFollow = 7f;
     float distToAttack = 1.9f;
     [SerializeField] bool isAttacking = false;
@@ -33,6 +34,7 @@ public class SheepEnemy : MonoBehaviour
         player = GameObject.Find("Player-Dunco");
         sheepAnim = transform.GetComponent<Animator>();
         particles = transform.Find("Sheep/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
+        hitCollider = transform.Find("Sheep/HitCollider").GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -68,13 +70,13 @@ public class SheepEnemy : MonoBehaviour
     public void ActivateAttack()
     {
         //Debug.Log("activateAttack");
-        transform.Find("Sheep/Cone").GetComponent<Collider>().enabled = true;
+        hitCollider.enabled = true;
     }
 
     public void DeactivateAttack()
     {
         //Debug.Log("deactivateAttack");
-        transform.Find("Sheep/Cone").gameObject.GetComponent<Collider>().enabled = false;
+        hitCollider.enabled = false;
         isAttacking = false;
         sheepAnim.SetBool("isAttacking", false);
         
