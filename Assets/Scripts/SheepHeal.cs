@@ -28,7 +28,7 @@ public class SheepHeal : MonoBehaviour
             //vyliecenie ovce
             GameObject SheepMesh = SheepParent.transform.Find("Sheep").gameObject;
             SheepMesh.GetComponent<Renderer>().material.SetColor("_Color",new Color(1f, 1f, 0.8f, 1f));
-            SheepMesh.GetComponent<Animator>().SetBool("isHealthy", true);
+            SheepParent.GetComponent<Animator>().SetBool("isHealthy", true);
         }
     }
 }

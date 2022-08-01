@@ -115,7 +115,7 @@ public class PlayerMover : MonoBehaviour
 
             
             model.transform.rotation = angel;
-            Debug.Log(angel);
+            //Debug.Log(angel);
             /*
              * 
              *  Vector3 upright = Vector3.Cross(model.transform.right, -(Fhit.point - Bhit.point).normalized);
