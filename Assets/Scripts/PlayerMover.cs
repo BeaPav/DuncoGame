@@ -71,7 +71,8 @@ public class PlayerMover : MonoBehaviour
         {
             return ySpeed;
         }
-
+        gravityMultiplyer = 1f;
+        Debug.Log("jump");
         return jumpSpeed;
     }
 
