@@ -35,8 +35,24 @@ public class PlayerScoreScript : MonoBehaviour
         }
         else if(other.tag == "Collectable")
         {
+            other.gameObject.SetActive(false);
             noCollectables++;
             noCollectablesText.text = noCollectables.ToString();
+        }
+        else if (other.tag == "SheepHeal")
+        {
+            noCollectables++;
+            noCollectablesText.text = noCollectables.ToString();
+            other.transform.parent.parent.GetComponent<SheepEnemy>().Heal();
+            other.gameObject.SetActive(false);
+        }
+        else if (other.tag == "StoneHeal")
+        {
+            Debug.Log("StoneHealColliderTriggered");
+            noCollectables++;
+            noCollectablesText.text = noCollectables.ToString();
+            other.transform.parent.parent.GetComponent<StoneEnemy>().Heal();
+            other.gameObject.SetActive(false);
         }
 
     }

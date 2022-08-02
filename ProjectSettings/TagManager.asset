@@ -6,6 +6,8 @@ TagManager:
   tags:
   - DamageSound
   - Collectable
+  - SheepHeal
+  - StoneHeal
   layers:
   - Default
   - TransparentFX

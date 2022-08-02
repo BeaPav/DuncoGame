@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 7220211839881036410}
   - component: {fileID: 8797391627694548480}
   - component: {fileID: 3538935715035628018}
-  - component: {fileID: 4584352223425064036}
   m_Layer: 0
   m_Name: TriggerColliderToHeal
-  m_TagString: Collectable
+  m_TagString: SheepHeal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,19 +62,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.3, z: 0.5}
   m_Center: {x: 0, y: 0.7, z: 0}
---- !u!114 &4584352223425064036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2107020001099972777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a1eb0b8e680f4240ae1eab040d6b3a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SheepParent: {fileID: 7549404864910688660}
 --- !u!1 &7305569031432237341
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +75,7 @@ GameObject:
   - component: {fileID: 1354929375750940334}
   - component: {fileID: 899023967008106864}
   m_Layer: 0
-  m_Name: Sheep
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -608,6 +594,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1946559425840789967}
     m_Modifications:
+    - target: {fileID: 251613322563271016, guid: fe015c7fb191d0e4581a038b5c671e23, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 251613322563271016, guid: fe015c7fb191d0e4581a038b5c671e23, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 251613322563271016, guid: fe015c7fb191d0e4581a038b5c671e23, type: 3}
+      propertyPath: InitialModule.startRotation.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822391438148896650, guid: fe015c7fb191d0e4581a038b5c671e23, type: 3}
+      propertyPath: m_RenderAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3049563147207004478, guid: fe015c7fb191d0e4581a038b5c671e23, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -618,7 +620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3049563147207004478, guid: fe015c7fb191d0e4581a038b5c671e23, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00121
+      value: 0.0046
       objectReference: {fileID: 0}
     - target: {fileID: 3049563147207004478, guid: fe015c7fb191d0e4581a038b5c671e23, type: 3}
       propertyPath: m_LocalPosition.z
@@ -658,7 +660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3162179014303733683, guid: fe015c7fb191d0e4581a038b5c671e23, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe015c7fb191d0e4581a038b5c671e23, type: 3}
