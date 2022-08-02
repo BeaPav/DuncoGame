@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8438794014499241740}
   - component: {fileID: 8438794014499241747}
   - component: {fileID: 8438794014499241744}
+  - component: {fileID: 7899902176667314407}
   m_Layer: 0
   m_Name: Player-Dunco
   m_TagString: Player
@@ -83,6 +84,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!114 &7899902176667314407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8438794014499241741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a68da962e74da40b40e78c2eb57f87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4489850125621351489
 PrefabInstance:
   m_ObjectHideFlags: 0
