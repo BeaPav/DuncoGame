@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public enum SheepState
+public enum EnemyState
 {
     CursedPlaced,
     CursedFollow,
@@ -17,44 +17,48 @@ public enum SheepState
 public class SheepEnemy : MonoBehaviour
 {
     GameObject player;
-    Animator sheepAnim;
+    GameObject enemyMesh;
+    Animator enemyAnim;
     NavMeshAgent agent;
     ParticleSystem particles;
-    Collider hitCollider;
+    ParticleSystem particlesSound;
+    Collider damageCollider;
     float distToFollow = 7f;
     float distToAttack = 1.9f;
     [SerializeField] bool isAttacking = false;
 
-    public SheepState state = SheepState.CursedPlaced;
+    public EnemyState state = EnemyState.CursedPlaced;
 
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player-Dunco");
-        sheepAnim = transform.GetComponent<Animator>();
-        particles = transform.Find("Sheep/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
-        hitCollider = transform.Find("Sheep/HitCollider").GetComponent<Collider>();
+        enemyMesh = transform.Find("Enemy").gameObject;
+        enemyAnim = transform.GetComponent<Animator>();
+        particles = transform.Find("Enemy/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
+        damageCollider = transform.Find("Enemy/HitCollider").GetComponent<Collider>();
+        particlesSound = transform.Find("Enemy/ParticleSound").GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
         DistanceControl();
-        if (state == SheepState.CursedFollow)
+        if (state == EnemyState.CursedFollow)
         {
             agent.destination = player.transform.position;
         }
-        else if(state == SheepState.CursedPlaced)
+        else if(state == EnemyState.CursedPlaced)
         {
         }
-        else if(state == SheepState.CursedAttack && !isAttacking)
+        else if(state == EnemyState.CursedAttack && !isAttacking)
         {
             //Debug.Log("startAttack");
 
-            sheepAnim.SetBool("isAttacking", true);
+            enemyAnim.SetBool("isAttacking", true);
         }
-        else if(state == SheepState.Healthy)
+        else if(state == EnemyState.Healthy)
         {
 
         }
@@ -70,39 +74,51 @@ public class SheepEnemy : MonoBehaviour
     public void ActivateAttack()
     {
         //Debug.Log("activateAttack");
-        hitCollider.enabled = true;
+        particlesSound.Play(true);
+        damageCollider.enabled = true;
+        
+
     }
 
     public void DeactivateAttack()
     {
         //Debug.Log("deactivateAttack");
-        hitCollider.enabled = false;
+        particlesSound.Stop();
+        damageCollider.enabled = false;
         isAttacking = false;
-        sheepAnim.SetBool("isAttacking", false);
+        enemyAnim.SetBool("isAttacking", false);
         
+    }
+
+    public void Heal()
+    {
+        state = EnemyState.Healthy;
+        enemyMesh.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
+        enemyAnim.SetBool("isHealthy", true);
+
     }
 
 
 
     private void DistanceControl()
     {
-        if (state != SheepState.Healthy)
+        if (state != EnemyState.Healthy)
         {
             float dist = (transform.position - player.transform.position).magnitude;
 
             if (dist < distToFollow && dist > distToAttack && !isAttacking)
             {
                 //Debug.Log("CursedFollow");
-                state = SheepState.CursedFollow;
+                state = EnemyState.CursedFollow;
             }
             else if (dist > distToFollow)
             {
-                state = SheepState.CursedPlaced;
+                state = EnemyState.CursedPlaced;
             }
             else if (dist < distToAttack)
             {
                 //Debug.Log("CursedAttack");
-                state = SheepState.CursedAttack;
+                state = EnemyState.CursedAttack;
             }
         }
 
