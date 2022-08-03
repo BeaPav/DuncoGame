@@ -63,6 +63,7 @@ public class PlayerMover : MonoBehaviour
         moveDirection.y = ySpeed;
 
         copyTerrain();
+        
 
         //Debug.Log(moveDirection.y);
         charControler.Move(moveDirection * Time.deltaTime);
@@ -112,9 +113,36 @@ public class PlayerMover : MonoBehaviour
     void copyTerrain() //premenovat
     {
         RaycastHit Fhit, Bhit;
-        if (Physics.Raycast(frontPoint.transform.position, frontPoint.transform.TransformDirection(Vector3.down), out Fhit, Mathf.Infinity) && Physics.Raycast(backPoint.transform.position, backPoint.transform.TransformDirection(Vector3.down), out Bhit, Mathf.Infinity))
+        if (Physics.Raycast(frontPoint.transform.position, frontPoint.transform.TransformDirection(Vector3.down), out Fhit, 0.5f) && Physics.Raycast(backPoint.transform.position, backPoint.transform.TransformDirection(Vector3.down), out Bhit, 0.5f))
         {
-            Vector3 upright = Vector3.Cross(model.transform.right, -(Fhit.point - Bhit.point).normalized);
+
+            Vector3 point1 = frontPoint.transform.position;
+            Vector3 point2 = Bhit.point;
+            int nasobitel = 1;
+            if (Fhit.point.y < Bhit.point.y)
+            {
+                point1 = backPoint.transform.position;
+                point2 = Fhit.point;
+                nasobitel = -1;
+            }
+            
+            Vector3 point3 = new Vector3(point1.x, point2.y, point1.z);
+
+            Vector3 angle = model.transform.eulerAngles;//Vector3.Angle(point3-point2,point1-point2) 
+            angle.z = Mathf.LerpAngle(angle.z, Vector3.Angle(point3 - point2, point1 - point2) * nasobitel, 3 * Time.deltaTime);
+            model.transform.eulerAngles = angle;
+
+            Debug.Log("=====");
+            Debug.Log(frontPoint.transform.position);
+            Debug.Log(Fhit.point);
+            Debug.Log("=");
+            Debug.Log(backPoint.transform.position);
+            Debug.Log(Bhit.point);
+            Debug.Log("-");
+            Debug.Log(angle);
+
+
+            /*Vector3 upright = Vector3.Cross(model.transform.right, -(Fhit.point - Bhit.point).normalized);
             Quaternion angel = Quaternion.LookRotation(Vector3.Cross(model.transform.right, upright));
 
             
