@@ -30,6 +30,8 @@ public class PlayerMover : MonoBehaviour
     CharacterController charControler;
 
     [SerializeField] GameObject model, frontPoint, backPoint;
+
+    int jumps = 0;
     public float fix;
     
 
@@ -71,10 +73,11 @@ public class PlayerMover : MonoBehaviour
 
     float Jump(float ySpeed)
     {
-        if (!Input.GetKeyDown(KeyCode.Space))
+        if (!Input.GetKeyDown(KeyCode.Space) || jumps >= 2)
         {
             return ySpeed;
         }
+        jumps++;
         gravityFinal = gravityStartCondition;
         Debug.Log("jump");
         return jumpSpeed;
@@ -88,7 +91,7 @@ public class PlayerMover : MonoBehaviour
             return ySpeed += Physics.gravity.y * Time.deltaTime * gravityFinal;
             
         }
-
+        jumps = 0;
         gravityFinal = gravityStartCondition;
         return -0.5f;
     }
