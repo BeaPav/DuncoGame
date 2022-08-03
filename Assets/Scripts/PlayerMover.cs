@@ -21,7 +21,9 @@ public class PlayerMover : MonoBehaviour
     public float ySpeed;
 
     public bool move;
-    public float gravityMultiplyer = 2f;
+    [SerializeField] float gravityStartCondition = 2f;
+    [SerializeField] float gravityMultiplConst = 1.3f;
+    float gravityFinal;
 
     Transform camera;
 
@@ -34,6 +36,7 @@ public class PlayerMover : MonoBehaviour
     private void Start()
     {
         playerInputs.Enable();
+        gravityFinal = gravityStartCondition;
 
         charControler = GetComponent<CharacterController>();
         camera = Camera.main.transform;
@@ -71,7 +74,7 @@ public class PlayerMover : MonoBehaviour
         {
             return ySpeed;
         }
-        gravityMultiplyer = 1f;
+        gravityFinal = gravityStartCondition;
         Debug.Log("jump");
         return jumpSpeed;
     }
@@ -80,12 +83,12 @@ public class PlayerMover : MonoBehaviour
     {
         if (!charControler.isGrounded)
         {
-            gravityMultiplyer *= 1.03f;
-            return ySpeed += Physics.gravity.y * Time.deltaTime * gravityMultiplyer;
+            gravityFinal *= gravityMultiplConst;
+            return ySpeed += Physics.gravity.y * Time.deltaTime * gravityFinal;
             
         }
 
-        gravityMultiplyer = 1f;
+        gravityFinal = gravityStartCondition;
         return -0.5f;
     }
 
