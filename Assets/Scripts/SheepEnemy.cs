@@ -37,7 +37,8 @@ public class SheepEnemy : MonoBehaviour
         enemyMesh = transform.Find("Enemy").gameObject;
         enemyAnim = transform.GetComponent<Animator>();
         particles = transform.Find("Enemy/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
-        damageCollider = transform.Find("Enemy/HitCollider").GetComponent<Collider>();
+        damageCollider = transform.Find("Enemy/DamageCollider").GetComponent<Collider>();
+        damageCollider.enabled = false;
         particlesSound = transform.Find("Enemy/ParticleSound").GetComponent<ParticleSystem>();
     }
 
