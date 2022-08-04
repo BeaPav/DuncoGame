@@ -7,15 +7,17 @@ public class StoneEnemy : MonoBehaviour
 {
     GameObject player;
     [SerializeField] GameObject enemyMesh;
-    //Animator enemyAnim;
+    Animator enemyAnim;
     NavMeshAgent agent;
     [SerializeField] ParticleSystem particles;
-    //Collider damageCollider;
-    float distToFollow = 7f;
-    float distToAttack = 3f;
+    [SerializeField] Collider damageCollider;
+    float distToFollow = 12f;
+    float distToAttack = 7f;
     [SerializeField] bool isAttacking = false;
 
     public EnemyState state = EnemyState.CursedPlaced;
+
+    private Vector3 startPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -23,9 +25,11 @@ public class StoneEnemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player-Dunco");
         enemyMesh = transform.Find("Enemy").gameObject;
-        //enemyAnim = transform.GetComponent<Animator>();
+        enemyAnim = transform.GetComponent<Animator>();
         particles = transform.Find("Enemy/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
-        //damageCollider = transform.Find("Enemy/HitCollider").GetComponent<Collider>();
+        damageCollider = transform.Find("Enemy/DamageCollider").GetComponent<Collider>();
+        damageCollider.enabled = false;
+        startPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -38,12 +42,13 @@ public class StoneEnemy : MonoBehaviour
         }
         else if (state == EnemyState.CursedPlaced)
         {
+            //Debug.Log("Placed");
+            agent.destination = startPosition;
         }
         else if (state == EnemyState.CursedAttack && !isAttacking)
         {
             //Debug.Log("startAttack");
-
-            //enemyAnim.SetBool("isAttacking", true);
+            enemyAnim.SetBool("isAttacking", true);
         }
         else if (state == EnemyState.Healthy)
         {
@@ -51,43 +56,38 @@ public class StoneEnemy : MonoBehaviour
         }
     }
 
-
-    /// <summary>
-    /// //////////////////////////////////////////////utok nejde lebo na ovci je spusteny z animu
-    /// 
-    /// </summary>
     public void PrepareAttack()
     {
-        Debug.Log("prepareAttack");
+        //Debug.Log("prepareAttack");
         isAttacking = true;
         particles.Play(true);
     }
 
     public void ActivateAttack()
     {
-        Debug.Log("activateAttack");
+        //Debug.Log("activateAttack");
         
-        //damageCollider.enabled = true;
+        damageCollider.enabled = true;
 
 
     }
 
     public void DeactivateAttack()
     {
-        Debug.Log("deactivateAttack");
+        //Debug.Log("deactivateAttack");
         
-        //damageCollider.enabled = false;
+        damageCollider.enabled = false;
         isAttacking = false;
-        //enemyAnim.SetBool("isAttacking", false);
+        enemyAnim.SetBool("isAttacking", false);
 
     }
 
     public void Heal()
     {
-        Debug.Log("HealStone");
+        //Debug.Log("HealStone");
         state = EnemyState.Healthy;
-        enemyMesh.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
-        //enemyAnim.SetBool("isHealthy", true);
+        //enemyMesh.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
+        enemyAnim.SetBool("isHealthy", true);
 
     }
 
@@ -98,6 +98,7 @@ public class StoneEnemy : MonoBehaviour
         if (state != EnemyState.Healthy)
         {
             float dist = (transform.position - player.transform.position).magnitude;
+            //Debug.Log(dist);
 
             if (dist < distToFollow && dist > distToAttack && !isAttacking)
             {

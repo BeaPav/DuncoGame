@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 6908236096110867239}
   - component: {fileID: 4724574956760494970}
   m_Layer: 0
-  m_Name: StoneEnemy
+  m_Name: NoActiveStoneEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,18 +8,21 @@ public class PlayerScoreScript : MonoBehaviour
 {
     public TextMeshProUGUI noCollectablesText;
     private float startDamageTime = 0f;
-    public int noCollectables = 0;
+    public int noCollectables;
+
+    CharacterController charControler;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        noCollectables = 0;
+        charControler = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Time.time - startDamageTime > 1f)
+        if(Time.time - startDamageTime > 0.8f)
         {
             transform.Find("pes/Damage").gameObject.SetActive(false);
         }
@@ -31,7 +34,15 @@ public class PlayerScoreScript : MonoBehaviour
         if (other.tag == "DamageSound")
         {
             Debug.Log("SoundDamage");
-            Damage(1f);
+            Damage(1);
+        }
+        else if (other.CompareTag("DamageStone"))
+        {
+            //Debug.Log("StoneDamageColliderTriggered");
+            if (charControler.isGrounded)
+            {
+                Damage(1);
+            }
         }
         else if(other.tag == "Collectable")
         {
@@ -48,17 +59,18 @@ public class PlayerScoreScript : MonoBehaviour
         }
         else if (other.tag == "StoneHeal")
         {
-            Debug.Log("StoneHealColliderTriggered");
+            //Debug.Log("StoneHealColliderTriggered");
             noCollectables++;
             noCollectablesText.text = noCollectables.ToString();
             other.transform.parent.parent.GetComponent<StoneEnemy>().Heal();
             other.gameObject.SetActive(false);
         }
+        
 
     }
 
 
-    private void Damage(float noDam)
+    private void Damage(int noDam)
     {
         transform.Find("pes/Damage").gameObject.SetActive(true);
         startDamageTime = Time.time;
