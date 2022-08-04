@@ -79,7 +79,7 @@ public class PlayerMover : MonoBehaviour
         }
         jumps++;
         gravityFinal = gravityStartCondition;
-        Debug.Log("jump");
+        //Debug.Log("jump");
         return jumpSpeed;
     }
 
@@ -135,6 +135,7 @@ public class PlayerMover : MonoBehaviour
             angle.z = Mathf.LerpAngle(angle.z, Vector3.Angle(point3 - point2, point1 - point2) * nasobitel, 3 * Time.deltaTime);
             model.transform.eulerAngles = angle;
 
+            /*
             Debug.Log("=====");
             Debug.Log(frontPoint.transform.position);
             Debug.Log(Fhit.point);
@@ -143,7 +144,7 @@ public class PlayerMover : MonoBehaviour
             Debug.Log(Bhit.point);
             Debug.Log("-");
             Debug.Log(angle);
-
+            */
 
             /*Vector3 upright = Vector3.Cross(model.transform.right, -(Fhit.point - Bhit.point).normalized);
             Quaternion angel = Quaternion.LookRotation(Vector3.Cross(model.transform.right, upright));
