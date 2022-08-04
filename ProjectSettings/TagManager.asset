@@ -9,6 +9,7 @@ TagManager:
   - SheepHeal
   - StoneHeal
   - DamageStone
+  - Bounce
   layers:
   - Default
   - TransparentFX

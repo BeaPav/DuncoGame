@@ -72,13 +72,16 @@ public class SheepEnemy : MonoBehaviour
         particles.Play(true);
     }
 
+    public void SoundAttack()
+    {
+        //Debug.Log("PlaySoundAttack");
+        particlesSound.Play(true);
+    }
+
     public void ActivateAttack()
     {
         //Debug.Log("activateAttack");
-        particlesSound.Play(true);
         damageCollider.enabled = true;
-        
-
     }
 
     public void DeactivateAttack()
