@@ -13,7 +13,10 @@ public class PlayerScoreScript : MonoBehaviour
 
     CharacterController charControler;
 
-    GameObject DamageVisualize;
+    
+    Renderer DamageRender;
+    Color startColor;
+    Color damageColor;
 
     [SerializeField] Vector3 bounce = Vector3.zero;
     [SerializeField] float bounceSpeed;
@@ -22,8 +25,14 @@ public class PlayerScoreScript : MonoBehaviour
     void Start()
     {
         noCollectables = 0;
+
         charControler = GetComponent<CharacterController>();
-        DamageVisualize = transform.Find("pivot/pes/Damage").gameObject;
+
+        DamageRender = transform.Find("pivot/pes").GetComponent<Renderer>();
+        startColor = DamageRender.material.color;
+        damageColor = new Color(214f / 255, 7f / 255, 197f / 255, 1f);
+
+
         bounceSpeed = 7f;
     }
 
@@ -32,7 +41,8 @@ public class PlayerScoreScript : MonoBehaviour
     {
         if(Time.time - startBounceTime > 0.5f)
         {
-            DamageVisualize.SetActive(false);
+            
+            DamageRender.material.SetColor("_Color", startColor);
             bounce = Vector3.zero;
         }
 
@@ -49,7 +59,7 @@ public class PlayerScoreScript : MonoBehaviour
         //Debug.Log("TriggerColliderSheepDamage");
         if (other.tag == "DamageSound")
         {
-            Debug.Log("SoundDamage");
+            //Debug.Log("SoundDamage");
             Damage(1, other.transform.parent.position);
         }
         else if (other.CompareTag("DamageStone"))
@@ -97,7 +107,8 @@ public class PlayerScoreScript : MonoBehaviour
         bounce = (transform.position - enemyPos).normalized;
         bounce.y = charControler.isGrounded? 1.5f : 0f;
         
-        DamageVisualize.SetActive(true);
+        
+        DamageRender.material.SetColor("_Color", damageColor);
         startBounceTime = Time.time;
 
 
