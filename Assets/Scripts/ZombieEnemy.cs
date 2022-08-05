@@ -3,66 +3,72 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
+/*
 public enum EnemyState
 {
-    CursedPlaced,
-    CursedFollow,
-    CursedAttack,
+    CursedPlaced, == neaktivny
+    CursedFollow, == zdvihne sa a sleduje hraca, zameriava
+    CursedAttack, == striela
     Healthy
 }
+*/
 
-
-
-public class SheepEnemy : MonoBehaviour
+public class ZombieEnemy : MonoBehaviour
 {
     GameObject player;
     GameObject enemyMesh;
-    Animator enemyAnim;
-    NavMeshAgent agent;
+    Transform targetToLookAt;
+    //Animator enemyAnim;
+
     ParticleSystem particlesPreAttack;
-    ParticleSystem particlesSound;
-    Collider damageCollider;
-    float distToFollow = 7f;
-    float distToAttack = 1.9f;
+
+    float distToLookAtPlayer = 7f;
+    float distToAttack = 6f;
     [SerializeField] bool isAttacking = false;
 
     public EnemyState state = EnemyState.CursedPlaced;
 
+    Quaternion startRotation;
+    [SerializeField] float rotationSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player-Dunco");
         enemyMesh = transform.Find("Enemy").gameObject;
-        enemyAnim = transform.GetComponent<Animator>();
-        particlesPreAttack = transform.Find("Enemy/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
-        damageCollider = transform.Find("Enemy/DamageCollider").GetComponent<Collider>();
-        damageCollider.enabled = false;
-        particlesSound = transform.Find("Enemy/ParticleSound").GetComponent<ParticleSystem>();
+        targetToLookAt = transform;
+        startRotation = transform.rotation;
+        rotationSpeed = 10f;
+        //enemyAnim = transform.GetComponent<Animator>();
+        //particlesPreAttack = transform.Find("Enemy/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         DistanceControl();
         if (state == EnemyState.CursedFollow)
         {
-            agent.destination = player.transform.position;
+            targetToLookAt = player.transform;
         }
-        else if(state == EnemyState.CursedPlaced)
+        else if (state == EnemyState.CursedPlaced)
         {
+            targetToLookAt = null;
         }
-        else if(state == EnemyState.CursedAttack && !isAttacking)
+        else if (state == EnemyState.CursedAttack && !isAttacking)
         {
             //Debug.Log("startAttack");
-
-            enemyAnim.SetBool("isAttacking", true);
+            targetToLookAt = player.transform;
+            //enemyAnim.SetBool("isAttacking", true);
         }
-        else if(state == EnemyState.Healthy)
+        else if (state == EnemyState.Healthy)
         {
-
+            targetToLookAt = null;
         }
+
+        LookAtFunc();
     }
 
     public void PrepareAttack()
@@ -75,33 +81,44 @@ public class SheepEnemy : MonoBehaviour
     public void SoundAttack()
     {
         //Debug.Log("PlaySoundAttack");
-        particlesSound.Play(true);
     }
 
     public void ActivateAttack()
     {
         //Debug.Log("activateAttack");
-        damageCollider.enabled = true;
     }
 
     public void DeactivateAttack()
     {
         //Debug.Log("deactivateAttack");
-        particlesSound.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        damageCollider.enabled = false;
         isAttacking = false;
-        enemyAnim.SetBool("isAttacking", false);
-        
+
     }
 
     public void Heal()
     {
         state = EnemyState.Healthy;
         enemyMesh.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
-        enemyAnim.SetBool("isHealthy", true);
+        //enemyAnim.SetBool("isHealthy", true);
 
     }
 
+    
+    private void LookAtFunc()
+    {
+        if (targetToLookAt != null)
+        {
+            Vector3 targPos = player.transform.position - transform.position;
+            targPos.y = 0;
+            targPos.Normalize();
+
+            transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, targPos, rotationSpeed * Time.deltaTime, 0f));
+        }
+        else
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, startRotation, rotationSpeed * Time.deltaTime);
+        }
+    }
 
 
     private void DistanceControl()
@@ -110,12 +127,12 @@ public class SheepEnemy : MonoBehaviour
         {
             float dist = (transform.position - player.transform.position).magnitude;
 
-            if (dist < distToFollow && dist > distToAttack && !isAttacking)
+            if (dist < distToLookAtPlayer && dist > distToAttack && !isAttacking)
             {
                 //Debug.Log("CursedFollow");
                 state = EnemyState.CursedFollow;
             }
-            else if (dist > distToFollow)
+            else if (dist > distToLookAtPlayer)
             {
                 state = EnemyState.CursedPlaced;
             }
