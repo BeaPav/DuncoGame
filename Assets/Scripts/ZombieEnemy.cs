@@ -16,30 +16,37 @@ public enum EnemyState
 public class ZombieEnemy : MonoBehaviour
 {
     GameObject player;
-    GameObject enemyMesh;
+    GameObject enemyShootingMesh;
     Transform targetToLookAt;
-    //Animator enemyAnim;
+    Animator enemyAnim;
 
     ParticleSystem particlesPreAttack;
 
-    float distToLookAtPlayer = 7f;
-    float distToAttack = 6f;
+    float distToLookAtPlayer = 12f;
+    float distToAttack = 10f;
     [SerializeField] bool isAttacking = false;
 
     public EnemyState state = EnemyState.CursedPlaced;
 
     Quaternion startRotation;
-    [SerializeField] float rotationSpeed;
+    [SerializeField] float rotSpeed = 10f;
+    [SerializeField] float rotGoToStartRotSpeed = 2f;
+
+    [SerializeField] GameObject bullet;
+    private Transform bulletSpawnPoint;
+    [SerializeField] float force = 2000f;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player-Dunco");
-        enemyMesh = transform.Find("Enemy").gameObject;
-        targetToLookAt = transform;
-        startRotation = transform.rotation;
-        rotationSpeed = 10f;
-        //enemyAnim = transform.GetComponent<Animator>();
+        enemyShootingMesh = transform.Find("Enemy/zombie_shooter").gameObject;
+        bulletSpawnPoint = transform.Find("Enemy/zombie_shooter/BulletSpawnPoint").transform;
+        targetToLookAt = null;
+        startRotation = enemyShootingMesh.transform.rotation;
+        enemyAnim = transform.GetComponent<Animator>();
         //particlesPreAttack = transform.Find("Enemy/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
 
     }
@@ -52,16 +59,18 @@ public class ZombieEnemy : MonoBehaviour
         if (state == EnemyState.CursedFollow)
         {
             targetToLookAt = player.transform;
+            enemyAnim.SetBool("isAttacking", false);
         }
         else if (state == EnemyState.CursedPlaced)
         {
             targetToLookAt = null;
+            //enemyAnim.SetBool("isAttacking", false);
         }
         else if (state == EnemyState.CursedAttack && !isAttacking)
         {
             //Debug.Log("startAttack");
             targetToLookAt = player.transform;
-            //enemyAnim.SetBool("isAttacking", true);
+            enemyAnim.SetBool("isAttacking", true);
         }
         else if (state == EnemyState.Healthy)
         {
@@ -71,6 +80,7 @@ public class ZombieEnemy : MonoBehaviour
         LookAtFunc();
     }
 
+    /*
     public void PrepareAttack()
     {
         //Debug.Log("prepareAttack");
@@ -78,14 +88,11 @@ public class ZombieEnemy : MonoBehaviour
         particlesPreAttack.Play(true);
     }
 
-    public void SoundAttack()
-    {
-        //Debug.Log("PlaySoundAttack");
-    }
 
     public void ActivateAttack()
     {
         //Debug.Log("activateAttack");
+
     }
 
     public void DeactivateAttack()
@@ -94,11 +101,20 @@ public class ZombieEnemy : MonoBehaviour
         isAttacking = false;
 
     }
+    */
+
+    public void Shoot()
+    {
+        GameObject proj = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity, transform);
+        Vector3 dir = (player.transform.position - bulletSpawnPoint.position);
+        dir.y = 0f;
+        proj.GetComponent<Rigidbody>().AddForce(dir * force,ForceMode.Impulse);
+    }
 
     public void Heal()
     {
         state = EnemyState.Healthy;
-        enemyMesh.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
+        enemyShootingMesh.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
         //enemyAnim.SetBool("isHealthy", true);
 
     }
@@ -108,15 +124,16 @@ public class ZombieEnemy : MonoBehaviour
     {
         if (targetToLookAt != null)
         {
-            Vector3 targPos = player.transform.position - transform.position;
+            Vector3 targPos = player.transform.position - enemyShootingMesh.transform.position;
             targPos.y = 0;
             targPos.Normalize();
 
-            transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, targPos, rotationSpeed * Time.deltaTime, 0f));
+            enemyShootingMesh.transform.rotation = Quaternion.LookRotation(
+                                                   Vector3.RotateTowards(enemyShootingMesh.transform.forward, targPos, rotSpeed * Time.deltaTime, 0f));
         }
         else
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, startRotation, rotationSpeed * Time.deltaTime);
+            enemyShootingMesh.transform.rotation = Quaternion.Slerp(enemyShootingMesh.transform.rotation, startRotation, rotGoToStartRotSpeed * Time.deltaTime);
         }
     }
 

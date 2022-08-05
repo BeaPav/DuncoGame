@@ -33,6 +33,8 @@ public class PlayerMover : MonoBehaviour
 
     int jumps = 0;
     public float fix;
+
+    Animator anim;
     
 
     private void Start()
@@ -42,6 +44,9 @@ public class PlayerMover : MonoBehaviour
 
         charControler = GetComponent<CharacterController>();
         camera = Camera.main.transform;
+
+        anim = transform.Find("pivot/test").GetComponent<Animator>();
+        model = transform.Find("pivot/test").gameObject;
 
         Cursor.lockState = CursorLockMode.Locked; // neskorej vyjebat
     }
@@ -101,6 +106,8 @@ public class PlayerMover : MonoBehaviour
     {
         if (Direction.magnitude > 0.01f)
         {
+            anim.SetBool("isRunning", true);
+
             float targetAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
             float smoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle - 90, ref smoothTurnVelocity, smoothTurnTime);
 
@@ -110,6 +117,7 @@ public class PlayerMover : MonoBehaviour
             return moveDirection.normalized * movementSpeed;
         }
 
+        anim.SetBool("isRunning", false);
         return Vector3.zero;
     }
 
