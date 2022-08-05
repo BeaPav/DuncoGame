@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 6324737184004824099}
   - component: {fileID: 6947402072316760966}
   - component: {fileID: 5156294098496268108}
-  - component: {fileID: 6216012477187767851}
-  - component: {fileID: 1018765068931847243}
+  - component: {fileID: 3726921483470913840}
   m_Layer: 0
   m_Name: skal_stena_2
   m_TagString: Untagged
@@ -29,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 6669314663764690585}
   m_LocalRotation: {x: -0.7071068, y: -0.000000047078487, z: -0.000000047078487, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0, z: 27.68}
-  m_LocalScale: {x: 100, y: 100, z: 100}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1000, y: 1000, z: 1000}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -42,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6669314663764690585}
-  m_Mesh: {fileID: 2212009239438826721, guid: b78e676b4f767074ebc32caa58a9904a, type: 3}
+  m_Mesh: {fileID: -7561171800028761610, guid: a3b110b0a8d58604aa20158123f73426, type: 3}
 --- !u!23 &5156294098496268108
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4874126678125670354, guid: b78e676b4f767074ebc32caa58a9904a, type: 3}
+  - {fileID: 2100000, guid: 253615e8497a46944a686980e887e77e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,20 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6216012477187767851
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6669314663764690585}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.099224, y: 0.054729942, z: 0.09822165}
-  m_Center: {x: -0.0040910225, y: -0.00195575, z: 0.048906397}
---- !u!64 &1018765068931847243
+--- !u!64 &3726921483470913840
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,4 +97,4 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 2212009239438826721, guid: b78e676b4f767074ebc32caa58a9904a, type: 3}
+  m_Mesh: {fileID: -7561171800028761610, guid: a3b110b0a8d58604aa20158123f73426, type: 3}
