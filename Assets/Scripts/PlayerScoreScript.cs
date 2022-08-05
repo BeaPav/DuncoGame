@@ -28,7 +28,7 @@ public class PlayerScoreScript : MonoBehaviour
 
         charControler = GetComponent<CharacterController>();
 
-        DamageRender = transform.Find("pivot/pes").GetComponent<Renderer>();
+        DamageRender = transform.Find("pivot/test/Cube.001").GetComponent<Renderer>();
         startColor = DamageRender.material.color;
         damageColor = new Color(214f / 255, 7f / 255, 197f / 255, 1f);
 
@@ -70,12 +70,23 @@ public class PlayerScoreScript : MonoBehaviour
                 Damage(1, other.transform.parent.position);
             }
         }
+        else if(other.CompareTag("Projectile"))
+        {
+            Damage(1, other.transform.parent.position);
+        }
+
+
+
+
         else if(other.tag == "Collectable")
         {
             other.gameObject.SetActive(false);
             noCollectables++;
             noCollectablesText.text = noCollectables.ToString();
         }
+
+
+
         else if (other.tag == "SheepHeal")
         {
             noCollectables++;
