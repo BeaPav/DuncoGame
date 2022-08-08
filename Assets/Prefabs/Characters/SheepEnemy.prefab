@@ -188,8 +188,8 @@ GameObject:
   - component: {fileID: 4149492882397419920}
   - component: {fileID: 921384735474499605}
   - component: {fileID: 5255141992926737560}
-  - component: {fileID: 4783937838329229094}
   - component: {fileID: 5776324755279107301}
+  - component: {fileID: 8129709560664527856}
   m_Layer: 0
   m_Name: SheepEnemy
   m_TagString: Untagged
@@ -223,7 +223,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.9
-  m_Speed: 7
+  m_Speed: 5
   m_Acceleration: 80
   avoidancePriority: 50
   m_AngularSpeed: 300
@@ -247,22 +247,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d467bb4fc7ea0304786f55aa99a14c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distToStartFollow: 8
+  distToEndFollow: 18
+  distToAttack: 5
   isAttacking: 0
   state: 0
---- !u!82 &4783937838329229094
+  timeBtwAattack: 3
+  timeAttackDuration: 1
+--- !u!95 &5776324755279107301
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7549404864910688660}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ebef2d9b10310ce41ae7f643ed147d44, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!82 &8129709560664527856
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7549404864910688660}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: aeb0693d62b1501408bd11f3700e9abe, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 136bd1f145822084a955a568e79585a0, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1.76
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -270,7 +295,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 1.000001
+  MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -345,26 +370,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &5776324755279107301
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7549404864910688660}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ebef2d9b10310ce41ae7f643ed147d44, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &186736402100420197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -591,22 +596,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1946559425840789967}
     m_Modifications:
-    - target: {fileID: 251613322563271016, guid: fe015c7fb191d0e4581a038b5c671e23, type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 251613322563271016, guid: fe015c7fb191d0e4581a038b5c671e23, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 251613322563271016, guid: fe015c7fb191d0e4581a038b5c671e23, type: 3}
-      propertyPath: InitialModule.startRotation.scalar
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2822391438148896650, guid: fe015c7fb191d0e4581a038b5c671e23, type: 3}
-      propertyPath: m_RenderAlignment
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3049563147207004478, guid: fe015c7fb191d0e4581a038b5c671e23, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -654,10 +643,6 @@ PrefabInstance:
     - target: {fileID: 3162179014303733683, guid: fe015c7fb191d0e4581a038b5c671e23, type: 3}
       propertyPath: m_Name
       value: ParticleSound
-      objectReference: {fileID: 0}
-    - target: {fileID: 3162179014303733683, guid: fe015c7fb191d0e4581a038b5c671e23, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe015c7fb191d0e4581a038b5c671e23, type: 3}
