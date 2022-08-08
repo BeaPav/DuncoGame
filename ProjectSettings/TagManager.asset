@@ -4,6 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Stair
+  - Climb
+  - Fly
   - DamageSound
   - Collectable
   - SheepHeal
@@ -12,6 +15,7 @@ TagManager:
   - Bounce
   - Projectile
   - ground
+  - Animal
   layers:
   - Default
   - TransparentFX
@@ -33,17 +37,17 @@ TagManager:
   - 
   - 
   - 
+  - Animal
+  - 
+  - 
+  - Enemy
   - 
   - 
   - 
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Item
   - 
   m_SortingLayers:
   - name: Default
