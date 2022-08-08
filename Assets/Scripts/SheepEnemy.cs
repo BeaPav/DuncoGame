@@ -95,27 +95,36 @@ public class SheepEnemy : MonoBehaviour
 
     public void PrepareAttack()
     {
-        Debug.Log("prepareAttack");
-        isAttacking = true;
-        particlesPreAttack.Play(true);
+        if (state != EnemyState.Healthy)
+        {
+            //Debug.Log("prepareAttack");
+            isAttacking = true;
+            particlesPreAttack.Play(true);
+        }
     }
 
     public void SoundAttack()
     {
-        Debug.Log("playSoundAttack");
-        particlesSound.Play(true);
-        audio.Play();
+        if (state != EnemyState.Healthy)
+        {
+            //Debug.Log("playSoundAttack");
+            particlesSound.Play(true);
+            audio.Play();
+        }
     }
 
     public void ActivateAttack()
     {
-        Debug.Log("activateAttack");
-        damageCollider.enabled = true;
+        if (state != EnemyState.Healthy)
+        {
+            //Debug.Log("activateAttack");
+            damageCollider.enabled = true;
+        }
     }
 
     public void DeactivateAttack()
     {
-        Debug.Log("deactivateAttack");
+        //Debug.Log("deactivateAttack");
         particlesSound.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         damageCollider.enabled = false;
         isAttacking = false;
