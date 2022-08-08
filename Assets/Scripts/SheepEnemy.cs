@@ -22,12 +22,19 @@ public class SheepEnemy : MonoBehaviour
     NavMeshAgent agent;
     ParticleSystem particlesPreAttack;
     ParticleSystem particlesSound;
+    AudioSource audio;
     Collider damageCollider;
-    float distToFollow = 7f;
-    float distToAttack = 1.9f;
+    float distToFollow;
+    [SerializeField] float distToStartFollow = 8f;
+    [SerializeField] float distToEndFollow = 18f;
+    [SerializeField] float distToAttack = 4f;
     [SerializeField] bool isAttacking = false;
 
     public EnemyState state = EnemyState.CursedPlaced;
+
+    float time;
+    [SerializeField] float timeBtwAattack;
+    [SerializeField] float timeAttackDuration;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +47,8 @@ public class SheepEnemy : MonoBehaviour
         damageCollider = transform.Find("Enemy/DamageCollider").GetComponent<Collider>();
         damageCollider.enabled = false;
         particlesSound = transform.Find("Enemy/ParticleSound").GetComponent<ParticleSystem>();
+        distToFollow = distToStartFollow;
+        audio = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -49,15 +58,34 @@ public class SheepEnemy : MonoBehaviour
         if (state == EnemyState.CursedFollow)
         {
             agent.destination = player.transform.position;
+            distToFollow = distToEndFollow;
         }
         else if(state == EnemyState.CursedPlaced)
         {
+            distToFollow = distToStartFollow;
         }
-        else if(state == EnemyState.CursedAttack && !isAttacking)
+        else if(state == EnemyState.CursedAttack)// && !isAttacking)
         {
             //Debug.Log("startAttack");
 
-            enemyAnim.SetBool("isAttacking", true);
+
+            //utok cez animaciu so zastavenim, treba pridat do animacie jumping deaktivaciu attack aby fungovalo
+            //enemyAnim.SetBool("isAttacking", true);
+
+            //utok bez zastavenia, ovca stale sleduje hraca
+            agent.destination = player.transform.position;
+
+            if(!isAttacking && Time.time - time > timeBtwAattack)
+            {
+                //time = Time.time;
+                Debug.Log(Time.time - time);
+                PrepareAttack();
+                Invoke("SoundAttack", 1f);
+                Invoke("ActivateAttack", 1.2f);
+                Invoke("DeactivateAttack", 1.2f + timeAttackDuration);
+
+            }
+
         }
         else if(state == EnemyState.Healthy)
         {
@@ -67,36 +95,39 @@ public class SheepEnemy : MonoBehaviour
 
     public void PrepareAttack()
     {
-        //Debug.Log("prepareAttack");
+        Debug.Log("prepareAttack");
         isAttacking = true;
         particlesPreAttack.Play(true);
     }
 
     public void SoundAttack()
     {
-        //Debug.Log("PlaySoundAttack");
+        Debug.Log("playSoundAttack");
         particlesSound.Play(true);
+        audio.Play();
     }
 
     public void ActivateAttack()
     {
-        //Debug.Log("activateAttack");
+        Debug.Log("activateAttack");
         damageCollider.enabled = true;
     }
 
     public void DeactivateAttack()
     {
-        //Debug.Log("deactivateAttack");
+        Debug.Log("deactivateAttack");
         particlesSound.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         damageCollider.enabled = false;
         isAttacking = false;
-        enemyAnim.SetBool("isAttacking", false);
-        
+        audio.Stop();
+        //enemyAnim.SetBool("isAttacking", false);
+        time = Time.time;
     }
 
     public void Heal()
     {
         state = EnemyState.Healthy;
+        DeactivateAttack();
         enemyMesh.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
         enemyAnim.SetBool("isHealthy", true);
 
