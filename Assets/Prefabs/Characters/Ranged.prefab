@@ -77,12 +77,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 102e18a50fd86c14d83cf5356c9a1e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distToLookAtPlayer: 30
+  distToAttack: 20
   isAttacking: 0
   state: 0
   rotSpeed: 10
-  rotGoToStartRotSpeed: 2
+  rotGoToStartSpeed: 2
   bullet: {fileID: 5725446343339287111, guid: fea76f2e51f50fe4cb6703314e87c9ea, type: 3}
-  force: 1
+  projectileSpeed: 15
+  projectileOffset: 2
+  timeBtwAattack: 2
 --- !u!95 &7314696744712017096
 Animator:
   serializedVersion: 4

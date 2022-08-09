@@ -113,6 +113,7 @@ public class PlayerScoreScript : MonoBehaviour
     }
 
 
+
     private void Damage(int noDam, Vector3 enemyPos)
     {
         bounce = (transform.position - enemyPos).normalized;

@@ -24,7 +24,10 @@ public class ProjectileDestroyer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("DestroyTrigger");
-        Destroy(this.gameObject, 0.2f);
+        if (other.tag != "Projectile")
+        {
+            //Debug.Log("DestroyTrigger");
+            Destroy(this.gameObject, 0.2f);
+        }
     }
 }

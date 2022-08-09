@@ -33,7 +33,7 @@ public class SheepEnemy : MonoBehaviour
     public EnemyState state = EnemyState.CursedPlaced;
 
     float time;
-    [SerializeField] float timeBtwAattack;
+    [SerializeField] float timeBtwAttack;
     [SerializeField] float timeAttackDuration;
 
     // Start is called before the first frame update
@@ -75,10 +75,10 @@ public class SheepEnemy : MonoBehaviour
             //utok bez zastavenia, ovca stale sleduje hraca
             agent.destination = player.transform.position;
 
-            if(!isAttacking && Time.time - time > timeBtwAattack)
+            if(!isAttacking && Time.time - time > timeBtwAttack)
             {
                 //time = Time.time;
-                Debug.Log(Time.time - time);
+                //Debug.Log(Time.time - time);
                 PrepareAttack();
                 Invoke("SoundAttack", 1f);
                 Invoke("ActivateAttack", 1.2f);
