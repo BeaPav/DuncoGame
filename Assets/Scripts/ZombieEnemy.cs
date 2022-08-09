@@ -22,20 +22,23 @@ public class ZombieEnemy : MonoBehaviour
 
     ParticleSystem particlesPreAttack;
 
-    float distToLookAtPlayer = 12f;
-    float distToAttack = 10f;
+    [SerializeField] float distToLookAtPlayer = 20f;
+    [SerializeField] float distToAttack = 15f;
     [SerializeField] bool isAttacking = false;
 
     public EnemyState state = EnemyState.CursedPlaced;
 
     Quaternion startRotation;
     [SerializeField] float rotSpeed = 10f;
-    [SerializeField] float rotGoToStartRotSpeed = 2f;
+    [SerializeField] float rotGoToStartSpeed = 2f;
 
     [SerializeField] GameObject bullet;
     private Transform bulletSpawnPoint;
-    [SerializeField] float force = 2000f;
+    [SerializeField] float projectileSpeed = 2f;
+    [SerializeField] float projectileOffset;
 
+    float time;
+    [SerializeField] float timeBtwAttack;
 
 
     // Start is called before the first frame update
@@ -47,6 +50,7 @@ public class ZombieEnemy : MonoBehaviour
         targetToLookAt = null;
         startRotation = enemyShootingMesh.transform.rotation;
         enemyAnim = transform.GetComponent<Animator>();
+        time = 0;
         //particlesPreAttack = transform.Find("Enemy/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
 
     }
@@ -66,11 +70,16 @@ public class ZombieEnemy : MonoBehaviour
             targetToLookAt = null;
             //enemyAnim.SetBool("isAttacking", false);
         }
-        else if (state == EnemyState.CursedAttack && !isAttacking)
+        else if (state == EnemyState.CursedAttack)
         {
             //Debug.Log("startAttack");
             targetToLookAt = player.transform;
-            enemyAnim.SetBool("isAttacking", true);
+
+            if (!isAttacking && Time.time - time > timeBtwAttack)
+            {
+                isAttacking = true;
+                enemyAnim.SetTrigger("isAttacking");
+            }
         }
         else if (state == EnemyState.Healthy)
         {
@@ -105,10 +114,19 @@ public class ZombieEnemy : MonoBehaviour
 
     public void Shoot()
     {
-        GameObject proj = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity, transform);
-        Vector3 dir = (player.transform.position - bulletSpawnPoint.position);
-        dir.y = 0f;
-        proj.GetComponent<Rigidbody>().AddForce(dir * force,ForceMode.Impulse);
+        Vector3 dir = (player.transform.position - bulletSpawnPoint.position).normalized;
+
+        GameObject proj0 = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.LookRotation(dir), transform);
+        GameObject proj1 = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.LookRotation(dir), transform);
+        GameObject proj2 = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.LookRotation(dir), transform);
+
+        proj0.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward.normalized * projectileSpeed, ForceMode.Impulse);
+        proj1.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(projectileOffset, 0f, 10f).normalized * projectileSpeed, ForceMode.Impulse);
+        proj2.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(-projectileOffset, 0f, 10f).normalized * projectileSpeed, ForceMode.Impulse);
+
+        
+        isAttacking = false;
+        time = Time.time;
     }
 
     public void Heal()
@@ -133,7 +151,7 @@ public class ZombieEnemy : MonoBehaviour
         }
         else
         {
-            enemyShootingMesh.transform.rotation = Quaternion.Slerp(enemyShootingMesh.transform.rotation, startRotation, rotGoToStartRotSpeed * Time.deltaTime);
+            enemyShootingMesh.transform.rotation = Quaternion.Slerp(enemyShootingMesh.transform.rotation, startRotation, rotGoToStartSpeed * Time.deltaTime);
         }
     }
 
@@ -142,7 +160,9 @@ public class ZombieEnemy : MonoBehaviour
     {
         if (state != EnemyState.Healthy)
         {
-            float dist = (transform.position - player.transform.position).magnitude;
+            Vector3 distVect = transform.position - player.transform.position;
+            distVect.y = 0;
+            float dist = distVect.magnitude;
 
             if (dist < distToLookAtPlayer && dist > distToAttack && !isAttacking)
             {
