@@ -94,6 +94,8 @@ MonoBehaviour:
   profiles:
   - name: Ledge Grab
     EnterStatus: 0
+    MaxVSpeed: 0
+    ForwardMultiplier: 1
     Height: 1.55
     LedgeExitDistance: 0.65
     ExitTime: 0.9

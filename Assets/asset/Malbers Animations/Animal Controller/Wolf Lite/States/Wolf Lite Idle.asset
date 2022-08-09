@@ -18,7 +18,7 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 
     Variable: {fileID: 0}
-  Priority: 1
+  Priority: 0
   General:
     modify: 3199
     RootMotion: 1
@@ -38,6 +38,8 @@ MonoBehaviour:
   TagModifiers: []
   UseSendMessage: 0
   IncludeChildren: 1
+  AllowExitFromAnim: 0
+  IncludeSleepState: 1
   SleepFromState: []
   SleepFromMode: []
   QueueFrom: []

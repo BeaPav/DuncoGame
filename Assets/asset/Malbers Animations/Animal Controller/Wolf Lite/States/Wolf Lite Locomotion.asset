@@ -18,7 +18,7 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 
     Variable: {fileID: 0}
-  Priority: 2
+  Priority: 1
   General:
     modify: 7231
     RootMotion: 1

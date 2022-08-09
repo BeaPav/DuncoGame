@@ -82,6 +82,7 @@ namespace MalbersAnimations.Controller
 
         public override void EnterTagAnimation()
         {
+            CanJumpAgain = true;
             if (CurrentAnimTag == EnterTagHash)
             {
                 Debugging($"[EnterTag - {EnterTag.Value}]");
@@ -280,6 +281,7 @@ namespace MalbersAnimations.Controller
 
         private void CheckForGround(float normalizedTime)
         {
+
             if (activeJump.CliffLandDistance == 0) return; //Do nothing if RayLenght is zero
 
             var clifftime = activeJump.CliffTime != 0 ? activeJump.CliffTime : 0.333f;
@@ -358,6 +360,7 @@ namespace MalbersAnimations.Controller
                 }
                 else
                 {
+                    Debug.Log("kokot");
                     animal.UseGravity = General.Gravity;
                     Debugging($"[Allow Exit] - <B>Jump [{activeJump.name}] </B> Go to Fall..No Ground was found");
                 }
