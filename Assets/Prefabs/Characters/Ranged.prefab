@@ -78,15 +78,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distToLookAtPlayer: 30
-  distToAttack: 20
+  distToAttack: 25
   isAttacking: 0
   state: 0
   rotSpeed: 10
   rotGoToStartSpeed: 2
   bullet: {fileID: 5725446343339287111, guid: fea76f2e51f50fe4cb6703314e87c9ea, type: 3}
-  projectileSpeed: 15
+  projectileSpeed: 30
   projectileOffset: 2
-  timeBtwAattack: 2
+  timeBtwAttack: 0
 --- !u!95 &7314696744712017096
 Animator:
   serializedVersion: 4
