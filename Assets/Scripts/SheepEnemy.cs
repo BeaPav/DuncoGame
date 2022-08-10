@@ -57,6 +57,11 @@ public class SheepEnemy : MonoBehaviour
     void Update()
     {
         DistanceControl();
+        if (HealControl())
+        {
+            //Debug.Log("Heal");
+            Heal();
+        }
         if (state == EnemyState.CursedFollow)
         {
             agent.destination = player.transform.position;
@@ -167,11 +172,7 @@ public class SheepEnemy : MonoBehaviour
                 state = EnemyState.CursedAttack;
             }
 
-            if(HealControl())
-            {
-                Debug.Log("Heal");
-                Heal();
-            }
+            
         }
 
     }

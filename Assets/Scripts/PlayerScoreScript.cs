@@ -91,15 +91,18 @@ public class PlayerScoreScript : MonoBehaviour
 
         else if (other.tag == "SheepHeal")
         {
-            if (HealControl(other))
+            if (false)
             {
                 noCollectables++;
-                noCollectablesText.text = noCollectables.ToString();
+                //noCollectablesText.text = noCollectables.ToString();
 
                 //other.gameObject.tag = "Bounce";
                 //other.transform.parent.parent.GetComponent<SheepEnemy>().Heal();
             }
+
+            //Debug.Log("Bounce");
             BounceDown();
+            other.transform.parent.parent.GetComponent<Animator>().SetTrigger("isHit");
         }
         else if (other.tag == "StoneHeal")
         {
@@ -110,9 +113,26 @@ public class PlayerScoreScript : MonoBehaviour
             other.transform.parent.parent.GetComponent<StoneEnemy>().Heal();
             other.gameObject.SetActive(false);
         }
+        else if (other.tag == "ZombieHeal")
+        {
+            if (false)
+            {
+                noCollectables++;
+                //noCollectablesText.text = noCollectables.ToString();
+
+                //other.gameObject.tag = "Bounce";
+                //other.transform.parent.parent.GetComponent<SheepEnemy>().Heal();
+            }
+
+            //Debug.Log("Bounce");
+            BounceDown();
+            other.transform.parent.parent.GetComponent<Animator>().SetTrigger("isHit");
+        }
+
         else if(other.CompareTag("Bounce"))
         {
             BounceDown();
+            Debug.Log("BounceInBounce");
         }
         
 

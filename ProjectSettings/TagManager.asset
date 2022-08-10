@@ -16,6 +16,8 @@ TagManager:
   - Projectile
   - ground
   - Animal
+  - Water
+  - ZombieHeal
   layers:
   - Default
   - TransparentFX
