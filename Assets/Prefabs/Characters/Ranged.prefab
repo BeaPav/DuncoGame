@@ -84,9 +84,10 @@ MonoBehaviour:
   rotSpeed: 10
   rotGoToStartSpeed: 2
   bullet: {fileID: 5725446343339287111, guid: fea76f2e51f50fe4cb6703314e87c9ea, type: 3}
-  projectileSpeed: 15
-  projectileOffset: 2
-  timeBtwAattack: 2
+  projectileSpeed: 20
+  timeBtwAttack: 3
+  timeBtwProjectInAttack: 0.2
+  ShotPrediction: 5
 --- !u!95 &7314696744712017096
 Animator:
   serializedVersion: 4

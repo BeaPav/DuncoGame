@@ -36,6 +36,8 @@ public class SheepEnemy : MonoBehaviour
     [SerializeField] float timeBtwAttack;
     [SerializeField] float timeAttackDuration;
 
+    [SerializeField] float healOffset = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -164,7 +166,26 @@ public class SheepEnemy : MonoBehaviour
                 //Debug.Log("CursedAttack");
                 state = EnemyState.CursedAttack;
             }
+
+            if(HealControl())
+            {
+                Debug.Log("Heal");
+                Heal();
+            }
         }
 
+    }
+
+    private bool HealControl()
+    {
+        if (player.transform.position.y - transform.position.y < 2f && player.transform.position.y - transform.position.y > 0f)
+        {
+            if (Mathf.Abs(transform.position.z - player.transform.position.z) < healOffset &&
+               Mathf.Abs(transform.position.x - player.transform.position.x) < healOffset)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

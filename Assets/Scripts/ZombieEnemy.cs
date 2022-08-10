@@ -16,6 +16,7 @@ public enum EnemyState
 public class ZombieEnemy : MonoBehaviour
 {
     GameObject player;
+    CharacterController playerController;
     GameObject enemyShootingMesh;
     Transform targetToLookAt;
     Animator enemyAnim;
@@ -35,22 +36,29 @@ public class ZombieEnemy : MonoBehaviour
     [SerializeField] GameObject bullet;
     private Transform bulletSpawnPoint;
     [SerializeField] float projectileSpeed = 2f;
-    [SerializeField] float projectileOffset;
+    //[SerializeField] float projectileOffset;
 
-    float time;
+    float EndAttackTime;
+    float EndSubAttackTime;
     [SerializeField] float timeBtwAttack;
+    [SerializeField] float timeBtwProjectInAttack;
+    private int noProjectilsInAttack = 0;
 
+
+    [SerializeField] float ShotPrediction;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player-Dunco");
+        playerController = player.GetComponent<CharacterController>();
         enemyShootingMesh = transform.Find("Enemy/zombie_shooter").gameObject;
         bulletSpawnPoint = transform.Find("Enemy/zombie_shooter/BulletSpawnPoint").transform;
         targetToLookAt = null;
         startRotation = enemyShootingMesh.transform.rotation;
         enemyAnim = transform.GetComponent<Animator>();
-        time = 0;
+        EndAttackTime = 0;
+        EndSubAttackTime = 0;
         //particlesPreAttack = transform.Find("Enemy/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
 
     }
@@ -75,10 +83,34 @@ public class ZombieEnemy : MonoBehaviour
             //Debug.Log("startAttack");
             targetToLookAt = player.transform;
 
-            if (!isAttacking && Time.time - time > timeBtwAttack)
+            if (!isAttacking && Time.time - EndAttackTime > timeBtwAttack)
             {
                 isAttacking = true;
+                noProjectilsInAttack++;
                 enemyAnim.SetTrigger("isAttacking");
+                EndSubAttackTime = Time.time;
+
+                Debug.Log("firstProjectile");
+                Debug.Log(noProjectilsInAttack);
+            }
+            else if(isAttacking && Time.time - EndSubAttackTime > timeBtwProjectInAttack)
+            {
+                enemyAnim.SetTrigger("isAttacking");
+                EndSubAttackTime = Time.time;
+                noProjectilsInAttack++;
+                Debug.Log("otherProjectile");
+                Debug.Log(noProjectilsInAttack);
+
+                if (noProjectilsInAttack == 3)
+                {
+                    isAttacking = false;
+                    noProjectilsInAttack = 0;
+                    EndAttackTime = Time.time;
+                    Debug.Log("endAttack");
+                    Debug.Log(noProjectilsInAttack);
+                    Debug.Log("--");
+                }
+                
             }
         }
         else if (state == EnemyState.Healthy)
@@ -114,8 +146,12 @@ public class ZombieEnemy : MonoBehaviour
 
     public void Shoot()
     {
-        Vector3 dir = (player.transform.position - bulletSpawnPoint.position).normalized;
+        Vector3 target = player.transform.position + playerController.velocity.normalized * ShotPrediction;
 
+        Vector3 dir = (target - bulletSpawnPoint.position).normalized;
+
+        //tri projektily naraz a do stran
+        /*
         GameObject proj0 = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.LookRotation(dir), transform);
         GameObject proj1 = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.LookRotation(dir), transform);
         GameObject proj2 = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.LookRotation(dir), transform);
@@ -123,10 +159,15 @@ public class ZombieEnemy : MonoBehaviour
         proj0.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward.normalized * projectileSpeed, ForceMode.Impulse);
         proj1.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(projectileOffset, 0f, 10f).normalized * projectileSpeed, ForceMode.Impulse);
         proj2.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(-projectileOffset, 0f, 10f).normalized * projectileSpeed, ForceMode.Impulse);
+        */
+
+        //jeden projektil
+        GameObject proj0 = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.LookRotation(dir), transform);
+        proj0.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward.normalized * projectileSpeed, ForceMode.Impulse);
 
         
-        isAttacking = false;
-        time = Time.time;
+        //isAttacking = false;
+        //EndAttackTime = Time.time;
     }
 
     public void Heal()

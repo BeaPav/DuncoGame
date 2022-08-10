@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1076805230771942911}
   - component: {fileID: 2879312315326118488}
+  - component: {fileID: 1300461111537317765}
   m_Layer: 0
   m_Name: Seno 1
   m_TagString: Untagged
@@ -42,10 +43,24 @@ BoxCollider:
   m_GameObject: {fileID: 4462621150682816017}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.02, y: 0.020498922, z: 0.02}
   m_Center: {x: 0, y: 0.00024946136, z: 0}
+--- !u!64 &1300461111537317765
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4462621150682816017}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1001 &6603988513644138049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -103,6 +118,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1146c8f74e5d5634e85bc71231fc2223, type: 3}
+--- !u!1 &6298140325056213776 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1146c8f74e5d5634e85bc71231fc2223, type: 3}
+  m_PrefabInstance: {fileID: 6603988513644138049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &3129565893265255519
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6298140325056213776}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -678483565242699159, guid: 1146c8f74e5d5634e85bc71231fc2223, type: 3}
 --- !u!4 &6641874784659024298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1146c8f74e5d5634e85bc71231fc2223, type: 3}

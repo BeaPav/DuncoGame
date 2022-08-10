@@ -21,6 +21,8 @@ public class PlayerScoreScript : MonoBehaviour
     [SerializeField] Vector3 bounce = Vector3.zero;
     [SerializeField] float bounceSpeed;
 
+    [SerializeField] float healOffset = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -89,11 +91,15 @@ public class PlayerScoreScript : MonoBehaviour
 
         else if (other.tag == "SheepHeal")
         {
-            noCollectables++;
-            noCollectablesText.text = noCollectables.ToString();
+            if (HealControl(other))
+            {
+                noCollectables++;
+                noCollectablesText.text = noCollectables.ToString();
+
+                //other.gameObject.tag = "Bounce";
+                //other.transform.parent.parent.GetComponent<SheepEnemy>().Heal();
+            }
             BounceDown();
-            other.transform.parent.parent.GetComponent<SheepEnemy>().Heal();
-            other.gameObject.tag = "Bounce";
         }
         else if (other.tag == "StoneHeal")
         {
@@ -130,8 +136,21 @@ public class PlayerScoreScript : MonoBehaviour
     private void BounceDown()
     {
         startBounceTime = Time.time;
-        bounce = transform.right * 0.5f;
-        bounce.y = 0f;
+        bounce = transform.right * 1f;
+        bounce.y = 3f;
+    }
+
+    private bool HealControl(Collider col)
+    {
+        if(col.transform.position.y < transform.position.y)
+        {
+            if(Mathf.Abs(col.transform.position.z - transform.position.z) < healOffset &&
+               Mathf.Abs(col.transform.position.x - transform.position.x) < healOffset)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -54,6 +54,7 @@ public class PlayerMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(charControler.isGrounded);
         if (move)
             Movement();
     }

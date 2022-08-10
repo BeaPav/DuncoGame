@@ -108,6 +108,8 @@ GameObject:
   - component: {fileID: 8438794014499241744}
   - component: {fileID: 6107939775883082549}
   - component: {fileID: 2071565343494314009}
+  - component: {fileID: 6588761092678446224}
+  - component: {fileID: 7010198182477700353}
   m_Layer: 0
   m_Name: Player-Dunco
   m_TagString: Player
@@ -222,7 +224,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0.08, y: 0.4, z: 0}
+  m_Center: {x: 0.08, y: 0.36, z: 0}
 --- !u!114 &6107939775883082549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,9 +238,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noCollectablesText: {fileID: 0}
-  noCollectables: 0
+  noCollectables: 3
   bounce: {x: 0, y: 0, z: 0}
   bounceSpeed: 0
+  healOffset: 1
 --- !u!65 &2071565343494314009
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -252,6 +255,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2739812, y: 1.0308101, z: 0.45689902}
   m_Center: {x: 0.16137956, y: 0.52204263, z: 0.0050979126}
+--- !u!136 &6588761092678446224
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8438794014499241741}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.20115201
+  m_Height: 1.1173656
+  m_Direction: 0
+  m_Center: {x: 0.06608351, y: 0.52330923, z: -0.0088585615}
+--- !u!135 &7010198182477700353
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8438794014499241741}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.18
+  m_Center: {x: 0.57, y: 0.87, z: 0}
 --- !u!1001 &4489850125621351489
 PrefabInstance:
   m_ObjectHideFlags: 0
