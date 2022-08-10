@@ -44,9 +44,14 @@ public class PlayerMover : MonoBehaviour
 
         charControler = GetComponent<CharacterController>();
         camera = Camera.main.transform;
-
+        /*
+        anim = transform.Find("pivot/test").GetComponent<Animator>();
+        model = transform.Find("pivot/test").gameObject;
+        */
+        
         anim = transform.Find("pivot/RUN").GetComponent<Animator>();
         model = transform.Find("pivot/RUN").gameObject;
+        
 
         Cursor.lockState = CursorLockMode.Locked; // neskorej vyjebat
     }
@@ -155,21 +160,21 @@ public class PlayerMover : MonoBehaviour
             Debug.Log(angle);
             */
 
-            /*Vector3 upright = Vector3.Cross(model.transform.right, -(Fhit.point - Bhit.point).normalized);
-            Quaternion angel = Quaternion.LookRotation(Vector3.Cross(model.transform.right, upright));
+        /*Vector3 upright = Vector3.Cross(model.transform.right, -(Fhit.point - Bhit.point).normalized);
+        Quaternion angel = Quaternion.LookRotation(Vector3.Cross(model.transform.right, upright));
 
-            
-            model.transform.rotation = angel;
-            //Debug.Log(angel);
-            /*
-             * 
-             *  Vector3 upright = Vector3.Cross(model.transform.right, -(Fhit.point - Bhit.point).normalized);
-             *   Vector3 angel = Quaternion.LookRotation(Vector3.Cross(model.transform.right, upright)).eulerAngles;
-             *   model.transform.eulerAngles = angel;
-             *   Debug.Log(angel);
-             */
-        }
+
+        model.transform.rotation = angel;
+        //Debug.Log(angel);
+        /*
+         * 
+         *  Vector3 upright = Vector3.Cross(model.transform.right, -(Fhit.point - Bhit.point).normalized);
+         *   Vector3 angel = Quaternion.LookRotation(Vector3.Cross(model.transform.right, upright)).eulerAngles;
+         *   model.transform.eulerAngles = angel;
+         *   Debug.Log(angel);
+         */
     }
+}
 
     private void OnDisable()
     {
