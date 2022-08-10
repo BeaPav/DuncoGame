@@ -45,8 +45,8 @@ public class PlayerMover : MonoBehaviour
         charControler = GetComponent<CharacterController>();
         camera = Camera.main.transform;
 
-        anim = transform.Find("pivot/test").GetComponent<Animator>();
-        model = transform.Find("pivot/test").gameObject;
+        anim = transform.Find("pivot/RUN").GetComponent<Animator>();
+        model = transform.Find("pivot/RUN").gameObject;
 
         Cursor.lockState = CursorLockMode.Locked; // neskorej vyjebat
     }
