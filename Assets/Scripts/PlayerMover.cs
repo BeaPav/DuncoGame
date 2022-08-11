@@ -16,6 +16,7 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] float smoothTurnTime = 0.2f;
     [SerializeField] float jumpSpeed = 10f;
     [SerializeField] float movementSpeed = 3f;
+    [SerializeField] float slopeSpeedChange = 700f;
 
     float smoothTurnVelocity;
     public float ySpeed;
@@ -44,15 +45,15 @@ public class PlayerMover : MonoBehaviour
 
         charControler = GetComponent<CharacterController>();
         camera = Camera.main.transform;
-        /*
+        
         anim = transform.Find("pivot/test").GetComponent<Animator>();
         model = transform.Find("pivot/test").gameObject;
-        */
         
+        /*
         anim = transform.Find("pivot/RUN").GetComponent<Animator>();
         model = transform.Find("pivot/RUN").gameObject;
+        */
         
-
         Cursor.lockState = CursorLockMode.Locked; // neskorej vyjebat
     }
 
@@ -146,7 +147,7 @@ public class PlayerMover : MonoBehaviour
             Vector3 point3 = new Vector3(point1.x, point2.y, point1.z);
 
             Vector3 angle = model.transform.eulerAngles;//Vector3.Angle(point3-point2,point1-point2) 
-            angle.z = Mathf.LerpAngle(angle.z, Vector3.Angle(point3 - point2, point1 - point2) * nasobitel, 3 * Time.deltaTime);
+            angle.z = Mathf.LerpAngle(angle.z, Vector3.Angle(point3 - point2, point1 - point2) * nasobitel, slopeSpeedChange * Time.deltaTime);
             model.transform.eulerAngles = angle;
 
             /*

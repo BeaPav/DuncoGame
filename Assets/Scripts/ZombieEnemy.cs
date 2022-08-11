@@ -47,6 +47,11 @@ public class ZombieEnemy : MonoBehaviour
 
     [SerializeField] float ShotPrediction;
 
+
+
+    [SerializeField] float healOffset = 0.6f;
+    GameObject healCollider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +64,7 @@ public class ZombieEnemy : MonoBehaviour
         enemyAnim = transform.GetComponent<Animator>();
         EndAttackTime = 0;
         EndSubAttackTime = 0;
+        healCollider = transform.Find("Enemy/TriggerColliderToHeal").gameObject;
         //particlesPreAttack = transform.Find("Enemy/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
 
     }
@@ -68,6 +74,13 @@ public class ZombieEnemy : MonoBehaviour
     {
         
         DistanceControl();
+
+        if (HealControl())
+        {
+            //Debug.Log("Heal");
+            Heal();
+        }
+
         if (state == EnemyState.CursedFollow)
         {
             targetToLookAt = player.transform;
@@ -90,25 +103,19 @@ public class ZombieEnemy : MonoBehaviour
                 enemyAnim.SetTrigger("isAttacking");
                 EndSubAttackTime = Time.time;
 
-                Debug.Log("firstProjectile");
-                Debug.Log(noProjectilsInAttack);
             }
             else if(isAttacking && Time.time - EndSubAttackTime > timeBtwProjectInAttack)
             {
                 enemyAnim.SetTrigger("isAttacking");
                 EndSubAttackTime = Time.time;
                 noProjectilsInAttack++;
-                Debug.Log("otherProjectile");
-                Debug.Log(noProjectilsInAttack);
 
                 if (noProjectilsInAttack == 3)
                 {
                     isAttacking = false;
                     noProjectilsInAttack = 0;
                     EndAttackTime = Time.time;
-                    Debug.Log("endAttack");
-                    Debug.Log(noProjectilsInAttack);
-                    Debug.Log("--");
+                    
                 }
                 
             }
@@ -146,6 +153,7 @@ public class ZombieEnemy : MonoBehaviour
 
     public void Shoot()
     {
+        
         Vector3 target = player.transform.position + playerController.velocity.normalized * ShotPrediction;
 
         Vector3 dir = (target - bulletSpawnPoint.position).normalized;
@@ -159,12 +167,12 @@ public class ZombieEnemy : MonoBehaviour
         proj0.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward.normalized * projectileSpeed, ForceMode.Impulse);
         proj1.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(projectileOffset, 0f, 10f).normalized * projectileSpeed, ForceMode.Impulse);
         proj2.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(-projectileOffset, 0f, 10f).normalized * projectileSpeed, ForceMode.Impulse);
+        
         */
-
         //jeden projektil
         GameObject proj0 = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.LookRotation(dir), transform);
         proj0.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward.normalized * projectileSpeed, ForceMode.Impulse);
-
+        
         
         //isAttacking = false;
         //EndAttackTime = Time.time;
@@ -172,8 +180,10 @@ public class ZombieEnemy : MonoBehaviour
 
     public void Heal()
     {
+        Debug.Log("Heal");
         state = EnemyState.Healthy;
         enemyShootingMesh.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
+        transform.Find("Enemy/zombie_huba").gameObject.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
         //enemyAnim.SetBool("isHealthy", true);
 
     }
@@ -196,6 +206,19 @@ public class ZombieEnemy : MonoBehaviour
         }
     }
 
+    private bool HealControl()
+    {
+        
+        if (player.transform.position.y - healCollider.transform.position.y < 0.8f && player.transform.position.y - healCollider.transform.position.y > 0f)
+        {
+            if (Mathf.Abs(healCollider.transform.position.z - player.transform.position.z) < healOffset &&
+               Mathf.Abs(healCollider.transform.position.x - player.transform.position.x) < healOffset)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     private void DistanceControl()
     {

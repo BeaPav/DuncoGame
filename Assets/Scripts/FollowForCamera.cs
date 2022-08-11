@@ -9,6 +9,7 @@ public class FollowForCamera : MonoBehaviour
 
     private void Start()
     {
+        follow = GameObject.Find("Player-Dunco").transform;
         transform.position = follow.position;
     }
 
