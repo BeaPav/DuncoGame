@@ -30,7 +30,7 @@ public class PlayerScoreScript : MonoBehaviour
 
         charControler = GetComponent<CharacterController>();
 
-        DamageRender = transform.Find("pivot/test/Cube.001").GetComponent<Renderer>();
+        DamageRender = transform.Find("pivot/Dunco/Cube.002").GetComponent<Renderer>();
         startColor = DamageRender.material.color;
         damageColor = new Color(214f / 255, 7f / 255, 197f / 255, 1f);
 

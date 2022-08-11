@@ -46,13 +46,14 @@ public class PlayerMover : MonoBehaviour
         charControler = GetComponent<CharacterController>();
         camera = Camera.main.transform;
         
+        /*
         anim = transform.Find("pivot/test").GetComponent<Animator>();
         model = transform.Find("pivot/test").gameObject;
-        
-        /*
-        anim = transform.Find("pivot/RUN").GetComponent<Animator>();
-        model = transform.Find("pivot/RUN").gameObject;
         */
+        
+        anim = transform.Find("pivot/Dunco").GetComponent<Animator>();
+        model = transform.Find("pivot/Dunco").gameObject;
+        
         
         Cursor.lockState = CursorLockMode.Locked; // neskorej vyjebat
     }
@@ -76,7 +77,7 @@ public class PlayerMover : MonoBehaviour
         ySpeed = Jump(ySpeed);
         moveDirection.y = ySpeed;
 
-        copyTerrain();
+        
         
 
         //Debug.Log(moveDirection.y);
@@ -87,8 +88,10 @@ public class PlayerMover : MonoBehaviour
     {
         if (!Input.GetKeyDown(KeyCode.Space) || jumps >= 2)
         {
+            //copyTerrain();
             return ySpeed;
         }
+        anim.SetTrigger("isJumping");
         jumps++;
         gravityFinal = gravityStartCondition;
         //Debug.Log("jump");
@@ -103,6 +106,7 @@ public class PlayerMover : MonoBehaviour
             return ySpeed += Physics.gravity.y * Time.deltaTime * gravityFinal;
             
         }
+        
         jumps = 0;
         gravityFinal = gravityStartCondition;
         return -0.5f;
