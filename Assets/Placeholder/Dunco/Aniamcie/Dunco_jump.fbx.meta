@@ -6,6 +6,9 @@ ModelImporter:
   - first:
       74: 1444733745673076434
     second: rig|rigAction.001
+  - first:
+      74: -9087855249205618794
+    second: rig|jump_pes
   externalObjects: {}
   materials:
     materialImportMode: 2
