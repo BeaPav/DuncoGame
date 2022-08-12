@@ -19,7 +19,7 @@ public class PlayerScoreScript : MonoBehaviour
     Color damageColor;
 
     [SerializeField] GameObject collectable;
-    GameObject colParent;
+    //GameObject colParent;
     Transform colSpawnPoint;
 
 
@@ -34,6 +34,7 @@ public class PlayerScoreScript : MonoBehaviour
     void Start()
     {
         noCollectables = 0;
+        noCollectablesText = GameObject.Find("Canvas/Text (TMP)").GetComponent<TextMeshProUGUI>();
 
         charControler = GetComponent<CharacterController>();
 
@@ -42,7 +43,7 @@ public class PlayerScoreScript : MonoBehaviour
         startColor = DamageMaterial.color;
         damageColor = new Color(214f / 255, 7f / 255, 197f / 255, 1f);
         colSpawnPoint = transform.Find("pivot/Dunco/CollectableSpawnPoint").transform;
-        colParent = GameObject.Find("CollectableParent").gameObject;
+        //colParent = GameObject.Find("CollectableParent").gameObject;
 
         bounceSpeed = 7f;
     }
@@ -162,8 +163,8 @@ public class PlayerScoreScript : MonoBehaviour
         {
             noCollectables--;
             noCollectablesText.text = noCollectables.ToString();
-            GameObject coll = Instantiate(collectable, colSpawnPoint.position + Vector3.up * 1.5f, Quaternion.Euler(0, 360f * Random.value, 0),
-                                          colParent.transform);
+            GameObject coll = Instantiate(collectable, colSpawnPoint.position + Vector3.up * 1.5f, Quaternion.Euler(0, 360f * Random.value, 0)
+                                          );//,colParent.transform);
 
             coll.GetComponent<CollectableEscape>().CreateTargetDir(transform.position);
             coll.GetComponent<Rigidbody>().AddForce(Vector3.up * 5f, ForceMode.VelocityChange);
