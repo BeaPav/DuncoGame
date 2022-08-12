@@ -57,7 +57,7 @@ public class SheepEnemy : MonoBehaviour
     void Update()
     {
         DistanceControl();
-        if (HealControl())
+        if (HealControl() && state != EnemyState.Healthy)
         {
             //Debug.Log("Heal");
             Heal();
@@ -146,6 +146,9 @@ public class SheepEnemy : MonoBehaviour
         DeactivateAttack();
         enemyMesh.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
         enemyAnim.SetBool("isHealthy", true);
+
+        player.GetComponent<PlayerScoreScript>().noCollectables++;
+        player.GetComponent<PlayerScoreScript>().noCollectablesText.text = player.GetComponent<PlayerScoreScript>().noCollectables.ToString();
 
     }
 

@@ -75,10 +75,11 @@ public class ZombieEnemy : MonoBehaviour
         
         DistanceControl();
 
-        if (HealControl())
+        if (HealControl() && state != EnemyState.Healthy)
         {
             //Debug.Log("Heal");
             Heal();
+            
         }
 
         if (state == EnemyState.CursedFollow)
@@ -185,10 +186,13 @@ public class ZombieEnemy : MonoBehaviour
         enemyShootingMesh.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
         transform.Find("Enemy/zombie_huba").gameObject.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
         //enemyAnim.SetBool("isHealthy", true);
+        player.GetComponent<PlayerScoreScript>().noCollectables++;
+        player.GetComponent<PlayerScoreScript>().noCollectablesText.text = player.GetComponent<PlayerScoreScript>().noCollectables.ToString();
+
 
     }
 
-    
+
     private void LookAtFunc()
     {
         if (targetToLookAt != null)

@@ -14,7 +14,7 @@ public class CollectableEscape : MonoBehaviour
 
     bool isHit = false;
 
-    Rigidbody rb;
+    [SerializeField] Rigidbody rb;
 
 
 
@@ -54,14 +54,20 @@ public class CollectableEscape : MonoBehaviour
 
     public void CreateTargetDir(Vector3 playerPos)
     {
+        Debug.Log(playerPos);
         startPos = transform.position;
+
+        Debug.Log(startPos + "startPos");
         targetDir = startPos - playerPos;
+
+        Debug.Log(targetDir + "target  2");
         targetDir.y = 0;
         targetDir = Quaternion.AngleAxis(Random.Range(-90f, 90f), Vector3.up) * targetDir;
-        rb.AddForce(-Vector3.up);
-
+        Debug.Log(targetDir + "target  3");
+        //rb.AddForce(-1f * Vector3.up);
+        Debug.Log("rb");
         Vector3.Normalize(targetDir);
-
+        Debug.Log(targetDir + "target");
     }
 
     private bool DistanceControl()
