@@ -8,20 +8,27 @@ using TMPro;
 public class PlayerScoreScript : MonoBehaviour
 {
     public TextMeshProUGUI noCollectablesText;
-    private float startBounceTime = 0f;
     public int noCollectables;
 
     CharacterController charControler;
 
     
     Renderer DamageRender;
+    Material DamageMaterial;
     Color startColor;
     Color damageColor;
 
+    [SerializeField] GameObject collectable;
+    GameObject colParent;
+    Transform colSpawnPoint;
+
+
+    private float startBounceTime = 0f;
     [SerializeField] Vector3 bounce = Vector3.zero;
     [SerializeField] float bounceSpeed;
 
-    [SerializeField] float healOffset = 1f;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,10 +37,12 @@ public class PlayerScoreScript : MonoBehaviour
 
         charControler = GetComponent<CharacterController>();
 
-        DamageRender = transform.Find("pivot/Dunco/Cube.002").GetComponent<Renderer>();
-        startColor = DamageRender.material.color;
+        DamageRender = transform.Find("pivot/Dunco/Cube.002").GetComponent<SkinnedMeshRenderer>();
+        DamageMaterial = DamageRender.materials[1];
+        startColor = DamageMaterial.color;
         damageColor = new Color(214f / 255, 7f / 255, 197f / 255, 1f);
-
+        colSpawnPoint = transform.Find("pivot/Dunco/CollectableSpawnPoint").transform;
+        colParent = GameObject.Find("CollectableParent").gameObject;
 
         bounceSpeed = 7f;
     }
@@ -44,7 +53,7 @@ public class PlayerScoreScript : MonoBehaviour
         if(Time.time - startBounceTime > 0.5f)
         {
             
-            DamageRender.material.SetColor("_Color", startColor);
+            DamageMaterial.SetColor("_Color", startColor);
             bounce = Vector3.zero;
         }
 
@@ -146,10 +155,20 @@ public class PlayerScoreScript : MonoBehaviour
         bounce.y = charControler.isGrounded? 1.5f : 0f;
         
         
-        DamageRender.material.SetColor("_Color", damageColor);
+        DamageMaterial.SetColor("_Color", damageColor);
         startBounceTime = Time.time;
 
+        if (noCollectables > 0)
+        {
+            noCollectables--;
+            noCollectablesText.text = noCollectables.ToString();
+            GameObject coll = Instantiate(collectable, colSpawnPoint.position + Vector3.up * 1.5f, Quaternion.Euler(0, 360f * Random.value, 0),
+                                          colParent.transform);
 
+            coll.GetComponent<CollectableEscape>().CreateTargetDir(transform.position);
+            coll.GetComponent<Rigidbody>().AddForce(Vector3.up * 5f, ForceMode.VelocityChange);
+        }
+        
     }
 
 
@@ -158,19 +177,6 @@ public class PlayerScoreScript : MonoBehaviour
         startBounceTime = Time.time;
         bounce = transform.right * 1f;
         bounce.y = 3f;
-    }
-
-    private bool HealControl(Collider col)
-    {
-        if(col.transform.position.y < transform.position.y)
-        {
-            if(Mathf.Abs(col.transform.position.z - transform.position.z) < healOffset &&
-               Mathf.Abs(col.transform.position.x - transform.position.x) < healOffset)
-            {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

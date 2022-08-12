@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CollectableEscape : MonoBehaviour
 {
-    Vector3 targetDir;
+    [SerializeField] Vector3 targetDir;
     Vector3 startPos;
-    Vector3 moveDir;
+    [SerializeField] Vector3 moveDir;
 
     [SerializeField] float moveSpeed;
     [SerializeField] float rotSpeed;
@@ -16,51 +16,55 @@ public class CollectableEscape : MonoBehaviour
 
     Rigidbody rb;
 
-    GameObject player;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player-Dunco");
-        
-        startPos = transform.position;
-        targetDir = (startPos - player.transform.position);
-        targetDir.y = 0;
-        targetDir = Quaternion.AngleAxis(Random.Range(-90f, 90f), Vector3.up) * targetDir;
-
-
-        Vector3.Normalize(targetDir);
-
         rb = transform.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(DistanceControl() && !isHit)
+        if (DistanceControl() && !isHit)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(targetDir), rotSpeed * Time.deltaTime);
             moveDir = (transform.forward).normalized;
-            //rb.AddForce(moveDir * moveSpeed, ForceMode.Force);
-            rb.velocity = moveDir * moveSpeed;
             
+            rb.AddForce(moveDir * moveSpeed, ForceMode.Force);
+            //rb.velocity = moveDir * moveSpeed;
+
         }
         else
         {
             rb.velocity = Vector3.zero;
         }
-        
+
 
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        isHit = true;
+        if (other.tag != "Collectable" && other.tag != "Projectile" && other.tag != "Terrain" && other.tag != "Korg" && other.tag != "DamageStone" && other.tag != "DamageSound")
+        {
+            isHit = true;
+        }
     }
 
+    public void CreateTargetDir(Vector3 playerPos)
+    {
+        startPos = transform.position;
+        targetDir = startPos - playerPos;
+        targetDir.y = 0;
+        targetDir = Quaternion.AngleAxis(Random.Range(-90f, 90f), Vector3.up) * targetDir;
+        rb.AddForce(-Vector3.up);
 
-    bool DistanceControl()
+        Vector3.Normalize(targetDir);
+
+    }
+
+    private bool DistanceControl()
     {
         float dist = (transform.position - startPos).magnitude;
         if (dist < maxDistance) return true;

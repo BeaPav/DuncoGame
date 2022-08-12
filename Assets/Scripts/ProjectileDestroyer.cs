@@ -15,7 +15,7 @@ public class ProjectileDestroyer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.time - startTime > 2f)
+        if(Time.time - startTime > 3f)
         {
             //Debug.Log("Destroy");
             Destroy(this.gameObject, 0.2f);

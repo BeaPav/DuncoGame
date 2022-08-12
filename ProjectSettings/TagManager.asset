@@ -18,6 +18,8 @@ TagManager:
   - Animal
   - Water
   - ZombieHeal
+  - Terrain
+  - Korg
   layers:
   - Default
   - TransparentFX
