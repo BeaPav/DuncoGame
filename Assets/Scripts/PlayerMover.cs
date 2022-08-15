@@ -36,7 +36,10 @@ public class PlayerMover : MonoBehaviour
     public float fix;
 
     Animator anim;
-    
+
+    public float barkTime;
+    public GameObject bark;
+    public float nextBark = 0;
 
     private void Start()
     {
@@ -61,6 +64,7 @@ public class PlayerMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        nextBark -= 1 * Time.deltaTime;
         //Debug.Log(charControler.isGrounded);
         if (move)
             Movement();
@@ -178,9 +182,21 @@ public class PlayerMover : MonoBehaviour
          *   model.transform.eulerAngles = angel;
          *   Debug.Log(angel);
          */
+        }
     }
-}
-
+    void Bark()
+    {
+        if (nextBark < 0 && Input.GetKeyDown(KeyCode.E))
+        {
+            nextBark = barkTime;
+            bark.active = true;
+        }
+        if (nextBark < 0)
+        {
+            //bark.active = false;
+        }
+       
+    }
     private void OnDisable()
     {
         playerInputs.Disable();

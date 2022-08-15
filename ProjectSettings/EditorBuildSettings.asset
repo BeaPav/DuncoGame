@@ -4,6 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Dunco/Menu.unity
+    guid: 1436dfcd85279034a963d88073a68926
+  - enabled: 1
+    path: Assets/Scenes/Dunco/Dunco_level_01.unity
+    guid: 2d4a97504151c234185dc9d2d231ff8a
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 95bebbd70e240a446a181b5f6f268a70, type: 2}
