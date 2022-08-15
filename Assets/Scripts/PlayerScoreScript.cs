@@ -17,6 +17,8 @@ public class PlayerScoreScript : MonoBehaviour
     Material DamageMaterial;
     Color startColor;
     Color damageColor;
+    float startDamageTime = 0f;
+
 
     [SerializeField] GameObject collectable;
     //GameObject colParent;
@@ -82,12 +84,15 @@ public class PlayerScoreScript : MonoBehaviour
                 Damage(1, other.transform.parent.position);
             }
         }
-        else if(other.CompareTag("Projectile"))
+        else if (other.CompareTag("DamageStoneRising"))
         {
             Damage(1, other.transform.parent.position);
         }
 
-
+        else if(other.CompareTag("Projectile"))
+        {
+            Damage(1, other.transform.parent.position);
+        }
 
 
         else if(other.tag == "Collectable")
@@ -98,86 +103,50 @@ public class PlayerScoreScript : MonoBehaviour
         }
 
 
-
-        else if (other.tag == "SheepHeal")
-        {
-            if (false)
-            {
-                noCollectables++;
-                //noCollectablesText.text = noCollectables.ToString();
-
-                //other.gameObject.tag = "Bounce";
-                //other.transform.parent.parent.GetComponent<SheepEnemy>().Heal();
-            }
-
-            //Debug.Log("Bounce");
-            BounceDown();
-            other.transform.parent.parent.GetComponent<Animator>().SetTrigger("isHit");
-        }
-        else if (other.tag == "StoneHeal")
-        {
-            //Debug.Log("StoneHealColliderTriggered");
-            noCollectables++;
-            noCollectablesText.text = noCollectables.ToString();
-            BounceDown();
-            other.transform.parent.parent.GetComponent<StoneEnemy>().Heal();
-            other.gameObject.SetActive(false);
-        }
-        else if (other.tag == "ZombieHeal")
-        {
-            if (false)
-            {
-                noCollectables++;
-                //noCollectablesText.text = noCollectables.ToString();
-
-                //other.gameObject.tag = "Bounce";
-                //other.transform.parent.parent.GetComponent<SheepEnemy>().Heal();
-            }
-
-            //Debug.Log("Bounce");
-            BounceDown();
-            other.transform.parent.parent.GetComponent<Animator>().SetTrigger("isHit");
-        }
-
+        /*
         else if(other.CompareTag("Bounce"))
         {
             BounceDown();
             Debug.Log("BounceInBounce");
         }
         
-
+        */
     }
 
 
 
     private void Damage(int noDam, Vector3 enemyPos)
     {
-        bounce = (transform.position - enemyPos).normalized;
-        bounce.y = charControler.isGrounded? 1.5f : 0f;
-        
-        
-        DamageMaterial.SetColor("_Color", damageColor);
-        startBounceTime = Time.time;
-
-        if (noCollectables > 0)
+        if (Time.time - startDamageTime > 1f)
         {
-            noCollectables--;
-            noCollectablesText.text = noCollectables.ToString();
-            GameObject coll = Instantiate(collectable, colSpawnPoint.position + Vector3.up * 1.5f, Quaternion.Euler(0, 360f * Random.value, 0)
-                                          );//,colParent.transform);
+            startDamageTime = Time.time;
+            bounce = (transform.position - enemyPos).normalized;
+            bounce.y = charControler.isGrounded ? 1.5f : 0f;
 
-            coll.GetComponent<CollectableEscape>().CreateTargetDir(transform.position);
-            coll.GetComponent<Rigidbody>().AddForce(Vector3.up * 5f, ForceMode.VelocityChange);
+
+            DamageMaterial.SetColor("_Color", damageColor);
+            startBounceTime = Time.time;
+
+            if (noCollectables > 0)
+            {
+                noCollectables--;
+                noCollectablesText.text = noCollectables.ToString();
+                GameObject coll = Instantiate(collectable, colSpawnPoint.position + Vector3.up * 1.5f, Quaternion.Euler(0, 360f * Random.value, 0)
+                                              );//,colParent.transform);
+
+                coll.GetComponent<CollectableEscape>().CreateTargetDir(transform.position);
+                coll.GetComponent<Rigidbody>().AddForce(Vector3.up * 5f, ForceMode.VelocityChange);
+            }
         }
         
     }
 
 
-    private void BounceDown()
+    public void BounceDown()
     {
         startBounceTime = Time.time;
         bounce = transform.right * 1f;
-        bounce.y = 3f;
+        bounce.y = 2f;
     }
 
 }

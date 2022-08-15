@@ -46,28 +46,25 @@ public class CollectableEscape : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "Collectable" && other.tag != "Projectile" && other.tag != "Terrain" && other.tag != "Korg" && other.tag != "DamageStone" && other.tag != "DamageSound")
+        if (other.tag != "Collectable" && other.tag != "Projectile" && other.tag != "Terrain" 
+            && other.tag != "Korg" && other.tag != "DamageStone" && other.tag != "DamageSound" )
         {
             isHit = true;
+            
         }
     }
 
     public void CreateTargetDir(Vector3 playerPos)
     {
-        Debug.Log(playerPos);
+        //Debug.Log(playerPos);
         startPos = transform.position;
 
-        Debug.Log(startPos + "startPos");
         targetDir = startPos - playerPos;
 
-        Debug.Log(targetDir + "target  2");
         targetDir.y = 0;
         targetDir = Quaternion.AngleAxis(Random.Range(-90f, 90f), Vector3.up) * targetDir;
-        Debug.Log(targetDir + "target  3");
-        //rb.AddForce(-1f * Vector3.up);
-        Debug.Log("rb");
+        GetComponent<Rigidbody>().AddForce(-1f * Vector3.up);
         Vector3.Normalize(targetDir);
-        Debug.Log(targetDir + "target");
     }
 
     private bool DistanceControl()

@@ -57,10 +57,13 @@ public class SheepEnemy : MonoBehaviour
     void Update()
     {
         DistanceControl();
-        if (HealControl() && state != EnemyState.Healthy)
+        if (HealControl())
         {
             //Debug.Log("Heal");
-            Heal();
+            if (state != EnemyState.Healthy)
+                Heal();
+            player.GetComponent<PlayerScoreScript>().BounceDown();
+            enemyAnim.SetTrigger("isHit");
         }
         if (state == EnemyState.CursedFollow)
         {
@@ -182,7 +185,7 @@ public class SheepEnemy : MonoBehaviour
 
     private bool HealControl()
     {
-        if (player.transform.position.y - transform.position.y < 2f && player.transform.position.y - transform.position.y > 0f)
+        if (player.transform.position.y - transform.position.y < 1.1f && player.transform.position.y - transform.position.y > 0f)
         {
             if (Mathf.Abs(transform.position.z - player.transform.position.z) < healOffset &&
                Mathf.Abs(transform.position.x - player.transform.position.x) < healOffset)

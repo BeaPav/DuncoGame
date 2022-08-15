@@ -401,8 +401,9 @@ GameObject:
   - component: {fileID: 2252293890521088393}
   - component: {fileID: 510507832096000283}
   - component: {fileID: 3637051433948524109}
+  - component: {fileID: 4740255907146990202}
   - component: {fileID: 6259005950060233855}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CollectableMesh
   m_TagString: Collectable
   m_Icon: {fileID: 0}
@@ -474,6 +475,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &4740255907146990202
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3927539646234194921}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.31
+  m_Center: {x: -0.0000038146973, y: 0.0000038146973, z: 0}
 --- !u!136 &6259005950060233855
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -501,7 +515,7 @@ GameObject:
   - component: {fileID: 4129929087310501012}
   - component: {fileID: 8391602518265444248}
   - component: {fileID: 8285976658151558970}
-  - component: {fileID: 3132626946942745026}
+  - component: {fileID: 6038946913040171067}
   m_Layer: 0
   m_Name: CollectableDuch
   m_TagString: Collectable
@@ -573,6 +587,7 @@ MonoBehaviour:
   moveSpeed: 15
   rotSpeed: 0.7
   maxDistance: 15
+  rb: {fileID: 0}
 --- !u!95 &8285976658151558970
 Animator:
   serializedVersion: 4
@@ -593,7 +608,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!135 &3132626946942745026
+--- !u!135 &6038946913040171067
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -604,5 +619,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.48
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}

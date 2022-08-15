@@ -6,15 +6,24 @@ using UnityEngine.AI;
 public class StoneEnemy : MonoBehaviour
 {
     GameObject player;
-    [SerializeField] GameObject enemyMesh;
+
+    GameObject healPoint;
     Animator enemyAnim;
     NavMeshAgent agent;
+
     ParticleSystem particlesPreAttack;
-    [SerializeField] ParticleSystem particlesDamage;
+    ParticleSystem particleRising;
+    ParticleSystem particlesDamage;
     Collider damageCollider;
+    Collider damageRisingCollider;
+
     float distToFollow = 12f;
     float distToAttack = 7f;
+
     [SerializeField] bool isAttacking = false;
+    [SerializeField] bool isRising = false;
+
+    [SerializeField] float healOffset = 0.6f;
 
     public EnemyState state = EnemyState.CursedPlaced;
 
@@ -25,12 +34,19 @@ public class StoneEnemy : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player-Dunco");
-        enemyMesh = transform.Find("Enemy").gameObject;
+
+        healPoint = transform.Find("Enemy/PointToHeal").gameObject;
+
         enemyAnim = transform.GetComponent<Animator>();
-        particlesPreAttack = transform.Find("Enemy/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
+
+        particlesPreAttack = transform.Find("Enemy/ParticleExplosionKorg/SmallerParticles").GetComponent<ParticleSystem>();
         particlesDamage = transform.Find("ParticleKorgDamage").GetComponent<ParticleSystem>();
+        particleRising = transform.Find("Enemy/ParticleRising").GetComponent<ParticleSystem>();
         damageCollider = transform.Find("Enemy/DamageCollider").GetComponent<Collider>();
         damageCollider.enabled = false;
+        damageRisingCollider = transform.Find("Enemy/DamageRisingCollider").GetComponent<Collider>();
+        damageRisingCollider.enabled = false;
+
         startPosition = transform.position;
     }
 
@@ -38,6 +54,16 @@ public class StoneEnemy : MonoBehaviour
     void Update()
     {
         DistanceControl();
+
+        if (HealControl())
+        {
+            //Debug.Log("Heal");
+            if (state != EnemyState.Healthy)
+                Heal();
+            player.GetComponent<PlayerScoreScript>().BounceDown();
+
+        }
+
         if (state == EnemyState.CursedFollow)
         {
             agent.destination = player.transform.position;
@@ -61,43 +87,71 @@ public class StoneEnemy : MonoBehaviour
 
     public void PrepareAttack()
     {
-        //Debug.Log("prepareAttack");
+        Debug.Log("prepareAttack");
         isAttacking = true;
         particlesPreAttack.Play(true);
     }
 
     public void ActivateAttack()
     {
-        //Debug.Log("activateAttack");
+        Debug.Log("activateAttack");
         
         damageCollider.enabled = true;
         particlesDamage.Play();
 
     }
 
+    public void ActivateRisingAttack()
+    {
+        Debug.Log("risingAttack");
+        isRising = true;
+        damageRisingCollider.enabled = true;
+        particleRising.Play();
+    }
+
     public void DeactivateAttack()
     {
-        //Debug.Log("deactivateAttack");
+        Debug.Log("deactivateAttack");
 
         particlesDamage.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        particleRising.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         damageCollider.enabled = false;
+        damageRisingCollider.enabled = false;
         isAttacking = false;
+        isRising = false;
         enemyAnim.SetBool("isAttacking", false);
 
     }
 
     public void Heal()
     {
-        //Debug.Log("HealStone");
-        state = EnemyState.Healthy;
-        //enemyMesh.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
-        enemyAnim.SetBool("isHealthy", true);
+        if (!isRising)
+        {
+            //Debug.Log("HealStone");
+            state = EnemyState.Healthy;
+            //enemyMesh.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
+            enemyAnim.SetBool("isHealthy", true);
 
-        player.GetComponent<PlayerScoreScript>().noCollectables++;
-        player.GetComponent<PlayerScoreScript>().noCollectablesText.text = player.GetComponent<PlayerScoreScript>().noCollectables.ToString();
+            player.GetComponent<PlayerScoreScript>().noCollectables++;
+            player.GetComponent<PlayerScoreScript>().noCollectablesText.text = player.GetComponent<PlayerScoreScript>().noCollectables.ToString();
+        }
 
     }
 
+
+    private bool HealControl()
+    {
+        //Debug.Log(player.transform.position.y > healPoint.transform.position.y);
+        if (player.transform.position.y - healPoint.transform.position.y < 0.4f && player.transform.position.y - healPoint.transform.position.y > 0f)
+        {
+            if (Mathf.Abs(healPoint.transform.position.z - player.transform.position.z) < healOffset &&
+               Mathf.Abs(healPoint.transform.position.x - player.transform.position.x) < healOffset)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     private void DistanceControl()

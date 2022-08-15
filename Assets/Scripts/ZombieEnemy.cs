@@ -17,7 +17,7 @@ public class ZombieEnemy : MonoBehaviour
 {
     GameObject player;
     CharacterController playerController;
-    GameObject enemyShootingMesh;
+    GameObject enemyMesh;
     Transform targetToLookAt;
     Animator enemyAnim;
 
@@ -25,6 +25,7 @@ public class ZombieEnemy : MonoBehaviour
 
     [SerializeField] float distToLookAtPlayer = 20f;
     [SerializeField] float distToAttack = 15f;
+    [SerializeField] float distTooCloseToAttack = 2f;
     [SerializeField] bool isAttacking = false;
 
     public EnemyState state = EnemyState.CursedPlaced;
@@ -46,25 +47,24 @@ public class ZombieEnemy : MonoBehaviour
 
 
     [SerializeField] float ShotPrediction;
+    [SerializeField] float upFactor;
 
 
 
     [SerializeField] float healOffset = 0.6f;
-    GameObject healCollider;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player-Dunco");
         playerController = player.GetComponent<CharacterController>();
-        enemyShootingMesh = transform.Find("Enemy/zombie_shooter").gameObject;
-        bulletSpawnPoint = transform.Find("Enemy/zombie_shooter/BulletSpawnPoint").transform;
+        enemyMesh = transform.Find("Enemy/zombie_huba").gameObject;
+        bulletSpawnPoint = transform.Find("Enemy/zombie_huba/BulletSpawnPoint").transform;
         targetToLookAt = null;
-        startRotation = enemyShootingMesh.transform.rotation;
+        startRotation = enemyMesh.transform.rotation;
         enemyAnim = transform.GetComponent<Animator>();
         EndAttackTime = 0;
         EndSubAttackTime = 0;
-        healCollider = transform.Find("Enemy/TriggerColliderToHeal").gameObject;
         //particlesPreAttack = transform.Find("Enemy/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
 
     }
@@ -75,11 +75,14 @@ public class ZombieEnemy : MonoBehaviour
         
         DistanceControl();
 
-        if (HealControl() && state != EnemyState.Healthy)
+        if (HealControl())
         {
             //Debug.Log("Heal");
-            Heal();
-            
+            if(state != EnemyState.Healthy)
+                Heal();
+            player.GetComponent<PlayerScoreScript>().BounceDown();
+            enemyAnim.SetTrigger("isHit");
+
         }
 
         if (state == EnemyState.CursedFollow)
@@ -155,7 +158,7 @@ public class ZombieEnemy : MonoBehaviour
     public void Shoot()
     {
         
-        Vector3 target = player.transform.position + playerController.velocity.normalized * ShotPrediction;
+        Vector3 target = player.transform.position + Vector3.up * upFactor + playerController.velocity.normalized * ShotPrediction;
 
         Vector3 dir = (target - bulletSpawnPoint.position).normalized;
 
@@ -183,9 +186,9 @@ public class ZombieEnemy : MonoBehaviour
     {
         Debug.Log("Heal");
         state = EnemyState.Healthy;
-        enemyShootingMesh.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
-        transform.Find("Enemy/zombie_huba").gameObject.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
+        enemyMesh.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
         //enemyAnim.SetBool("isHealthy", true);
+
         player.GetComponent<PlayerScoreScript>().noCollectables++;
         player.GetComponent<PlayerScoreScript>().noCollectablesText.text = player.GetComponent<PlayerScoreScript>().noCollectables.ToString();
 
@@ -197,26 +200,26 @@ public class ZombieEnemy : MonoBehaviour
     {
         if (targetToLookAt != null)
         {
-            Vector3 targPos = player.transform.position - enemyShootingMesh.transform.position;
+            Vector3 targPos = player.transform.position - enemyMesh.transform.position;
             targPos.y = 0;
             targPos.Normalize();
 
-            enemyShootingMesh.transform.rotation = Quaternion.LookRotation(
-                                                   Vector3.RotateTowards(enemyShootingMesh.transform.forward, targPos, rotSpeed * Time.deltaTime, 0f));
+            enemyMesh.transform.rotation = Quaternion.LookRotation(
+                                                   Vector3.RotateTowards(enemyMesh.transform.forward, targPos, rotSpeed * Time.deltaTime, 0f));
         }
         else
         {
-            enemyShootingMesh.transform.rotation = Quaternion.Slerp(enemyShootingMesh.transform.rotation, startRotation, rotGoToStartSpeed * Time.deltaTime);
+            enemyMesh.transform.rotation = Quaternion.Slerp(enemyMesh.transform.rotation, startRotation, rotGoToStartSpeed * Time.deltaTime);
         }
     }
 
     private bool HealControl()
     {
         
-        if (player.transform.position.y - healCollider.transform.position.y < 0.8f && player.transform.position.y - healCollider.transform.position.y > 0f)
+        if (player.transform.position.y - enemyMesh.transform.position.y < 2.4f && player.transform.position.y - enemyMesh.transform.position.y > 0f)
         {
-            if (Mathf.Abs(healCollider.transform.position.z - player.transform.position.z) < healOffset &&
-               Mathf.Abs(healCollider.transform.position.x - player.transform.position.x) < healOffset)
+            if (Mathf.Abs(enemyMesh.transform.position.z - player.transform.position.z) < healOffset &&
+               Mathf.Abs(enemyMesh.transform.position.x - player.transform.position.x) < healOffset)
             {
                 return true;
             }
@@ -241,7 +244,7 @@ public class ZombieEnemy : MonoBehaviour
             {
                 state = EnemyState.CursedPlaced;
             }
-            else if (dist < distToAttack)
+            else if (dist < distToAttack && dist > distTooCloseToAttack)
             {
                 //Debug.Log("CursedAttack");
                 state = EnemyState.CursedAttack;

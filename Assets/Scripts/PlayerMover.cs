@@ -88,7 +88,7 @@ public class PlayerMover : MonoBehaviour
     {
         if (!Input.GetKeyDown(KeyCode.Space) || jumps >= 2)
         {
-            //copyTerrain();
+            copyTerrain();
             return ySpeed;
         }
         anim.SetTrigger("isJumping");

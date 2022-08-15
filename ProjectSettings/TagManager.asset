@@ -20,6 +20,8 @@ TagManager:
   - ZombieHeal
   - Terrain
   - Korg
+  - Ranged
+  - DamageStoneRising
   layers:
   - Default
   - TransparentFX
@@ -27,9 +29,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - CollectableDuch
   - PostProcess
-  - 
+  - Dunco
   - 
   - 
   - 
