@@ -179,6 +179,7 @@ MonoBehaviour:
   distToAttack: 20
   distTooCloseToAttack: 2
   isAttacking: 0
+  maxAngleToShoot: 50
   state: 0
   rotSpeed: 10
   rotGoToStartSpeed: 2

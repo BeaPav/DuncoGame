@@ -18,10 +18,12 @@ public class GameMenu : MonoBehaviour
             if(isShow)
             {
                 Time.timeScale = 0;
+                Cursor.lockState = CursorLockMode.Confined;
             }
             else
             {
                 Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.Locked;
             }
         }
     }
@@ -31,11 +33,13 @@ public class GameMenu : MonoBehaviour
         isShow = !isShow;
         esc.active = isShow;
         Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void Menu()
     {
         SceneManager.LoadScene(0);
         Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 }

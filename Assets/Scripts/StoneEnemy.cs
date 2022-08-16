@@ -87,14 +87,14 @@ public class StoneEnemy : MonoBehaviour
 
     public void PrepareAttack()
     {
-        Debug.Log("prepareAttack");
+        //Debug.Log("prepareAttack");
         isAttacking = true;
         particlesPreAttack.Play(true);
     }
 
     public void ActivateAttack()
     {
-        Debug.Log("activateAttack");
+        //Debug.Log("activateAttack");
         
         damageCollider.enabled = true;
         particlesDamage.Play();
@@ -103,7 +103,7 @@ public class StoneEnemy : MonoBehaviour
 
     public void ActivateRisingAttack()
     {
-        Debug.Log("risingAttack");
+        //Debug.Log("risingAttack");
         isRising = true;
         damageRisingCollider.enabled = true;
         particleRising.Play();
@@ -111,7 +111,7 @@ public class StoneEnemy : MonoBehaviour
 
     public void DeactivateAttack()
     {
-        Debug.Log("deactivateAttack");
+        //Debug.Log("deactivateAttack");
 
         particlesDamage.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         particleRising.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);

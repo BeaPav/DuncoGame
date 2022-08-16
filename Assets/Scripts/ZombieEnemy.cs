@@ -27,6 +27,7 @@ public class ZombieEnemy : MonoBehaviour
     [SerializeField] float distToAttack = 15f;
     [SerializeField] float distTooCloseToAttack = 2f;
     [SerializeField] bool isAttacking = false;
+    [SerializeField] float maxAngleToShoot = 45;
 
     public EnemyState state = EnemyState.CursedPlaced;
 
@@ -162,24 +163,28 @@ public class ZombieEnemy : MonoBehaviour
 
         Vector3 dir = (target - bulletSpawnPoint.position).normalized;
 
-        //tri projektily naraz a do stran
-        /*
-        GameObject proj0 = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.LookRotation(dir), transform);
-        GameObject proj1 = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.LookRotation(dir), transform);
-        GameObject proj2 = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.LookRotation(dir), transform);
+        if (Vector3.Angle(enemyMesh.transform.forward, dir) < maxAngleToShoot)
+        {
 
-        proj0.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward.normalized * projectileSpeed, ForceMode.Impulse);
-        proj1.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(projectileOffset, 0f, 10f).normalized * projectileSpeed, ForceMode.Impulse);
-        proj2.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(-projectileOffset, 0f, 10f).normalized * projectileSpeed, ForceMode.Impulse);
-        
-        */
-        //jeden projektil
-        GameObject proj0 = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.LookRotation(dir), transform);
-        proj0.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward.normalized * projectileSpeed, ForceMode.Impulse);
-        
-        
-        //isAttacking = false;
-        //EndAttackTime = Time.time;
+            //tri projektily naraz a do stran
+            /*
+            GameObject proj0 = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.LookRotation(dir), transform);
+            GameObject proj1 = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.LookRotation(dir), transform);
+            GameObject proj2 = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.LookRotation(dir), transform);
+
+            proj0.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward.normalized * projectileSpeed, ForceMode.Impulse);
+            proj1.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(projectileOffset, 0f, 10f).normalized * projectileSpeed, ForceMode.Impulse);
+            proj2.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(-projectileOffset, 0f, 10f).normalized * projectileSpeed, ForceMode.Impulse);
+
+            */
+            //jeden projektil
+            GameObject proj0 = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.LookRotation(dir), transform);
+            proj0.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward.normalized * projectileSpeed, ForceMode.Impulse);
+
+
+            //isAttacking = false;
+            //EndAttackTime = Time.time;
+        }
     }
 
     public void Heal()
@@ -246,8 +251,11 @@ public class ZombieEnemy : MonoBehaviour
             }
             else if (dist < distToAttack && dist > distTooCloseToAttack)
             {
-                //Debug.Log("CursedAttack");
-                state = EnemyState.CursedAttack;
+                if (!HealControl())
+                {
+                    //Debug.Log("CursedAttack");
+                    state = EnemyState.CursedAttack;
+                }
             }
         }
 
