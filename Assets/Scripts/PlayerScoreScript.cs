@@ -99,7 +99,7 @@ public class PlayerScoreScript : MonoBehaviour
 
         else if(other.tag == "Collectable")
         {
-            other.gameObject.SetActive(false);
+            Destroy(other.gameObject);
             noCollectables++;
             noCollectablesText.text = noCollectables.ToString();
         }
@@ -133,11 +133,15 @@ public class PlayerScoreScript : MonoBehaviour
             {
                 noCollectables--;
                 noCollectablesText.text = noCollectables.ToString();
-                GameObject coll = Instantiate(collectable, colSpawnPoint.position + Vector3.up * 1.5f, Quaternion.Euler(0, 360f * Random.value, 0)
+                GameObject coll = Instantiate(collectable, colSpawnPoint.position + Vector3.up * 2f, Quaternion.Euler(0, 360f * Random.value, 0)
                                               );//,colParent.transform);
 
+                Debug.Log("spawn point: " + colSpawnPoint.position);
+                Debug.Log("collect pos: " + coll.transform.position);
+                Debug.Log("player pos: " + transform.position);
+
                 coll.GetComponent<CollectableEscape>().CreateTargetDir(transform.position);
-                coll.GetComponent<Rigidbody>().AddForce(Vector3.up * 5f, ForceMode.VelocityChange);
+                //coll.GetComponent<Rigidbody>().AddForce(Vector3.up * 5f, ForceMode.VelocityChange);
             }
         }
         

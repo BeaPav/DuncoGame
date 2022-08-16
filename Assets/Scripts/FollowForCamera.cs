@@ -18,6 +18,6 @@ public class FollowForCamera : MonoBehaviour
     {
         transform.position = Vector3.Lerp(transform.position, follow.position, smooth * Time.deltaTime);
         //transform.position = Vector3.MoveTowards(transform.position, follow.position, smooth * Time.deltaTime);
-        Debug.Log("target: " + follow.position);
+        //Debug.Log("target: " + follow.position);
     }
 }

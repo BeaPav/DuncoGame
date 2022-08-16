@@ -18,6 +18,7 @@ public class ZombieEnemy : MonoBehaviour
     GameObject player;
     CharacterController playerController;
     GameObject enemyMesh;
+    GameObject healPoint;
     Transform targetToLookAt;
     Animator enemyAnim;
 
@@ -60,6 +61,7 @@ public class ZombieEnemy : MonoBehaviour
         player = GameObject.Find("Player-Dunco");
         playerController = player.GetComponent<CharacterController>();
         enemyMesh = transform.Find("Enemy/zombie_huba").gameObject;
+        healPoint = transform.Find("Enemy/PointToHeal").gameObject;
         bulletSpawnPoint = transform.Find("Enemy/zombie_huba/BulletSpawnPoint").transform;
         targetToLookAt = null;
         startRotation = enemyMesh.transform.rotation;
@@ -220,11 +222,11 @@ public class ZombieEnemy : MonoBehaviour
 
     private bool HealControl()
     {
-        
-        if (player.transform.position.y - enemyMesh.transform.position.y < 2.4f && player.transform.position.y - enemyMesh.transform.position.y > 0f)
+        Vector3 distControl = player.transform.position - healPoint.transform.position;
+        if (distControl.y < 0.4f && distControl.y > 0f)
         {
-            if (Mathf.Abs(enemyMesh.transform.position.z - player.transform.position.z) < healOffset &&
-               Mathf.Abs(enemyMesh.transform.position.x - player.transform.position.x) < healOffset)
+            distControl.y = 0f;
+            if (distControl.magnitude < healOffset)
             {
                 return true;
             }

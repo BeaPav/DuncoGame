@@ -151,13 +151,15 @@ public class StoneEnemy : MonoBehaviour
     }
 
 
+
+
     private bool HealControl()
     {
-        //Debug.Log(player.transform.position.y > healPoint.transform.position.y);
-        if (player.transform.position.y - healPoint.transform.position.y < 0.4f && player.transform.position.y - healPoint.transform.position.y > 0f)
+        Vector3 distControl = player.transform.position - healPoint.transform.position;
+        if (distControl.y < 0.4f && distControl.y > 0f)
         {
-            if (Mathf.Abs(healPoint.transform.position.z - player.transform.position.z) < healOffset &&
-               Mathf.Abs(healPoint.transform.position.x - player.transform.position.x) < healOffset)
+            distControl.y = 0f;
+            if (distControl.magnitude < healOffset)
             {
                 return true;
             }

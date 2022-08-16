@@ -12,7 +12,7 @@ public class CollectableEscape : MonoBehaviour
     [SerializeField] float rotSpeed;
     [SerializeField] float maxDistance;
 
-    bool isHit = false;
+    bool isHit;
 
     [SerializeField] Rigidbody rb;
 
@@ -22,17 +22,20 @@ public class CollectableEscape : MonoBehaviour
     void Start()
     {
         rb = transform.GetComponent<Rigidbody>();
+        isHit = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (DistanceControl() && !isHit)
+        
+        if (targetDir != Vector3.zero && DistanceControl() && !isHit)
         {
+            //Debug.Log("moveCollectable");
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(targetDir), rotSpeed * Time.deltaTime);
             moveDir = (transform.forward).normalized;
             
-            rb.AddForce(moveDir * moveSpeed, ForceMode.Force);
+            rb.AddForce(moveDir * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
             //rb.velocity = moveDir * moveSpeed;
 
         }
@@ -63,13 +66,15 @@ public class CollectableEscape : MonoBehaviour
 
         targetDir.y = 0;
         targetDir = Quaternion.AngleAxis(Random.Range(-90f, 90f), Vector3.up) * targetDir;
-        GetComponent<Rigidbody>().AddForce(-1f * Vector3.up);
+        //GetComponent<Rigidbody>().AddForce(-1f * Vector3.up);
         Vector3.Normalize(targetDir);
     }
 
     private bool DistanceControl()
     {
-        float dist = (transform.position - startPos).magnitude;
+        Vector3 distVector = transform.position - startPos;
+        distVector.y = 0;
+        float dist = distVector.magnitude;
         if (dist < maxDistance) return true;
         return false;
     }

@@ -17,7 +17,10 @@ public enum EnemyState
 public class SheepEnemy : MonoBehaviour
 {
     GameObject player;
-    GameObject enemyMesh;
+    GameObject healPoint;
+
+    SkinnedMeshRenderer enemyRender;
+
     Animator enemyAnim;
     NavMeshAgent agent;
     ParticleSystem particlesPreAttack;
@@ -38,18 +41,26 @@ public class SheepEnemy : MonoBehaviour
 
     [SerializeField] float healOffset = 1f;
 
+    [SerializeField] Material healthyMaterial;
+
+
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player-Dunco");
-        enemyMesh = transform.Find("Enemy").gameObject;
+
+        enemyRender = transform.Find("Enemy/sheep").GetComponent<SkinnedMeshRenderer>();
+        healPoint = transform.Find("Enemy/PointToHeal").gameObject;
         enemyAnim = transform.GetComponent<Animator>();
+
         particlesPreAttack = transform.Find("Enemy/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
         damageCollider = transform.Find("Enemy/DamageCollider").GetComponent<Collider>();
         damageCollider.enabled = false;
         particlesSound = transform.Find("Enemy/ParticleSound").GetComponent<ParticleSystem>();
+
         distToFollow = distToStartFollow;
+
         audio = gameObject.GetComponent<AudioSource>();
     }
 
@@ -147,7 +158,7 @@ public class SheepEnemy : MonoBehaviour
     {
         state = EnemyState.Healthy;
         DeactivateAttack();
-        enemyMesh.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
+        enemyRender.material = healthyMaterial;
         enemyAnim.SetBool("isHealthy", true);
 
         player.GetComponent<PlayerScoreScript>().noCollectables++;
@@ -185,10 +196,11 @@ public class SheepEnemy : MonoBehaviour
 
     private bool HealControl()
     {
-        if (player.transform.position.y - transform.position.y < 1.1f && player.transform.position.y - transform.position.y > 0f)
+        Vector3 distControl = player.transform.position - healPoint.transform.position;
+        if (distControl.y < 0.4f && distControl.y > 0f)
         {
-            if (Mathf.Abs(transform.position.z - player.transform.position.z) < healOffset &&
-               Mathf.Abs(transform.position.x - player.transform.position.x) < healOffset)
+            distControl.y = 0f;
+            if (distControl.magnitude < healOffset)
             {
                 return true;
             }
