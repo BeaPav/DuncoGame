@@ -12,16 +12,16 @@ public class StoneEnemy : MonoBehaviour
     NavMeshAgent agent;
 
     ParticleSystem particlesPreAttack;
-    ParticleSystem particleRising;
+    //ParticleSystem particleRising;
     ParticleSystem particlesDamage;
     Collider damageCollider;
-    Collider damageRisingCollider;
+    //Collider damageRisingCollider;
 
     float distToFollow = 12f;
     float distToAttack = 7f;
 
     [SerializeField] bool isAttacking = false;
-    [SerializeField] bool isRising = false;
+    //[SerializeField] bool isRising = false;
 
     [SerializeField] float healOffset = 0.6f;
 
@@ -41,11 +41,11 @@ public class StoneEnemy : MonoBehaviour
 
         particlesPreAttack = transform.Find("Enemy/ParticleExplosionKorg/SmallerParticles").GetComponent<ParticleSystem>();
         particlesDamage = transform.Find("ParticleKorgDamage").GetComponent<ParticleSystem>();
-        particleRising = transform.Find("Enemy/ParticleRising").GetComponent<ParticleSystem>();
+        //particleRising = transform.Find("Enemy/ParticleRising").GetComponent<ParticleSystem>();
         damageCollider = transform.Find("Enemy/DamageCollider").GetComponent<Collider>();
         damageCollider.enabled = false;
-        damageRisingCollider = transform.Find("Enemy/DamageRisingCollider").GetComponent<Collider>();
-        damageRisingCollider.enabled = false;
+        //damageRisingCollider = transform.Find("Enemy/DamageRisingCollider").GetComponent<Collider>();
+        //damageRisingCollider.enabled = false;
 
         startPosition = transform.position;
     }
@@ -103,10 +103,12 @@ public class StoneEnemy : MonoBehaviour
 
     public void ActivateRisingAttack()
     {
+        /*
         //Debug.Log("risingAttack");
         isRising = true;
         damageRisingCollider.enabled = true;
         particleRising.Play();
+        */
     }
 
     public void DeactivateAttack()
@@ -114,17 +116,18 @@ public class StoneEnemy : MonoBehaviour
         //Debug.Log("deactivateAttack");
 
         particlesDamage.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        particleRising.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        //particleRising.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         damageCollider.enabled = false;
-        damageRisingCollider.enabled = false;
+        //damageRisingCollider.enabled = false;
         isAttacking = false;
-        isRising = false;
+        //isRising = false;
         enemyAnim.SetBool("isAttacking", false);
 
     }
 
     public void Heal()
     {
+        /*
         if (!isRising)
         {
             //Debug.Log("HealStone");
@@ -135,6 +138,15 @@ public class StoneEnemy : MonoBehaviour
             player.GetComponent<PlayerScoreScript>().noCollectables++;
             player.GetComponent<PlayerScoreScript>().noCollectablesText.text = player.GetComponent<PlayerScoreScript>().noCollectables.ToString();
         }
+        */
+
+        //Debug.Log("HealStone");
+        state = EnemyState.Healthy;
+        //enemyMesh.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
+        enemyAnim.SetBool("isHealthy", true);
+
+        player.GetComponent<PlayerScoreScript>().noCollectables++;
+        player.GetComponent<PlayerScoreScript>().noCollectablesText.text = player.GetComponent<PlayerScoreScript>().noCollectables.ToString();
 
     }
 
