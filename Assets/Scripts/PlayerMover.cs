@@ -143,7 +143,7 @@ public class PlayerMover : MonoBehaviour
     void copyTerrain() //premenovat
     {
         RaycastHit Fhit, Bhit;
-        if (Physics.Raycast(frontPoint.transform.position, frontPoint.transform.TransformDirection(Vector3.down), out Fhit, 0.5f) && Physics.Raycast(backPoint.transform.position, backPoint.transform.TransformDirection(Vector3.down), out Bhit, 0.5f))
+        if (Physics.Raycast(frontPoint.transform.position, frontPoint.transform.TransformDirection(Vector3.down), out Fhit, 0.8f) && Physics.Raycast(backPoint.transform.position, backPoint.transform.TransformDirection(Vector3.down), out Bhit, 0.8f))
         {
 
             Vector3 point1 = frontPoint.transform.position;
@@ -161,31 +161,12 @@ public class PlayerMover : MonoBehaviour
             Vector3 angle = model.transform.eulerAngles;//Vector3.Angle(point3-point2,point1-point2) 
             angle.z = Mathf.LerpAngle(angle.z, Vector3.Angle(point3 - point2, point1 - point2) * nasobitel, slopeSpeedChange * Time.deltaTime);
             model.transform.eulerAngles = angle;
-
-            /*
-            Debug.Log("=====");
-            Debug.Log(frontPoint.transform.position);
-            Debug.Log(Fhit.point);
-            Debug.Log("=");
-            Debug.Log(backPoint.transform.position);
-            Debug.Log(Bhit.point);
-            Debug.Log("-");
-            Debug.Log(angle);
-            */
-
-        /*Vector3 upright = Vector3.Cross(model.transform.right, -(Fhit.point - Bhit.point).normalized);
-        Quaternion angel = Quaternion.LookRotation(Vector3.Cross(model.transform.right, upright));
-
-
-        model.transform.rotation = angel;
-        //Debug.Log(angel);
-        /*
-         * 
-         *  Vector3 upright = Vector3.Cross(model.transform.right, -(Fhit.point - Bhit.point).normalized);
-         *   Vector3 angel = Quaternion.LookRotation(Vector3.Cross(model.transform.right, upright)).eulerAngles;
-         *   model.transform.eulerAngles = angel;
-         *   Debug.Log(angel);
-         */
+        } 
+        else
+        {
+            Vector3 vector = model.transform.eulerAngles;
+            vector.z = 0;
+            model.transform.eulerAngles = vector;
         }
     }
     void Bark()
