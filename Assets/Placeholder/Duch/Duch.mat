@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ovca_cursed
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: Duch
+  m_Shader: {fileID: 4800000, guid: 0e0019510d6142644b412d07db9dee4e, type: 3}
   m_ValidKeywords:
+  - _SOURCE_SPECULARALPHA
+  m_InvalidKeywords:
+  - _BLENDMAINNORMAL_ON
   - _EMISSION
-  - _METALLICGLOSSMAP
-  - _NORMALMAP
-  m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -24,7 +24,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 46db6afe99a3e6343b0a6cfc20a7c361, type: 3}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CutoutMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -40,15 +44,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: f09ce7b5fcbbea742b5c00f6e6912d23, type: 3}
+        m_Texture: {fileID: 2800000, guid: bc45547c70176e945bd6a373500faa13, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 173bd78e6224a8440aa460b26ec08ebd, type: 3}
+        m_Texture: {fileID: 2800000, guid: c60ad2999895e7e4eb9829e65b3bae1d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 9b4f4ee3e32ea914f9382b8a980931be, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -59,25 +63,59 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BumpScale: 0.5
+    - _AoIntensity: 1
+    - _BlendMainNormal: 1
+    - _Brightness: 1
+    - _BumpScale: 1
+    - _ContrastDetailMap: 0
+    - _Cull: 0
     - _Cutoff: 0.5
+    - _DetailBrightness: 1
     - _DetailNormalMapScale: 1
+    - _DetailSaturation: 0
     - _DstBlend: 0
-    - _GlossMapScale: 0
+    - _EmissionIntensity: 1
+    - _EnableDetailMask: 0
+    - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _IntensityCutoutMap: 0.5
+    - _IntensityMask: 1
+    - _InvertABaseColor: 0
+    - _InvertCutout: 0
+    - _InvertMask: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Parallax: 0.005
+    - _Parallax: 0.02
+    - _Saturation: 0
     - _SmoothnessTextureChannel: 0
+    - _Source: 0
+    - _SourceMask: 0
     - _SpecularHighlights: 1
+    - _SpecularIntensity: 0.2
+    - _SpreadDetailMap: 0
     - _SrcBlend: 1
     - _UVSec: 0
+    - _UseBaseColorAlpha: 0
+    - _VisualizeMask: 0
+    - _ZTest: 4
     - _ZWrite: 1
+    - __dirty: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 7.3772106, g: 7.3772106, b: 7.3772106, a: 1}
+    - _DetailColor: {r: 1, g: 1, b: 1, a: 0}
+    - _EmissionColor: {r: 2.9960785, g: 2.9960785, b: 2.9960785, a: 1}
+    - _GlobalXYTilingXYZWOffsetXY: {r: 1, g: 1, b: 0, a: 0}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
