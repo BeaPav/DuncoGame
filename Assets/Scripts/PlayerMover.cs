@@ -38,8 +38,10 @@ public class PlayerMover : MonoBehaviour
     Animator anim;
 
     public float barkTime;
+    public float barkCoolDown;
     public GameObject bark;
-    public float nextBark = 0;
+    private float barkCounting;
+    private float barkCooldownCounting;
 
     private void Start()
     {
@@ -64,7 +66,9 @@ public class PlayerMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        nextBark -= 1 * Time.deltaTime;
+        barkCounting -= Time.deltaTime;
+        barkCooldownCounting -= Time.deltaTime;
+        Bark();
         //Debug.Log(charControler.isGrounded);
         if (move)
             Movement();
@@ -186,15 +190,18 @@ public class PlayerMover : MonoBehaviour
     }
     void Bark()
     {
-        if (nextBark < 0 && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && barkCooldownCounting < 0)
         {
-            nextBark = barkTime;
-            bark.active = true;
+            bark.SetActive(true);
+            barkCounting = barkTime;
+            barkCooldownCounting = barkCoolDown;
         }
-        if (nextBark < 0)
+
+        if (barkCounting < 0)
         {
-            //bark.active = false;
+            bark.SetActive(false);
         }
+
        
     }
     private void OnDisable()
