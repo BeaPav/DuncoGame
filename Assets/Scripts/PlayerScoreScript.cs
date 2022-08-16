@@ -84,10 +84,12 @@ public class PlayerScoreScript : MonoBehaviour
                 Damage(1, other.transform.parent.position);
             }
         }
+        /*
         else if (other.CompareTag("DamageStoneRising"))
         {
             Damage(1, other.transform.parent.position);
         }
+        */
 
         else if(other.CompareTag("Projectile"))
         {
