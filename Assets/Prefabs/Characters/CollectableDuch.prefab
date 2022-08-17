@@ -699,7 +699,6 @@ GameObject:
   - component: {fileID: 8794375901361473933}
   - component: {fileID: 4129929087310501012}
   - component: {fileID: 8391602518265444248}
-  - component: {fileID: 8285976658151558970}
   m_Layer: 0
   m_Name: CollectableDuch
   m_TagString: Collectable
@@ -773,26 +772,6 @@ MonoBehaviour:
   rotSpeed: 0.7
   maxDistance: 20
   rb: {fileID: 4129929087310501012}
---- !u!95 &8285976658151558970
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5500824059536632282}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1e728bf766c41e94cbbd66c74a489ebf, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6120317067982294495
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,6 +26,8 @@ public class StoneEnemy : MonoBehaviour
 
     private Vector3 startPosition;
 
+    AudioSource audioAttack;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +44,8 @@ public class StoneEnemy : MonoBehaviour
         damageCollider.enabled = false;
 
         startPosition = transform.position;
+
+        audioAttack = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -92,6 +96,7 @@ public class StoneEnemy : MonoBehaviour
         
         damageCollider.enabled = true;
         particlesDamage.Play();
+        audioAttack.Play();
 
     }
 
@@ -103,6 +108,7 @@ public class StoneEnemy : MonoBehaviour
         damageCollider.enabled = false;
         isAttacking = false;
         enemyAnim.SetBool("isAttacking", false);
+        audioAttack.Stop();
 
     }
 

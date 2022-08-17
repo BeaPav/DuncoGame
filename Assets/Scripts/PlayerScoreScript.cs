@@ -30,6 +30,8 @@ public class PlayerScoreScript : MonoBehaviour
     [SerializeField] float bounceSpeed;
 
 
+    [SerializeField] AudioSource audioCollectable;
+
 
 
     // Start is called before the first frame update
@@ -100,6 +102,7 @@ public class PlayerScoreScript : MonoBehaviour
         else if(other.tag == "Collectable")
         {
             Destroy(other.gameObject);
+            audioCollectable.Play();
             noCollectables++;
             noCollectablesText.text = noCollectables.ToString();
         }

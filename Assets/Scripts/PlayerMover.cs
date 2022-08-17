@@ -44,6 +44,8 @@ public class PlayerMover : MonoBehaviour
     public GameObject bark;
     private float barkCounting;
     private float barkCooldownCounting;
+    [SerializeField] AudioSource audioBark1;
+    [SerializeField] AudioSource audioBark2;
 
     private void Start()
     {
@@ -179,6 +181,9 @@ public class PlayerMover : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && barkCooldownCounting < 0)
         {
             bark.SetActive(true);
+            audioBark1.Play();
+            Invoke("Echo", 0.4f);
+            
             barkParticles.Play(true);
             barkCounting = barkTime;
             barkCooldownCounting = barkCoolDown;
@@ -191,6 +196,13 @@ public class PlayerMover : MonoBehaviour
 
        
     }
+
+
+    void Echo()
+    {
+        audioBark2.Play();
+    }
+
     private void OnDisable()
     {
         playerInputs.Disable();

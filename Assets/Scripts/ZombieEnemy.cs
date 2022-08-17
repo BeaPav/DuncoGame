@@ -55,6 +55,10 @@ public class ZombieEnemy : MonoBehaviour
     [SerializeField] Material healthyMaterial;
     [SerializeField] float healOffset = 0.6f;
 
+
+    [SerializeField] AudioSource audioAttack;
+    [SerializeField] AudioSource audioHit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +75,8 @@ public class ZombieEnemy : MonoBehaviour
         EndSubAttackTime = 0;
         //particlesPreAttack = transform.Find("Enemy/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
 
+        
+
     }
 
     // Update is called once per frame
@@ -86,6 +92,7 @@ public class ZombieEnemy : MonoBehaviour
                 Heal();
             player.GetComponent<PlayerScoreScript>().BounceDown();
             enemyAnim.SetTrigger("isHit");
+            audioHit.Play();
 
         }
 
@@ -108,7 +115,7 @@ public class ZombieEnemy : MonoBehaviour
             {
                 isAttacking = true;
                 noProjectilsInAttack++;
-                enemyAnim.SetTrigger("isAttacking");
+                enemyAnim.SetTrigger("isAttacking");    
                 EndSubAttackTime = Time.time;
 
             }
@@ -181,6 +188,7 @@ public class ZombieEnemy : MonoBehaviour
 
             */
             //jeden projektil
+            audioAttack.Play();
             GameObject proj0 = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.LookRotation(dir), transform);
             proj0.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward.normalized * projectileSpeed, ForceMode.Impulse);
 
