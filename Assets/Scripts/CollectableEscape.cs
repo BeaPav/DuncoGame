@@ -53,7 +53,7 @@ public class CollectableEscape : MonoBehaviour
             && other.tag != "Korg" && other.tag != "DamageStone" && other.tag != "DamageSound"  && other.tag != "BarkCollider")
         {
             isHit = true;
-            
+            Debug.Log("hitByColliderCollectable");
         }
     }
 

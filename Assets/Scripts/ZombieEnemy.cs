@@ -109,14 +109,12 @@ public class ZombieEnemy : MonoBehaviour
                 isAttacking = true;
                 noProjectilsInAttack++;
                 enemyAnim.SetTrigger("isAttacking");
-                Shoot();
                 EndSubAttackTime = Time.time;
 
             }
             else if(isAttacking && Time.time - EndSubAttackTime > timeBtwProjectInAttack)
             {
                 enemyAnim.SetTrigger("isAttacking");
-                Shoot();
                 EndSubAttackTime = Time.time;
                 noProjectilsInAttack++;
 
