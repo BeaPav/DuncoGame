@@ -6,6 +6,7 @@ public class BarkCollectable : MonoBehaviour
 {
     Transform colSpawnPoint;
     [SerializeField] GameObject collectable;
+    bool hasCollectable;
 
     GameObject player;
 
@@ -14,6 +15,7 @@ public class BarkCollectable : MonoBehaviour
     {
         colSpawnPoint = transform.Find("CollectableSpawnPoint").transform;
         player = GameObject.Find("Player-Dunco");
+        hasCollectable = true;
     }
 
     // Update is called once per frame
@@ -24,9 +26,10 @@ public class BarkCollectable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("BarkCollider"))
+        if(other.CompareTag("BarkCollider") && hasCollectable)
         {
-            GameObject coll = Instantiate(collectable, colSpawnPoint.position + Vector3.up * 2f, Quaternion.Euler(0, 360f * Random.value, 0));
+            hasCollectable = false;
+            GameObject coll = Instantiate(collectable, colSpawnPoint.position + Vector3.up * 1f, Quaternion.Euler(0, 360f * Random.value, 0));
             coll.GetComponent<CollectableEscape>().CreateTargetDir(player.transform.position);
         }
     }
