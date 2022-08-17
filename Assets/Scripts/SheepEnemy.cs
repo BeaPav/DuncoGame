@@ -52,7 +52,7 @@ public class SheepEnemy : MonoBehaviour
 
         enemyRender = transform.Find("Enemy/sheep").GetComponent<SkinnedMeshRenderer>();
         healPoint = transform.Find("Enemy/PointToHeal").gameObject;
-        enemyAnim = transform.GetComponent<Animator>();
+        enemyAnim = transform.Find("Enemy").gameObject.GetComponent<Animator>();
 
         particlesPreAttack = transform.Find("Enemy/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
         damageCollider = transform.Find("Enemy/DamageCollider").GetComponent<Collider>();

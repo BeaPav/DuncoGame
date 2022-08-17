@@ -32,6 +32,8 @@ public class PlayerMover : MonoBehaviour
 
     [SerializeField] GameObject model, frontPoint, backPoint;
 
+    ParticleSystem barkParticles;
+
     int jumps = 0;
     public float fix;
 
@@ -58,8 +60,10 @@ public class PlayerMover : MonoBehaviour
         
         anim = transform.Find("pivot/Dunco").GetComponent<Animator>();
         model = transform.Find("pivot/Dunco").gameObject;
-        
-        
+        barkParticles = transform.Find("pivot/Dunco/Bark").gameObject.GetComponent<ParticleSystem>();
+        bark = transform.Find("bark").gameObject;
+
+
         Cursor.lockState = CursorLockMode.Locked; // neskorej vyjebat
     }
 
@@ -174,6 +178,7 @@ public class PlayerMover : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && barkCooldownCounting < 0)
         {
             bark.SetActive(true);
+            barkParticles.Play(true);
             barkCounting = barkTime;
             barkCooldownCounting = barkCoolDown;
         }
