@@ -22,6 +22,7 @@ TagManager:
   - Korg
   - Ranged
   - DamageStoneRising
+  - BarkCollider
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - 
   - Water
   - UI
-  - CollectableDuch
+  - CollDuchNoCollidePlayer
   - PostProcess
   - Dunco
   - 
