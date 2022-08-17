@@ -127,9 +127,10 @@ public class PlayerMover : MonoBehaviour
     //pohyb, ze mys kontroluje aj pohyb postavy
     Vector3 Rotation(Vector3 Direction)
     {
-        if (Direction.magnitude > 0.01f)
+        if (Direction.magnitude > 0.01f || Input.GetMouseButton(1))
         {
-            anim.SetBool("isRunning", true);
+            if (Direction.magnitude > 0.01f) anim.SetBool("isRunning", true);
+            else anim.SetBool("isRunning", false);
 
             float targetAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
             float smoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle - 90, ref smoothTurnVelocity, smoothTurnTime);

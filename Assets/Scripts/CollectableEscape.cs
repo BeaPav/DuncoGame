@@ -50,7 +50,7 @@ public class CollectableEscape : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag != "Collectable" && other.tag != "Projectile" && other.tag != "Terrain" 
-            && other.tag != "Korg" && other.tag != "DamageStone" && other.tag != "DamageSound" )
+            && other.tag != "Korg" && other.tag != "DamageStone" && other.tag != "DamageSound"  && other.tag != "BarkCollider")
         {
             isHit = true;
             
