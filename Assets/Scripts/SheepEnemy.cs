@@ -73,8 +73,11 @@ public class SheepEnemy : MonoBehaviour
             //Debug.Log("Heal");
             if (state != EnemyState.Healthy)
                 Heal();
+            else
+                enemyAnim.SetTrigger("isHit");
+
             player.GetComponent<PlayerScoreScript>().BounceDown();
-            enemyAnim.SetTrigger("isHit");
+
         }
         if (state == EnemyState.CursedFollow)
         {
