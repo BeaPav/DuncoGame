@@ -17,7 +17,7 @@ public class ZombieEnemy : MonoBehaviour
 {
     GameObject player;
     CharacterController playerController;
-    GameObject enemyMesh;
+    GameObject enemyMeshParent;
     GameObject healPoint;
     Transform targetToLookAt;
     Animator enemyAnim;
@@ -51,8 +51,8 @@ public class ZombieEnemy : MonoBehaviour
     [SerializeField] float ShotPrediction;
     [SerializeField] float upFactor;
 
-
-
+    
+    [SerializeField] Material healthyMaterial;
     [SerializeField] float healOffset = 0.6f;
 
     // Start is called before the first frame update
@@ -60,12 +60,13 @@ public class ZombieEnemy : MonoBehaviour
     {
         player = GameObject.Find("Player-Dunco");
         playerController = player.GetComponent<CharacterController>();
-        enemyMesh = transform.Find("Enemy/zombie_huba").gameObject;
+
+        enemyMeshParent = transform.Find("Enemy/zombie_huba").gameObject;
         healPoint = transform.Find("Enemy/PointToHeal").gameObject;
         bulletSpawnPoint = transform.Find("Enemy/zombie_huba/BulletSpawnPoint").transform;
         targetToLookAt = null;
-        startRotation = enemyMesh.transform.rotation;
-        enemyAnim = transform.GetComponent<Animator>();
+        startRotation = enemyMeshParent.transform.rotation;
+        enemyAnim = enemyMeshParent.transform.GetComponent<Animator>();
         EndAttackTime = 0;
         EndSubAttackTime = 0;
         //particlesPreAttack = transform.Find("Enemy/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
@@ -108,12 +109,14 @@ public class ZombieEnemy : MonoBehaviour
                 isAttacking = true;
                 noProjectilsInAttack++;
                 enemyAnim.SetTrigger("isAttacking");
+                Shoot();
                 EndSubAttackTime = Time.time;
 
             }
             else if(isAttacking && Time.time - EndSubAttackTime > timeBtwProjectInAttack)
             {
                 enemyAnim.SetTrigger("isAttacking");
+                Shoot();
                 EndSubAttackTime = Time.time;
                 noProjectilsInAttack++;
 
@@ -165,7 +168,7 @@ public class ZombieEnemy : MonoBehaviour
 
         Vector3 dir = (target - bulletSpawnPoint.position).normalized;
 
-        if (Vector3.Angle(enemyMesh.transform.forward, dir) < maxAngleToShoot)
+        if (Vector3.Angle(enemyMeshParent.transform.forward, dir) < maxAngleToShoot)
         {
 
             //tri projektily naraz a do stran
@@ -193,8 +196,8 @@ public class ZombieEnemy : MonoBehaviour
     {
         Debug.Log("Heal");
         state = EnemyState.Healthy;
-        enemyMesh.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f, 1f, 0.8f, 1f));
-        //enemyAnim.SetBool("isHealthy", true);
+        enemyMeshParent.transform.Find("Circle").GetComponent<SkinnedMeshRenderer>().material = healthyMaterial;
+        
 
         player.GetComponent<PlayerScoreScript>().noCollectables++;
         player.GetComponent<PlayerScoreScript>().noCollectablesText.text = player.GetComponent<PlayerScoreScript>().noCollectables.ToString();
@@ -207,16 +210,16 @@ public class ZombieEnemy : MonoBehaviour
     {
         if (targetToLookAt != null)
         {
-            Vector3 targPos = player.transform.position - enemyMesh.transform.position;
+            Vector3 targPos = player.transform.position - enemyMeshParent.transform.position;
             targPos.y = 0;
             targPos.Normalize();
 
-            enemyMesh.transform.rotation = Quaternion.LookRotation(
-                                                   Vector3.RotateTowards(enemyMesh.transform.forward, targPos, rotSpeed * Time.deltaTime, 0f));
+            enemyMeshParent.transform.rotation = Quaternion.LookRotation(
+                                                   Vector3.RotateTowards(enemyMeshParent.transform.forward, targPos, rotSpeed * Time.deltaTime, 0f));
         }
         else
         {
-            enemyMesh.transform.rotation = Quaternion.Slerp(enemyMesh.transform.rotation, startRotation, rotGoToStartSpeed * Time.deltaTime);
+            enemyMeshParent.transform.rotation = Quaternion.Slerp(enemyMeshParent.transform.rotation, startRotation, rotGoToStartSpeed * Time.deltaTime);
         }
     }
 
