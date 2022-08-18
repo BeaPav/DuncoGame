@@ -1,18 +1,39 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject dog;
+    public PlayerScoreScript PlayerScoreScript;
+    private int duseSave;
+    private int lastChceckPointId;
+    private Vector3 savePosition;
+    public GameObject[] chceckPoints;
+    private void Start()
     {
-        
+        Restart();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Save(int chceckPointId)
     {
+        if (chceckPointId > lastChceckPointId)
+        {
+            duseSave = PlayerScoreScript.noCollectables;
+            savePosition = chceckPoints[chceckPointId - 1].transform.position;
+        }
+    }
+    public void Restart()
+    {
+        GameObject[] duse = GameObject.FindGameObjectsWithTag("Collectable");
+
+        foreach (GameObject dusa in duse)
+        {
+            Destroy(dusa);
+        }
         
+        PlayerScoreScript.noCollectables = duseSave;
+        dog.transform.position = savePosition;
     }
 }
