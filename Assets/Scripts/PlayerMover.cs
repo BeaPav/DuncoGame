@@ -47,7 +47,9 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] AudioSource audioBark1;
     [SerializeField] AudioSource audioBark2;
 
-    [SerializeField] float velocityY;
+    [SerializeField] float groundDist;
+
+    RaycastHit groundContorol;
 
     private void Start()
     {
@@ -74,9 +76,8 @@ public class PlayerMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        velocityY = charControler.velocity.y;
-        anim.SetFloat("velocity", velocityY);
-
+        
+        //groundContorol = 
         barkCounting -= Time.deltaTime;
         barkCooldownCounting -= Time.deltaTime;
         Bark();
