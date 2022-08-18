@@ -8,20 +8,29 @@ public class SaveManager : MonoBehaviour
     public GameObject dog;
     public PlayerScoreScript PlayerScoreScript;
     private int duseSave;
-    private int lastChceckPointId;
+    private int lastChceckPointId = -1;
     private Vector3 savePosition;
-    public GameObject[] chceckPoints;
+    private CharacterController dogCharacterController;
+
     private void Start()
     {
-        Restart();
+        dogCharacterController = dog.GetComponent<CharacterController>();
     }
 
-    public void Save(int chceckPointId)
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            Restart();
+        }
+    }
+
+    public void Save(int chceckPointId, Vector3 position)
     {
         if (chceckPointId > lastChceckPointId)
         {
             duseSave = PlayerScoreScript.noCollectables;
-            savePosition = chceckPoints[chceckPointId - 1].transform.position;
+            savePosition = position;
         }
     }
     public void Restart()
@@ -34,6 +43,11 @@ public class SaveManager : MonoBehaviour
         }
         
         PlayerScoreScript.noCollectables = duseSave;
-        dog.transform.position = savePosition;
+        dogCharacterController.enabled = false;
+        dogCharacterController.transform.position = savePosition;
+        dogCharacterController.enabled = true;
+        Debug.Log(savePosition);
+        Debug.Log(dogCharacterController.transform.position);
+        Debug.Log("----");
     }
 }

@@ -68,6 +68,7 @@ public class PlayerScoreScript : MonoBehaviour
             charControler.Move(bounce * bounceSpeed * Time.deltaTime);
         }
 
+        noCollectablesText.text = noCollectables.ToString();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -104,7 +105,6 @@ public class PlayerScoreScript : MonoBehaviour
             Destroy(other.gameObject);
             audioCollectable.Play();
             noCollectables++;
-            noCollectablesText.text = noCollectables.ToString();
         }
 
 

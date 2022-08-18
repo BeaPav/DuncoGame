@@ -23,6 +23,7 @@ TagManager:
   - Ranged
   - DamageStoneRising
   - BarkCollider
+  - SaveManager
   layers:
   - Default
   - TransparentFX
