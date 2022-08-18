@@ -84,6 +84,8 @@ public class PlayerMover : MonoBehaviour
         if (move)
             Movement();
     }
+    
+    
 
     void Movement()
     {
@@ -101,6 +103,11 @@ public class PlayerMover : MonoBehaviour
 
         //Debug.Log(moveDirection.y);
         charControler.Move(moveDirection * Time.deltaTime);
+    }
+
+    public void SetMove(bool b)
+    {
+        move = b;
     }
 
     float Jump(float ySpeed)
