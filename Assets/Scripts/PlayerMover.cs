@@ -82,16 +82,18 @@ public class PlayerMover : MonoBehaviour
             groundDist = transform.position.y - groundContorol.point.y;
             anim.SetFloat("GroundDist", groundDist);
 
-            if(charControler.isGrounded)
-            {
-                anim.SetFloat("GroundDist", 0.1f);
-            }
+            
         }
         else
         {
             anim.SetFloat("GroundDist", 10);
         }
-        
+
+        if (charControler.isGrounded)
+        {
+            anim.SetFloat("GroundDist", 0.1f);
+        }
+
         barkCounting -= Time.deltaTime;
         barkCooldownCounting -= Time.deltaTime;
         Bark();
