@@ -105,9 +105,14 @@ public class PlayerMover : MonoBehaviour
         charControler.Move(moveDirection * Time.deltaTime);
     }
 
-    public void SetMove(bool b)
+    public void SetMoveTrue()
     {
-        move = b;
+        move = true;
+    }
+    
+    public void SetMoveFalse()
+    {
+        move = false;
     }
 
     float Jump(float ySpeed)
