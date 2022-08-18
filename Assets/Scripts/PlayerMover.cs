@@ -35,7 +35,6 @@ public class PlayerMover : MonoBehaviour
     ParticleSystem barkParticles;
 
     int jumps = 0;
-    public float fix;
 
     Animator anim;
 
@@ -47,9 +46,10 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] AudioSource audioBark1;
     [SerializeField] AudioSource audioBark2;
 
-    [SerializeField] float groundDist;
+    float groundDist;
+    float yVelocity;
 
-    RaycastHit groundContorol;
+    
 
     private void Start()
     {
@@ -65,7 +65,7 @@ public class PlayerMover : MonoBehaviour
         */
         
         anim = transform.Find("pivot/Dunco").GetComponent<Animator>();
-        model = transform.Find("pivot/Dunco").gameObject;
+        model = transform.Find("pivot").gameObject;
         barkParticles = transform.Find("pivot/Dunco/Bark").gameObject.GetComponent<ParticleSystem>();
         bark = transform.Find("bark").gameObject;
 
@@ -76,14 +76,36 @@ public class PlayerMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RaycastHit groundContorol;
+        if(Physics.Raycast(transform.position, -transform.up, out groundContorol, 3f))
+        {
+            groundDist = transform.position.y - groundContorol.point.y;
+            anim.SetFloat("GroundDist", groundDist);
+
+            if(charControler.isGrounded)
+            {
+                anim.SetFloat("GroundDist", 0.1f);
+            }
+        }
+        else
+        {
+            anim.SetFloat("GroundDist", 10);
+        }
         
-        //groundContorol = 
         barkCounting -= Time.deltaTime;
         barkCooldownCounting -= Time.deltaTime;
         Bark();
         //Debug.Log(charControler.isGrounded);
+
+        //movement bez jumpu
+        //MoveJump();
+        //ySpeed = Gravity(ySpeed);
+
+        
         if (move)
             Movement();
+        
+
     }
     
     
@@ -95,12 +117,15 @@ public class PlayerMover : MonoBehaviour
         Vector3 direction = new Vector3(inputDirection.x, 0, inputDirection.y).normalized;
         Vector3 moveDirection = Rotation(direction) * direction.magnitude;
 
+        //movement spojeny s jump
+        
         ySpeed = Gravity(ySpeed);
         ySpeed = Jump(ySpeed);
         moveDirection.y = ySpeed;
+        
 
-        
-        
+        //movement bez jumpu
+        //moveDirection.y = 0;
 
         //Debug.Log(moveDirection.y);
         charControler.Move(moveDirection * Time.deltaTime);
@@ -115,6 +140,15 @@ public class PlayerMover : MonoBehaviour
     {
         move = false;
     }
+
+    /*
+    void MoveJump()
+    {
+        ySpeed = Jump(ySpeed);
+        Vector3 jumpMovement = new Vector3(0, ySpeed, 0);
+        charControler.Move(jumpMovement * Time.deltaTime);
+    }
+    */
 
     float Jump(float ySpeed)
     {
@@ -167,16 +201,19 @@ public class PlayerMover : MonoBehaviour
 
     void copyTerrain() //premenovat
     {
+        
         RaycastHit Fhit, Bhit;
         if (Physics.Raycast(frontPoint.transform.position, frontPoint.transform.TransformDirection(Vector3.down), out Fhit, 0.8f) && Physics.Raycast(backPoint.transform.position, backPoint.transform.TransformDirection(Vector3.down), out Bhit, 0.8f))
         {
 
-            Vector3 point1 = frontPoint.transform.position;
+            //Vector3 point1 = frontPoint.transform.position;
+            Vector3 point1 = Fhit.point + Vector3.up * 0.05f;
             Vector3 point2 = Bhit.point;
             int nasobitel = 1;
             if (Fhit.point.y < Bhit.point.y)
             {
-                point1 = backPoint.transform.position;
+                //point1 = backPoint.transform.position;
+                point1 = Bhit.point + Vector3.up * 0.05f;
                 point2 = Fhit.point;
                 nasobitel = -1;
             }
@@ -190,31 +227,45 @@ public class PlayerMover : MonoBehaviour
         else
         {
             Vector3 vector = model.transform.eulerAngles;
-            vector.z = 0;
+            //vector.z = 0;
+            vector.z = Mathf.LerpAngle(vector.z, 0, slopeSpeedChange * Time.deltaTime);
             model.transform.eulerAngles = vector;
         }
+        
     }
     void Bark()
     {
         if (Input.GetKeyDown(KeyCode.E) && barkCooldownCounting < 0)
         {
-            bark.SetActive(true);
-            audioBark1.Play();
-            Invoke("Echo", 0.4f);
-            
-            barkParticles.Play(true);
+            anim.SetBool("isBarking", true);
             barkCounting = barkTime;
             barkCooldownCounting = barkCoolDown;
+            Debug.Log("Bark");
+            Invoke("BarkDelayed", 0.5f);
+            
+
         }
 
         if (barkCounting < 0)
         {
             bark.SetActive(false);
+            //Debug.Log("NOBark");
+            
         }
 
        
     }
 
+    void BarkDelayed()
+    {
+        bark.SetActive(true);
+        audioBark1.Play();
+        Invoke("Echo", 0.4f);
+
+        barkParticles.Play(true);
+        anim.SetBool("isBarking", false);
+
+    }
 
     void Echo()
     {
