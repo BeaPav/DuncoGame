@@ -18,6 +18,12 @@ ModelImporter:
   - first:
       74: 5139966189114125150
     second: DuncoJumpEnd
+  - first:
+      74: -5647759165835826116
+    second: DuncoFallRovno
+  - first:
+      74: 7182799025199906720
+    second: DuncoFallRovno1Frame
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -80,8 +86,8 @@ ModelImporter:
       name: Dunco_double
       takeName: rig|jump_pes
       internalID: 0
-      firstFrame: 10
-      lastFrame: 35
+      firstFrame: 13
+      lastFrame: 16.8
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -110,7 +116,7 @@ ModelImporter:
       takeName: rig|jump_pes
       internalID: 0
       firstFrame: 0
-      lastFrame: 15
+      lastFrame: 16.6
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -161,6 +167,223 @@ ModelImporter:
       events: []
       transformMask: []
       maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: DuncoFallRovno
+      takeName: rig|jump_pes
+      internalID: 0
+      firstFrame: 15
+      lastFrame: 15.1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Cube.002
+        weight: 1
+      - path: rig
+        weight: 1
+      - path: rig/Bone
+        weight: 1
+      - path: rig/MCH-torso.parent
+        weight: 1
+      - path: rig/MCH-torso.parent/torso
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.004
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.004/MCH-ROT-tail
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.004/MCH-ROT-tail/spine.003
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.004/MCH-ROT-tail/spine.003/spine.002
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.004/MCH-ROT-tail/spine.003/spine.002/spine.001
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.004/MCH-ROT-tail/spine.003/spine.002/spine.001/spine
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.004/MCH-ROT-tail/spine.003/spine.002/spine.001/spine/tweak_spine
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.004/MCH-ROT-tail/spine.003/spine.002/spine.001/spine/tweak_spine/ORG-spine
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.004/MCH-ROT-tail/spine.003/spine.002/spine.001/spine/tweak_spine/ORG-spine/DEF-spine
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.004/MCH-ROT-tail/spine.003/spine.002/spine.001/spine/tweak_spine/ORG-spine/DEF-spine/DEF-spine.001
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.004/MCH-ROT-tail/spine.003/spine.002/spine.001/spine/tweak_spine/ORG-spine/DEF-spine/DEF-spine.001/DEF-spine.002
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.004/MCH-ROT-tail/spine.003/spine.002/spine.001/spine/tweak_spine/ORG-spine/DEF-spine/DEF-spine.001/DEF-spine.002/DEF-spine.003
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/DEF-thigh.L
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/DEF-thigh.L/DEF-thigh.L.001
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/DEF-thigh.L/DEF-thigh.L.001/DEF-shin.L
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/DEF-thigh.L/DEF-thigh.L.001/DEF-shin.L/DEF-shin.L.001
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/DEF-thigh.L/DEF-thigh.L.001/DEF-shin.L/DEF-shin.L.001/DEF-foot.L
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/DEF-thigh.L/DEF-thigh.L.001/DEF-shin.L/DEF-shin.L.001/DEF-foot.L/DEF-foot.L.001
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/DEF-thigh.L/DEF-thigh.L.001/DEF-shin.L/DEF-shin.L.001/DEF-foot.L/DEF-foot.L.001/DEF-toe.L
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/DEF-thigh.R
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/DEF-thigh.R/DEF-thigh.R.001
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/DEF-thigh.R/DEF-thigh.R.001/DEF-shin.R
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/DEF-thigh.R/DEF-thigh.R.001/DEF-shin.R/DEF-shin.R.001
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/DEF-thigh.R/DEF-thigh.R.001/DEF-shin.R/DEF-shin.R.001/DEF-foot.R
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/DEF-thigh.R/DEF-thigh.R.001/DEF-shin.R/DEF-shin.R.001/DEF-foot.R/DEF-foot.R.001
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/DEF-thigh.R/DEF-thigh.R.001/DEF-shin.R/DEF-shin.R.001/DEF-foot.R/DEF-foot.R.001/DEF-toe.R
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/ORG-pelvis.L
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/ORG-pelvis.L/DEF-pelvis.L
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/ORG-pelvis.R
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.007/spine_fk.007/MCH-spine.006/spine_fk.006/MCH-spine.005/spine_fk.005/MCH-spine.004/spine_fk.004/tweak_spine.005/ORG-spine.005/ORG-pelvis.R/DEF-pelvis.R
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-breast.L
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-breast.L/DEF-breast.L
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-breast.R
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-breast.R/DEF-breast.R
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.L
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.L/DEF-front_thigh.L
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.L/DEF-front_thigh.L/DEF-front_thigh.L.001
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.L/DEF-front_thigh.L/DEF-front_thigh.L.001/DEF-front_shin.L
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.L/DEF-front_thigh.L/DEF-front_thigh.L.001/DEF-front_shin.L/DEF-front_shin.L.001
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.L/DEF-front_thigh.L/DEF-front_thigh.L.001/DEF-front_shin.L/DEF-front_shin.L.001/DEF-front_foot.L
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.L/DEF-front_thigh.L/DEF-front_thigh.L.001/DEF-front_shin.L/DEF-front_shin.L.001/DEF-front_foot.L/DEF-front_foot.L.001
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.L/DEF-front_thigh.L/DEF-front_thigh.L.001/DEF-front_shin.L/DEF-front_shin.L.001/DEF-front_foot.L/DEF-front_foot.L.001/DEF-front_toe.L
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.L/DEF-shoulder.L
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.R
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.R/DEF-front_thigh.R
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.R/DEF-front_thigh.R/DEF-front_thigh.R.001
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.R/DEF-front_thigh.R/DEF-front_thigh.R.001/DEF-front_shin.R
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.R/DEF-front_thigh.R/DEF-front_thigh.R.001/DEF-front_shin.R/DEF-front_shin.R.001
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.R/DEF-front_thigh.R/DEF-front_thigh.R.001/DEF-front_shin.R/DEF-front_shin.R.001/DEF-front_foot.R
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.R/DEF-front_thigh.R/DEF-front_thigh.R.001/DEF-front_shin.R/DEF-front_shin.R.001/DEF-front_foot.R/DEF-front_foot.R.001
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.R/DEF-front_thigh.R/DEF-front_thigh.R.001/DEF-front_shin.R/DEF-front_shin.R.001/DEF-front_foot.R/DEF-front_foot.R.001/DEF-front_toe.R
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-pivot/tweak_spine.008/ORG-spine.008/ORG-shoulder.R/DEF-shoulder.R
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-ROT-neck
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-ROT-neck/neck
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-ROT-neck/neck/head.004
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-ROT-neck/neck/MCH-ROT-head
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-ROT-neck/neck/MCH-ROT-head/head
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-ROT-neck/neck/MCH-ROT-head/head/head.001
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-ROT-neck/neck/MCH-ROT-head/head/head.002
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-ROT-neck/neck/MCH-ROT-head/head/head.002/head.003
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-ROT-neck/neck/MCH-ROT-head/head/head.002/head.005
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-ROT-neck/neck/MCH-ROT-head/head/head.002/head.005/head.006
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-ROT-neck/neck/MCH-ROT-head/head/head.002/head.007
+        weight: 1
+      - path: rig/MCH-torso.parent/torso/MCH-spine.008/spine_fk.008/MCH-ROT-neck/neck/MCH-ROT-head/head/head.002/head.007/head.008
+        weight: 1
+      - path: rig/root
+        weight: 1
+      - path: rig/root/DEF-spine.004
+        weight: 1
+      - path: rig/root/DEF-spine.004/DEF-spine.005
+        weight: 1
+      - path: rig/root/DEF-spine.004/DEF-spine.005/DEF-spine.006
+        weight: 1
+      - path: rig/root/DEF-spine.004/DEF-spine.005/DEF-spine.006/DEF-spine.007
+        weight: 1
+      - path: rig/root/DEF-spine.004/DEF-spine.005/DEF-spine.006/DEF-spine.007/DEF-spine.008
+        weight: 1
+      - path: rig/root/DEF-spine.004/DEF-spine.005/DEF-spine.006/DEF-spine.007/DEF-spine.008/DEF-spine.009
+        weight: 1
+      - path: rig/root/DEF-spine.004/DEF-spine.005/DEF-spine.006/DEF-spine.007/DEF-spine.008/DEF-spine.009/DEF-spine.010
+        weight: 1
+      - path: rig/root/DEF-spine.004/DEF-spine.005/DEF-spine.006/DEF-spine.007/DEF-spine.008/DEF-spine.009/DEF-spine.010/DEF-spine.011
+        weight: 1
+      maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     isReadable: 0
