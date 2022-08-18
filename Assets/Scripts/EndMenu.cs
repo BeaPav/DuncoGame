@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class EndMenu : MonoBehaviour
 {
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+    }
     public void Menu() 
     {
         SceneManager.LoadScene(0);
