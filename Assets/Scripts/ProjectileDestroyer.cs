@@ -27,7 +27,7 @@ public class ProjectileDestroyer : MonoBehaviour
         if (other.tag != "Projectile" && other.tag != "Ranged")
         {
             //Debug.Log("DestroyTrigger");
-            Destroy(this.gameObject, 0.2f);
+            Destroy(this.gameObject, 0.1f);
         }
     }
 }
