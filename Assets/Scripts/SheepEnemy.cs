@@ -25,7 +25,9 @@ public class SheepEnemy : MonoBehaviour
     NavMeshAgent agent;
     ParticleSystem particlesPreAttack;
     ParticleSystem particlesSound;
-    AudioSource audio;
+    [SerializeField] AudioSource audioBee;
+    [SerializeField] AudioSource audioHit;
+    bool bouncing;
     Collider damageCollider;
     float distToFollow;
     [SerializeField] float distToStartFollow = 8f;
@@ -40,6 +42,7 @@ public class SheepEnemy : MonoBehaviour
     [SerializeField] float timeAttackDuration;
 
     [SerializeField] float healOffset = 1f;
+    [SerializeField] float bounceStrength;
 
     Material cursedMaterial;
     [SerializeField] Material healthyMaterial;
@@ -61,11 +64,9 @@ public class SheepEnemy : MonoBehaviour
         damageCollider.enabled = false;
         particlesSound = transform.Find("Enemy/ParticleSound").GetComponent<ParticleSystem>();
 
-        
+        bouncing = false;
 
         distToFollow = distToStartFollow;
-
-        audio = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -77,9 +78,15 @@ public class SheepEnemy : MonoBehaviour
             //Debug.Log("Heal");
             if (state != EnemyState.Healthy)
                 Heal();
-            enemyAnim.SetTrigger("isHit");
-
-            player.GetComponent<PlayerScoreScript>().BounceDown();
+            
+            if (!bouncing)
+            {
+                audioHit.Play();bouncing = true;
+                Invoke("BouncingFalse", 1f);
+                player.GetComponent<PlayerScoreScript>().BounceDown(bounceStrength);
+                enemyAnim.SetTrigger("isHit");
+            }
+            
 
         }
         if (state == EnemyState.CursedFollow)
@@ -120,6 +127,12 @@ public class SheepEnemy : MonoBehaviour
         }
     }
 
+
+    void BouncingFalse()
+    {
+        bouncing = false;
+    }
+
     public void PrepareAttack()
     {
         if (state != EnemyState.Healthy)
@@ -136,7 +149,7 @@ public class SheepEnemy : MonoBehaviour
         {
             //Debug.Log("playSoundAttack");
             particlesSound.Play(true);
-            audio.Play();
+            audioBee.Play();
         }
     }
 
@@ -155,7 +168,7 @@ public class SheepEnemy : MonoBehaviour
         particlesSound.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         damageCollider.enabled = false;
         isAttacking = false;
-        audio.Stop();
+        audioBee.Stop();
         //enemyAnim.SetBool("isAttacking", false);
         time = Time.time;
     }

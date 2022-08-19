@@ -26,13 +26,13 @@ public class PlayerScoreScript : MonoBehaviour
 
 
     private float startBounceTime = 0f;
-    [SerializeField] Vector3 bounce = Vector3.zero;
-    [SerializeField] float bounceSpeed;
+    Vector3 bounce = Vector3.zero;
+    float bounceSpeed;
 
 
     [SerializeField] AudioSource audioCollectable;
 
-
+    Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +50,8 @@ public class PlayerScoreScript : MonoBehaviour
         //colParent = GameObject.Find("CollectableParent").gameObject;
 
         bounceSpeed = 7f;
+
+        anim = transform.Find("pivot/Dunco").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -151,11 +153,12 @@ public class PlayerScoreScript : MonoBehaviour
     }
 
 
-    public void BounceDown()
+    public void BounceDown(float bounceStrength)
     {
         startBounceTime = Time.time;
-        bounce = transform.right * 1f;
-        bounce.y = 2f;
+        //bounce = transform.right * 1f;
+        anim.SetTrigger("isJumping");
+        bounce.y = bounceStrength;
     }
 
 }

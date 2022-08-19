@@ -53,11 +53,13 @@ public class ZombieEnemy : MonoBehaviour
 
     Material cursedMaterial;
     [SerializeField] Material healthyMaterial;
-    [SerializeField] float healOffset = 0.6f;
+    [SerializeField] float healOffset;
+    [SerializeField] float bounceStrength;
 
 
     [SerializeField] AudioSource audioAttack;
     [SerializeField] AudioSource audioHit;
+    bool bouncing;
 
     // Start is called before the first frame update
     void Start()
@@ -75,7 +77,7 @@ public class ZombieEnemy : MonoBehaviour
         EndAttackTime = 0;
         EndSubAttackTime = 0;
         //particlesPreAttack = transform.Find("Enemy/ParticleExplosion/SmallerParticles").GetComponent<ParticleSystem>();
-
+        bouncing = false;
         
 
     }
@@ -91,9 +93,15 @@ public class ZombieEnemy : MonoBehaviour
             //Debug.Log("Heal");
             if(state != EnemyState.Healthy)
                 Heal();
-            player.GetComponent<PlayerScoreScript>().BounceDown();
-            enemyAnim.SetTrigger("isHit");
-            audioHit.Play();
+            
+            if (!bouncing)
+            {
+                audioHit.Play();
+                audioHit.Play(); bouncing = true;
+                Invoke("BouncingFalse", 1f);
+                player.GetComponent<PlayerScoreScript>().BounceDown(bounceStrength);
+                enemyAnim.SetTrigger("isHit");
+            }
 
         }
 
@@ -166,6 +174,11 @@ public class ZombieEnemy : MonoBehaviour
 
     }
     */
+
+    void BouncingFalse()
+    {
+        bouncing = false;
+    }
 
     public void Shoot()
     {
