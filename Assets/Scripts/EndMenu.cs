@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 public class EndMenu : MonoBehaviour
 {
+    public TextMeshProUGUI duseText;
     private void Start()
     {
+        duseText.text = PlayerPrefs.GetInt("duse").ToString();
         Cursor.lockState = CursorLockMode.Confined;
     }
     public void Menu() 
