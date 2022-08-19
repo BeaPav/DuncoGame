@@ -47,7 +47,6 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] AudioSource audioBark2;
 
     float groundDist;
-    float yVelocity;
 
     
 

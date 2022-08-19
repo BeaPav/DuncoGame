@@ -20,13 +20,16 @@ public class StoneEnemy : MonoBehaviour
 
     [SerializeField] bool isAttacking = false;
 
-    [SerializeField] float healOffset = 0.6f;
+    [SerializeField] float healOffset;
+    [SerializeField] float bounceStrength;
+    bool bouncing;
 
     public EnemyState state = EnemyState.CursedPlaced;
 
     private Vector3 startPosition;
 
-    AudioSource audioAttack;
+    [SerializeField] AudioSource audioAttack;
+    [SerializeField] AudioSource audioHit;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +48,9 @@ public class StoneEnemy : MonoBehaviour
 
         startPosition = transform.position;
 
-        audioAttack = gameObject.GetComponent<AudioSource>();
+        
+
+        bouncing = false;
     }
 
     // Update is called once per frame
@@ -58,8 +63,15 @@ public class StoneEnemy : MonoBehaviour
             //Debug.Log("Heal");
             if (state != EnemyState.Healthy)
                 Heal();
-            player.GetComponent<PlayerScoreScript>().BounceDown();
 
+            if (!bouncing)
+            {
+                audioHit.Play();
+                bouncing = true;
+                Invoke("BouncingFalse", 1f);
+                player.GetComponent<PlayerScoreScript>().BounceDown(bounceStrength);
+                //enemyAnim.SetTrigger("isHit");
+            }
         }
 
         if (state == EnemyState.CursedFollow)
@@ -82,6 +94,13 @@ public class StoneEnemy : MonoBehaviour
 
         }
     }
+
+
+    void BouncingFalse()
+    {
+        bouncing = false;
+    }
+
 
     public void PrepareAttack()
     {
