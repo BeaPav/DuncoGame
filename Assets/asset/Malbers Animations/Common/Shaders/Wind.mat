@@ -2,14 +2,15 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Wind
   m_Shader: {fileID: 4800000, guid: 56e91ddfff913b148a557bfdbd9613d0, type: 3}
-  m_ShaderKeywords: 
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -79,6 +80,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -102,7 +104,7 @@ Material:
     - _Transparency: 1
     - _UVSec: 0
     - _Voli: 0
-    - _Volume: 3.64
+    - _Volume: 5
     - _X: 1
     - _Y: 1
     - _ZWrite: 1
@@ -117,12 +119,13 @@ Material:
     - _Speed2: {r: 0.03, g: -0.1, b: 0, a: 0}
     - _Tilli: {r: 0.2, g: 0, b: 0, a: 0}
     - _Tillin: {r: 2, g: 2, b: 0, a: 0}
-    - _Tilling2: {r: 2, g: 0.24, b: 0, a: 0}
+    - _Tilling2: {r: 1.4, g: 0.24, b: 0, a: 0}
     - _Tillling: {r: 3, g: 0.1, b: 0, a: 0}
-    - _Tillling1: {r: 1, g: 0.09, b: 0, a: 0}
+    - _Tillling1: {r: 2.88, g: 0.09, b: 0, a: 0}
     - _Vector0: {r: 2, g: 0.2, b: 0, a: 0}
     - _Vector1: {r: -0.12, g: -0.1, b: 0, a: 0}
     - _Win: {r: 0.7735849, g: 0.7699359, b: 0.7699359, a: 0}
     - _WindColor: {r: 0.6886792, g: 0.6531693, b: 0.5684852, a: 0}
-    - _WindColor1: {r: 1, g: 1, b: 1, a: 0}
+    - _WindColor1: {r: 0.66, g: 0.26, b: 0.69318736, a: 0}
     - _WindColor2: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 0}
+  m_BuildTextureStacks: []
