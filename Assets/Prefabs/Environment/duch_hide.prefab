@@ -4921,7 +4921,7 @@ GameObject:
   - component: {fileID: 8123085775922083575}
   - component: {fileID: 1863533183851041581}
   m_Layer: 0
-  m_Name: Spot Light
+  m_Name: SpotLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5101,3 +5101,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectable: {fileID: 5500824059536632282, guid: 7b5f38c7c6ce3484fbe263fc29fc6e46, type: 3}
+  objectsNotToStopMovement: []

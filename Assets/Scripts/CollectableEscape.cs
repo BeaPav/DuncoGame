@@ -12,17 +12,18 @@ public class CollectableEscape : MonoBehaviour
     [SerializeField] float rotSpeed;
     [SerializeField] float maxDistance;
 
-    bool isHit;
+    [SerializeField] bool isHit;
 
     [SerializeField] Rigidbody rb;
 
-
+    public List<GameObject> objectsNotToStopMovement;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = transform.GetComponent<Rigidbody>();
         isHit = false;
+
     }
 
     // Update is called once per frame
@@ -49,10 +50,27 @@ public class CollectableEscape : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "Collectable" && other.tag != "Projectile" && other.tag != "Terrain" 
+        if (other.gameObject != this.gameObject && other.tag != "Collectable" && other.tag != "Projectile" && other.tag != "Terrain" 
             && other.tag != "Korg" && other.tag != "DamageStone" && other.tag != "DamageSound"  && other.tag != "BarkCollider")
         {
-            isHit = true;
+            //Debug.Log("trigger1");
+            bool hitHelp = true;
+            foreach (GameObject obj in objectsNotToStopMovement)
+            {
+                if (other.gameObject == obj)
+                {
+                    hitHelp = false;
+                    
+                }
+
+            }
+
+            if (hitHelp)
+            {
+                isHit = true;
+                Debug.Log(other.gameObject.name);
+                //Debug.Log("trigger2");
+            }
             //Debug.Log("hitByColliderCollectable");
         }
     }
