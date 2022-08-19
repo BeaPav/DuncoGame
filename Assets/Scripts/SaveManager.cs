@@ -35,6 +35,11 @@ public class SaveManager : MonoBehaviour
     }
     public void Restart()
     {
+       /* SheepEnemy[] components = GameObject.FindObjectsOfType<SheepEnemy>();
+        foreach(sheep comp in SheepEnemy)
+            sheep.
+        */
+        
         GameObject[] duse = GameObject.FindGameObjectsWithTag("Collectable");
 
         foreach (GameObject dusa in duse)
