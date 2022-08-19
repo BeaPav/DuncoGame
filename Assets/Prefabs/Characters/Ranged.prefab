@@ -125,7 +125,8 @@ MonoBehaviour:
   ShotPrediction: 5
   upFactor: 1
   healthyMaterial: {fileID: 2100000, guid: ad47c610e56d32f40b586f9bed5f6b26, type: 2}
-  healOffset: 1.3
+  healOffset: 1.5
+  bounceStrength: 4
   audioAttack: {fileID: 571711708084718581}
   audioHit: {fileID: 3424544016502838298}
 --- !u!82 &571711708084718581
