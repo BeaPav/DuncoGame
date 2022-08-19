@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class valaska : MonoBehaviour
 {
+    public float timer;
     public float distance;
     public GameObject dog;
 
@@ -11,7 +12,14 @@ public class valaska : MonoBehaviour
     {
         if(Vector3.Distance(dog.transform.position,transform.position) < distance)
         {
-            SceneManager.LoadScene(2);
+            StartCoroutine(Wait());
         }
+    }
+
+    IEnumerator Wait()
+    {
+        PlayerPrefs.SetInt("duse",dog.GetComponent<PlayerScoreScript>().noCollectables);
+        yield return new WaitForSeconds(timer);
+        SceneManager.LoadScene(2);
     }
 }

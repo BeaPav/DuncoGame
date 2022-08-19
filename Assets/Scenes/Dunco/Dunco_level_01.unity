@@ -8434,6 +8434,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17b9bfb7ecedd6746acb57a05d36363b, type: 3}
+--- !u!114 &409409983 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7850341518525907582, guid: 39dac311ada9b844dad8f6316462f67c, type: 3}
+  m_PrefabInstance: {fileID: 7850341517987209021}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &411724023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49549,17 +49560,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6832306612902350147, guid: c6cde421a7e45e74795aff4ebf09be33, type: 3}
   m_PrefabInstance: {fileID: 839648088}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2108932216 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 805544552290728472, guid: 39dac311ada9b844dad8f6316462f67c, type: 3}
-  m_PrefabInstance: {fileID: 7850341517987209021}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2112498488 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3951946737205657730, guid: 9c8815e57689b6a4ea65036a32e7c763, type: 3}
@@ -51596,6 +51596,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7824954003937640284, guid: 39dac311ada9b844dad8f6316462f67c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7850341518520430036, guid: 39dac311ada9b844dad8f6316462f67c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -51760,12 +51764,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6107939775883082549, guid: 21513073e42dabb43b88c9cd010fde49, type: 3}
       propertyPath: noCollectables
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6107939775883082549, guid: 21513073e42dabb43b88c9cd010fde49, type: 3}
       propertyPath: noCollectablesText
       value: 
-      objectReference: {fileID: 2108932216}
+      objectReference: {fileID: 409409983}
     - target: {fileID: 6228225201567771743, guid: 21513073e42dabb43b88c9cd010fde49, type: 3}
       propertyPath: m_IsActive
       value: 0
