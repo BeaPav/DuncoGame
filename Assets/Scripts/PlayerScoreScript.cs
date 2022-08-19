@@ -38,7 +38,7 @@ public class PlayerScoreScript : MonoBehaviour
     void Start()
     {
         noCollectables = 0;
-        noCollectablesText = GameObject.Find("Canvas/Text (TMP)").GetComponent<TextMeshProUGUI>();
+        noCollectablesText = noCollectablesText.GetComponent<TextMeshProUGUI>();
 
         charControler = GetComponent<CharacterController>();
 
