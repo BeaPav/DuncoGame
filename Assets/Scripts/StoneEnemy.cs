@@ -137,7 +137,15 @@ public class StoneEnemy : MonoBehaviour
 
     }
 
+    public void CurseAgain()
+    {
+        state = EnemyState.CursedPlaced;
 
+        enemyAnim.SetBool("isHealthy", false);
+        enemyAnim.SetBool("isAttacking", false);
+        enemyAnim.SetTrigger("cursedAgain");
+        transform.Find("Enemy/Cube.001").gameObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
+    }
 
 
     private bool HealControl()
