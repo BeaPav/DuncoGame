@@ -41,6 +41,7 @@ public class SheepEnemy : MonoBehaviour
 
     [SerializeField] float healOffset = 1f;
 
+    Material cursedMaterial;
     [SerializeField] Material healthyMaterial;
 
 
@@ -51,6 +52,7 @@ public class SheepEnemy : MonoBehaviour
         player = GameObject.Find("Player-Dunco");
 
         enemyRender = transform.Find("Enemy/sheep").GetComponent<SkinnedMeshRenderer>();
+        cursedMaterial = enemyRender.material;
         healPoint = transform.Find("Enemy/PointToHeal").gameObject;
         enemyAnim = transform.Find("Enemy").gameObject.GetComponent<Animator>();
 
@@ -58,6 +60,8 @@ public class SheepEnemy : MonoBehaviour
         damageCollider = transform.Find("Enemy/DamageCollider").GetComponent<Collider>();
         damageCollider.enabled = false;
         particlesSound = transform.Find("Enemy/ParticleSound").GetComponent<ParticleSystem>();
+
+        
 
         distToFollow = distToStartFollow;
 
@@ -73,8 +77,7 @@ public class SheepEnemy : MonoBehaviour
             //Debug.Log("Heal");
             if (state != EnemyState.Healthy)
                 Heal();
-            else
-                enemyAnim.SetTrigger("isHit");
+            enemyAnim.SetTrigger("isHit");
 
             player.GetComponent<PlayerScoreScript>().BounceDown();
 
@@ -162,14 +165,19 @@ public class SheepEnemy : MonoBehaviour
         state = EnemyState.Healthy;
         DeactivateAttack();
         enemyRender.material = healthyMaterial;
-        enemyAnim.SetBool("isHealthy", true);
 
         player.GetComponent<PlayerScoreScript>().noCollectables++;
         player.GetComponent<PlayerScoreScript>().noCollectablesText.text = player.GetComponent<PlayerScoreScript>().noCollectables.ToString();
 
     }
 
+    public void CurseAgain()
+    {
+        state = EnemyState.CursedPlaced;
+        enemyRender.material = cursedMaterial;
 
+        enemyAnim.SetTrigger("cursedAgain");
+    }
 
     private void DistanceControl()
     {

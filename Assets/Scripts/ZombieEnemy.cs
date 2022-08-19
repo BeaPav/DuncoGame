@@ -51,7 +51,7 @@ public class ZombieEnemy : MonoBehaviour
     [SerializeField] float ShotPrediction;
     [SerializeField] float upFactor;
 
-    
+    Material cursedMaterial;
     [SerializeField] Material healthyMaterial;
     [SerializeField] float healOffset = 0.6f;
 
@@ -68,6 +68,7 @@ public class ZombieEnemy : MonoBehaviour
         enemyMeshParent = transform.Find("Enemy/zombie_huba").gameObject;
         healPoint = transform.Find("Enemy/PointToHeal").gameObject;
         bulletSpawnPoint = transform.Find("Enemy/zombie_huba/BulletSpawnPoint").transform;
+        cursedMaterial = enemyMeshParent.transform.Find("Circle").GetComponent<SkinnedMeshRenderer>().material;
         targetToLookAt = null;
         startRotation = enemyMeshParent.transform.rotation;
         enemyAnim = enemyMeshParent.transform.GetComponent<Animator>();
@@ -200,7 +201,7 @@ public class ZombieEnemy : MonoBehaviour
 
     public void Heal()
     {
-        Debug.Log("Heal");
+        //Debug.Log("Heal");
         state = EnemyState.Healthy;
         enemyMeshParent.transform.Find("Circle").GetComponent<SkinnedMeshRenderer>().material = healthyMaterial;
         
@@ -209,6 +210,13 @@ public class ZombieEnemy : MonoBehaviour
         player.GetComponent<PlayerScoreScript>().noCollectablesText.text = player.GetComponent<PlayerScoreScript>().noCollectables.ToString();
 
 
+    }
+
+    public void CurseAgain()
+    {
+        state = EnemyState.CursedPlaced;
+        enemyMeshParent.transform.Find("Circle").GetComponent<SkinnedMeshRenderer>().material = cursedMaterial;
+        enemyAnim.SetTrigger("cursedAgain");
     }
 
 
