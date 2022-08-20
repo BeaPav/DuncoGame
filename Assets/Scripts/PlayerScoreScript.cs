@@ -26,7 +26,9 @@ public class PlayerScoreScript : MonoBehaviour
 
 
     private float startBounceTime = 0f;
+    private float startBounceDamageTime = 0f;
     Vector3 bounce = Vector3.zero;
+    Vector3 bounceDamage = Vector3.zero;
     float bounceSpeed;
 
 
@@ -58,10 +60,16 @@ public class PlayerScoreScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.time - startBounceTime > 0.5f)
+        if(Time.time - startBounceDamageTime > 0.5f)
         {
             
             DamageMaterial.SetColor("_Color", startColor);
+            bounceDamage = Vector3.zero;
+        }
+
+        if (Time.time - startBounceTime > 0.5f)
+        {
+
             bounce = Vector3.zero;
         }
 
@@ -72,6 +80,11 @@ public class PlayerScoreScript : MonoBehaviour
             {
                 charControler.Move(bounce * bounceSpeed * Time.deltaTime);
             }
+        }
+
+        if (bounceDamage != Vector3.zero)
+        {
+            charControler.Move(bounceDamage * bounceSpeed * Time.deltaTime);
         }
 
         noCollectablesText.text = noCollectables.ToString();
@@ -132,13 +145,13 @@ public class PlayerScoreScript : MonoBehaviour
         if (Time.time - startDamageTime > 1f)
         {
             startDamageTime = Time.time;
-            bounce = (transform.position - enemyPos).normalized;
-            bounce.y = charControler.isGrounded ? 1.5f : 0f;
+            bounceDamage = (transform.position - enemyPos).normalized;
+            bounceDamage.y = charControler.isGrounded ? 1.5f : 0f;
 
 
             DamageMaterial.SetColor("_Color", damageColor);
             audioDamage.Play();
-            startBounceTime = Time.time;
+            startBounceDamageTime = Time.time;
 
             if (noCollectables > 0)
             {

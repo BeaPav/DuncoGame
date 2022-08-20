@@ -29,6 +29,7 @@ public class StoneEnemy : MonoBehaviour
     private Vector3 startPosition;
 
     [SerializeField] AudioSource audioAttack;
+    [SerializeField] AudioSource audioPreAttack;
     [SerializeField] AudioSource audioHit;
 
     // Start is called before the first frame update
@@ -114,6 +115,7 @@ public class StoneEnemy : MonoBehaviour
     {
         //Debug.Log("prepareAttack");
         isAttacking = true;
+        audioPreAttack.Play();
         particlesPreAttack.Play(true);
     }
 
@@ -136,6 +138,7 @@ public class StoneEnemy : MonoBehaviour
         isAttacking = false;
         enemyAnim.SetBool("isAttacking", false);
         audioAttack.Stop();
+        audioPreAttack.Stop();
 
     }
 

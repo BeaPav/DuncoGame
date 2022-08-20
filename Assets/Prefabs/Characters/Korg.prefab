@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 1995564738330955980}
   - component: {fileID: 7837730054806047821}
   - component: {fileID: 5326481757480348145}
-  - component: {fileID: 6267574680974580716}
+  - component: {fileID: 2315374846121627460}
   m_Layer: 0
   m_Name: Korg
   m_TagString: Korg
@@ -127,6 +127,7 @@ MonoBehaviour:
   bounceStrength: 2
   state: 0
   audioAttack: {fileID: 1995564738330955980}
+  audioPreAttack: {fileID: 2315374846121627460}
   audioHit: {fileID: 7837730054806047821}
 --- !u!95 &3847738609983929161
 Animator:
@@ -158,9 +159,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 65f453f3c72b65b4dafc6b951a571612, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 3cf1d7d776ee00a478c3ae18356d6a29, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.237
+  m_Volume: 0.166
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -353,8 +354,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sources:
-  - {fileID: 6267574680974580716}
---- !u!82 &6267574680974580716
+  - {fileID: 0}
+--- !u!82 &2315374846121627460
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -364,18 +365,18 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 65f453f3c72b65b4dafc6b951a571612, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 1ae729f00534b1b4ea122cd70ddc2a57, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 10
+  MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
