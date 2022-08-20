@@ -62,7 +62,14 @@ public class StoneEnemy : MonoBehaviour
         {
             //Debug.Log("Heal");
             if (state != EnemyState.Healthy)
+            {
                 Heal();
+                audioHit.Play();
+                bouncing = true;
+                Invoke("BouncingFalse", 1f);
+                player.GetComponent<PlayerScoreScript>().BounceDown(bounceStrength);
+                enemyAnim.SetTrigger("isHit");
+            }
 
             if (!bouncing)
             {
@@ -72,6 +79,7 @@ public class StoneEnemy : MonoBehaviour
                 player.GetComponent<PlayerScoreScript>().BounceDown(bounceStrength);
                 //enemyAnim.SetTrigger("isHit");
             }
+
         }
 
         if (state == EnemyState.CursedFollow)

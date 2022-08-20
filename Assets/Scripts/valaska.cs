@@ -20,6 +20,6 @@ public class valaska : MonoBehaviour
     {
         PlayerPrefs.SetInt("duse",dog.GetComponent<PlayerScoreScript>().noCollectables);
         yield return new WaitForSeconds(timer);
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 }

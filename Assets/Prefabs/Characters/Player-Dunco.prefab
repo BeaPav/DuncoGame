@@ -280,8 +280,6 @@ MonoBehaviour:
   noCollectablesText: {fileID: 0}
   noCollectables: 0
   collectable: {fileID: 5500824059536632282, guid: 7b5f38c7c6ce3484fbe263fc29fc6e46, type: 3}
-  bounce: {x: 0, y: 0, z: 0}
-  bounceSpeed: 0
   audioCollectable: {fileID: 888119813769342834}
 --- !u!82 &5557122540630702278
 AudioSource:
@@ -661,11 +659,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11900000, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 3}
       propertyPath: m_AspectRatio
-      value: 1.67
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11900000, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 3}
       propertyPath: m_FieldOfView
-      value: 28.96
+      value: 26.35
       objectReference: {fileID: 0}
     - target: {fileID: 11900000, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 3}
       propertyPath: m_FarClipPlane
