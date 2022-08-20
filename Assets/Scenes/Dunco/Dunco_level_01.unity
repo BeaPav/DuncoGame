@@ -2356,15 +2356,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6977131907010244106, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.012583579
+      value: -0.012583572
       objectReference: {fileID: 0}
     - target: {fileID: 6977131907010244106, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.91852945
+      value: 0.91852933
       objectReference: {fileID: 0}
     - target: {fileID: 6977131907010244106, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.029331366
+      value: -0.029331349
       objectReference: {fileID: 0}
     - target: {fileID: 6977131907257735918, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_BiasY
@@ -2552,19 +2552,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6977131907706670475, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.36995658
+      value: -0.36995664
       objectReference: {fileID: 0}
     - target: {fileID: 6977131907706670475, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.1375293
+      value: 0.13752933
       objectReference: {fileID: 0}
     - target: {fileID: 6977131907706670475, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.86122996
+      value: 0.86123
       objectReference: {fileID: 0}
     - target: {fileID: 6977131907706670475, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.3201574
+      value: 0.32015738
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
@@ -2608,7 +2608,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128734983}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5443,7 +5443,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149703467}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -7760,6 +7760,12 @@ PrefabInstance:
       propertyPath: PressFText
       value: 
       objectReference: {fileID: 1650242105}
+    - target: {fileID: 8726088215934381067, guid: 27cb34004ed53be4cadd65ae3cefd750, type: 3}
+      propertyPath: what.Array.data[1]
+      value: "Mus\xED\u0161 \xEDs\u0165 na vrchol Kriv\xE1\u0148a a n\xE1js\u0165
+        vala\u0161ku, aby si ma vyslobodil. Po ceste zbieraj du\u0161e do skrinky,
+        tak zvr\xE1time \u010Do sme sp\xF4sobili."
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27cb34004ed53be4cadd65ae3cefd750, type: 3}
 --- !u!1001 &264255833
@@ -8351,7 +8357,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 291789135}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -8455,8 +8461,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7c09b2e2c54c948b0b56b602e76099f6, type: 2}
-  m_sharedMaterial: {fileID: 8181398048399501651, guid: 7c09b2e2c54c948b0b56b602e76099f6, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1b14d31b47534ea4095bae3148421e18, type: 2}
+  m_sharedMaterial: {fileID: -750548297333451649, guid: 1b14d31b47534ea4095bae3148421e18, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8480,8 +8486,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1
-  m_fontSizeBase: 1
+  m_fontSize: 1.5
+  m_fontSizeBase: 1.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -37216,7 +37222,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1220116336}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -61555,7 +61561,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575040583}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -67169,7 +67175,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1740101581}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -87807,11 +87813,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 562792223397840723, guid: ec4d01b72ee4216439a84584d061a8fa, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.44602302
+      value: -0.4460231
       objectReference: {fileID: 0}
     - target: {fileID: 562792223397840723, guid: ec4d01b72ee4216439a84584d061a8fa, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.1658066
+      value: 0.16580659
       objectReference: {fileID: 0}
     - target: {fileID: 562792223397840723, guid: ec4d01b72ee4216439a84584d061a8fa, type: 3}
       propertyPath: m_LocalRotation.y
@@ -87819,7 +87825,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 562792223397840723, guid: ec4d01b72ee4216439a84584d061a8fa, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.30646905
+      value: 0.30646896
       objectReference: {fileID: 0}
     - target: {fileID: 562792223397840723, guid: ec4d01b72ee4216439a84584d061a8fa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
