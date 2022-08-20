@@ -473,8 +473,8 @@ RectTransform:
   m_GameObject: {fileID: 799673186}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.87, y: 0.87, z: 0.87}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 64025996}
   m_RootOrder: 0
@@ -482,7 +482,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.0025177002, y: 11.75086}
-  m_SizeDelta: {x: 765.8312, y: 427.342}
+  m_SizeDelta: {x: 768.1, y: 437.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1160863354
 GameObject:
@@ -520,7 +520,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.13725491, g: 0.08235294, b: 0.08235294, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -603,8 +603,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -57, y: -223}
-  m_SizeDelta: {x: 249.04, y: 50}
+  m_AnchoredPosition: {x: -25, y: -189.24}
+  m_SizeDelta: {x: 341.81, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1977346914
 MonoBehaviour:
@@ -626,12 +626,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Space to continue
-
-'
+  m_text: "Stla\u010D space pre pokra\u010Dovanie\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7c09b2e2c54c948b0b56b602e76099f6, type: 2}
-  m_sharedMaterial: {fileID: 8181398048399501651, guid: 7c09b2e2c54c948b0b56b602e76099f6, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 30fc56c8ab0da7841b35e9b0a946892f, type: 2}
+  m_sharedMaterial: {fileID: 7999066829220973935, guid: 30fc56c8ab0da7841b35e9b0a946892f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -655,15 +653,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
