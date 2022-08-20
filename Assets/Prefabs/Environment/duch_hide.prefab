@@ -5168,7 +5168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8869cf8bb79b26c4099fe927d74b1a92, type: 3}
       propertyPath: m_Name
-      value: DuchHideMesh
+      value: Barel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8869cf8bb79b26c4099fe927d74b1a92, type: 3}
