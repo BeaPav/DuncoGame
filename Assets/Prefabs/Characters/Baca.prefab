@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2009401017752623644}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 9143991459207409501}
@@ -48,9 +48,17 @@ MonoBehaviour:
   PressFText: {fileID: 0}
   Dunco: {fileID: 0}
   chat: {fileID: 0}
-  who: []
-  what: []
-  distance: 0
+  who:
+  - ' '
+  - ' '
+  - ' '
+  what:
+  - "Ach Dun\u010Do \u010Do sme to urobili? Vypustili sme ve\u013Ek\xE9 zlo. Mus\xEDme
+    to napravi\u0165!"
+  - "Mus\xED\u0161 \xEDs\u0165 a n\xE1js\u0165 vala\u0161ku aby si ma vyslobodil.
+    Po ceste zbieraj du\u0161e do skrinky, tak zvr\xE1time \u010Do sme sp\xF4sobili."
+  - "Ve\u013Ea \u0161\u0165astia ps\xEDk m\xF4j!"
+  distance: 10
 --- !u!1 &6207552790351702630
 GameObject:
   m_ObjectHideFlags: 0
