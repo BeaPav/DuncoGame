@@ -29,10 +29,16 @@ public class gate : MonoBehaviour
     {
         soulTextText.text = PlayerScoreScript.noCollectables.ToString() + "/" + soulCount.ToString();
 
+        if (PlayerScoreScript.noCollectables >= soulCount)
+        {
+            soulTextText.text = "Bark";
+        }
+
         if((Input.GetKeyDown(KeyCode.E) && Vector3.Distance(transform.position, dog.transform.position) < distance && PlayerScoreScript.noCollectables >= soulCount) || 
             Input.GetKeyDown(KeyCode.L)) 
         {
             Gate.SetActive(false);
+            soulText.SetActive(false);
         }
     }
 }

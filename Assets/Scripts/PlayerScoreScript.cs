@@ -31,6 +31,7 @@ public class PlayerScoreScript : MonoBehaviour
 
 
     [SerializeField] AudioSource audioCollectable;
+    [SerializeField] AudioSource audioDamage;
 
     Animator anim;
 
@@ -102,6 +103,7 @@ public class PlayerScoreScript : MonoBehaviour
         else if(other.CompareTag("Projectile"))
         {
             Damage(1, other.transform.parent.position);
+            
         }
 
 
@@ -135,6 +137,7 @@ public class PlayerScoreScript : MonoBehaviour
 
 
             DamageMaterial.SetColor("_Color", damageColor);
+            audioDamage.Play();
             startBounceTime = Time.time;
 
             if (noCollectables > 0)
