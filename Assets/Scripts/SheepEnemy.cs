@@ -81,20 +81,21 @@ public class SheepEnemy : MonoBehaviour
                 Heal();
                 audioHit.Play();
                 bouncing = true;
-                Invoke("BouncingFalse", 1f);
+                Invoke("BouncingFalse", 0.5f);
                 player.GetComponent<PlayerScoreScript>().BounceDown(bounceStrength);
                 enemyAnim.SetTrigger("isHit");
             }
             
+            /*
             if (!bouncing)
             {
                 audioHit.Play();
                 bouncing = true;
-                Invoke("BouncingFalse", 1f);
+                Invoke("BouncingFalse", 0.5f);
                 player.GetComponent<PlayerScoreScript>().BounceDown(bounceStrength);
                 enemyAnim.SetTrigger("isHit");
             }
-            
+            */
 
         }
         if (state == EnemyState.CursedFollow)

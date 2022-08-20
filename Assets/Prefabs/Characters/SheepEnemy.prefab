@@ -112,7 +112,7 @@ MonoBehaviour:
   timeBtwAttack: 0
   timeAttackDuration: 1
   healOffset: 0.95
-  bounceStrength: 2
+  bounceStrength: 2.5
   healthyMaterial: {fileID: 2100000, guid: fbb101a3f0574ba409cf17c4e7e60ca8, type: 2}
 --- !u!82 &8129709560664527856
 AudioSource:
@@ -121,7 +121,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7549404864910688660}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 136bd1f145822084a955a568e79585a0, type: 3}
