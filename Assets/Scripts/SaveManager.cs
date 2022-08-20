@@ -47,7 +47,7 @@ public class SaveManager : MonoBehaviour
             Destroy(dusa);
         }
         
-        PlayerScoreScript.noCollectables = duseSave;
+       // PlayerScoreScript.noCollectables = duseSave;
         dogCharacterController.enabled = false;
         dogCharacterController.transform.position = savePosition;
         dogCharacterController.enabled = true;
