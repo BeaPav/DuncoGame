@@ -1977,7 +1977,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6977131906665075909, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.30113825
+      value: -0.30113828
       objectReference: {fileID: 0}
     - target: {fileID: 6977131906665075909, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1985,7 +1985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6977131906665075909, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.33449146
+      value: -0.3344915
       objectReference: {fileID: 0}
     - target: {fileID: 6977131907010244105, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_Lens.FieldOfView
@@ -2041,19 +2041,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6977131907257735919, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 3.138183
+      value: 5.96908
       objectReference: {fileID: 0}
     - target: {fileID: 6977131907257735919, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -3.684056
+      value: -4.98839
       objectReference: {fileID: 0}
     - target: {fileID: 6977131907516123904, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 3.138183
+      value: 5.96908
       objectReference: {fileID: 0}
     - target: {fileID: 6977131907516123904, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -3.684056
+      value: -4.98839
       objectReference: {fileID: 0}
     - target: {fileID: 6977131907516123935, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_BiasY
@@ -2077,11 +2077,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6977131907602109328, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 3.138183
+      value: 5.96908
       objectReference: {fileID: 0}
     - target: {fileID: 6977131907602109328, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -3.684056
+      value: -4.98839
       objectReference: {fileID: 0}
     - target: {fileID: 6977131907602109359, guid: 8008521d0cdf3364bbfec4013c382c0c, type: 3}
       propertyPath: m_DeadZoneWidth
@@ -30451,10 +30451,9 @@ Transform:
   - {fileID: 146738692}
   - {fileID: 796522288}
   - {fileID: 1416093281}
-  - {fileID: 1103264731}
+  - {fileID: 1438691488}
   - {fileID: 58132517}
   - {fileID: 988526892}
-  - {fileID: 1438691488}
   - {fileID: 1188433145}
   - {fileID: 805962647}
   - {fileID: 1207612156}
@@ -30463,6 +30462,7 @@ Transform:
   - {fileID: 1798756145}
   - {fileID: 1335208746}
   - {fileID: 161967915}
+  - {fileID: 1103264731}
   - {fileID: 1137601940}
   - {fileID: 2011587073}
   - {fileID: 1103749429}
