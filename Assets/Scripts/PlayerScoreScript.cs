@@ -67,7 +67,10 @@ public class PlayerScoreScript : MonoBehaviour
         if (bounce != Vector3.zero)
         {
             //Debug.Log("nonZeroBounce");
-            charControler.Move(bounce * bounceSpeed * Time.deltaTime);
+            if (charControler.velocity.y < 0)
+            {
+                charControler.Move(bounce * bounceSpeed * Time.deltaTime);
+            }
         }
 
         noCollectablesText.text = noCollectables.ToString();

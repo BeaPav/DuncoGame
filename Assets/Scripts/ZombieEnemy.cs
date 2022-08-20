@@ -91,13 +91,22 @@ public class ZombieEnemy : MonoBehaviour
         if (HealControl())
         {
             //Debug.Log("Heal");
-            if(state != EnemyState.Healthy)
-                Heal();
             
+
+            if (state != EnemyState.Healthy)
+            {
+                Heal();
+                audioHit.Play();
+                bouncing = true;
+                Invoke("BouncingFalse", 1f);
+                player.GetComponent<PlayerScoreScript>().BounceDown(bounceStrength);
+                enemyAnim.SetTrigger("isHit");
+            }
+
             if (!bouncing)
             {
                 audioHit.Play();
-                audioHit.Play(); bouncing = true;
+                bouncing = true;
                 Invoke("BouncingFalse", 1f);
                 player.GetComponent<PlayerScoreScript>().BounceDown(bounceStrength);
                 enemyAnim.SetTrigger("isHit");

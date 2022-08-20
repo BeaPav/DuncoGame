@@ -77,11 +77,19 @@ public class SheepEnemy : MonoBehaviour
         {
             //Debug.Log("Heal");
             if (state != EnemyState.Healthy)
+            {
                 Heal();
+                audioHit.Play();
+                bouncing = true;
+                Invoke("BouncingFalse", 1f);
+                player.GetComponent<PlayerScoreScript>().BounceDown(bounceStrength);
+                enemyAnim.SetTrigger("isHit");
+            }
             
             if (!bouncing)
             {
-                audioHit.Play();bouncing = true;
+                audioHit.Play();
+                bouncing = true;
                 Invoke("BouncingFalse", 1f);
                 player.GetComponent<PlayerScoreScript>().BounceDown(bounceStrength);
                 enemyAnim.SetTrigger("isHit");
