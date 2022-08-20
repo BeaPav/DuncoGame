@@ -98,7 +98,7 @@ public class ZombieEnemy : MonoBehaviour
                 Heal();
                 audioHit.Play();
                 bouncing = true;
-                Invoke("BouncingFalse", 1f);
+                Invoke("BouncingFalse", 0.92f);
                 player.GetComponent<PlayerScoreScript>().BounceDown(bounceStrength);
                 enemyAnim.SetTrigger("isHit");
             }
@@ -107,7 +107,7 @@ public class ZombieEnemy : MonoBehaviour
             {
                 audioHit.Play();
                 bouncing = true;
-                Invoke("BouncingFalse", 1f);
+                Invoke("BouncingFalse", 0.92f);
                 player.GetComponent<PlayerScoreScript>().BounceDown(bounceStrength);
                 enemyAnim.SetTrigger("isHit");
             }

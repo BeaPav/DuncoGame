@@ -72,6 +72,7 @@ public class StoneEnemy : MonoBehaviour
                 enemyAnim.SetTrigger("isHit");
             }
 
+            /*
             if (!bouncing)
             {
                 audioHit.Play();
@@ -80,6 +81,7 @@ public class StoneEnemy : MonoBehaviour
                 player.GetComponent<PlayerScoreScript>().BounceDown(bounceStrength);
                 //enemyAnim.SetTrigger("isHit");
             }
+            */
 
         }
 
