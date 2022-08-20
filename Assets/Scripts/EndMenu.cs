@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 using TMPro;
 public class EndMenu : MonoBehaviour
 {
+    public int MaxSouls;
+
     public TextMeshProUGUI duseText;
     private void Start()
     {
-        duseText.text = PlayerPrefs.GetInt("duse").ToString();
+        duseText.text = PlayerPrefs.GetInt("duse").ToString() + "/ " + MaxSouls.ToString();
         Cursor.lockState = CursorLockMode.Confined;
     }
     public void Menu() 

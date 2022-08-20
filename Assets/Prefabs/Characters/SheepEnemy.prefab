@@ -104,7 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioBee: {fileID: 8129709560664527856}
   audioHit: {fileID: 5214569218689637612}
-  distToStartFollow: 8
+  distToStartFollow: 12
   distToEndFollow: 18
   distToAttack: 5
   isAttacking: 0

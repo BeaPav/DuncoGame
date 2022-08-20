@@ -31,7 +31,7 @@ public class gate : MonoBehaviour
 
         if (PlayerScoreScript.noCollectables >= soulCount)
         {
-            soulTextText.text = "Bark";
+            soulTextText.text = "Štek";
         }
 
         if((Input.GetKeyDown(KeyCode.E) && Vector3.Distance(transform.position, dog.transform.position) < distance && PlayerScoreScript.noCollectables >= soulCount) || 

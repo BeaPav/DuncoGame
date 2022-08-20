@@ -86,7 +86,7 @@ public class SheepEnemy : MonoBehaviour
                 enemyAnim.SetTrigger("isHit");
             }
             
-            /*
+            
             if (!bouncing)
             {
                 audioHit.Play();
@@ -95,7 +95,7 @@ public class SheepEnemy : MonoBehaviour
                 player.GetComponent<PlayerScoreScript>().BounceDown(bounceStrength);
                 enemyAnim.SetTrigger("isHit");
             }
-            */
+            
 
         }
         if (state == EnemyState.CursedFollow)
