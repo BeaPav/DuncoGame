@@ -37,8 +37,13 @@ public class gate : MonoBehaviour
         if((Input.GetKeyDown(KeyCode.E) && Vector3.Distance(transform.position, dog.transform.position) < distance && PlayerScoreScript.noCollectables >= soulCount) || 
             Input.GetKeyDown(KeyCode.L)) 
         {
-            Gate.SetActive(false);
-            soulText.SetActive(false);
+            Invoke("TurnOffGate", 0.5f);
         }
+    }
+
+    void TurnOffGate()
+    {
+        Gate.SetActive(false);
+        soulText.SetActive(false);
     }
 }
